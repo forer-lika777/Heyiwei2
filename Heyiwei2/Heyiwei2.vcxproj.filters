@@ -15,6 +15,7 @@
     <ClCompile Include="StudentManager.cpp" />
     <ClCompile Include="RecordManager.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

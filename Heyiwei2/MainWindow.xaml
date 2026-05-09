@@ -10,6 +10,6 @@
     Title="Heyiwei2">
 
     <Grid>
-
+        <Button Content="Click Me"></Button>
     </Grid>
 </Window>
