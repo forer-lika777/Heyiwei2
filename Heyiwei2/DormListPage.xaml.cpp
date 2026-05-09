@@ -12,13 +12,12 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::Heyiwei2::implementation
 {
-    int32_t DormListPage::MyProperty()
+    DormListPage::DormListPage()
     {
-        throw hresult_not_implemented();
-    }
-
-    void DormListPage::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
+        InitializeComponent();
+        if (mylistview())
+        {
+            mylistview().Items().Append(winrt::box_value(L"628"));
+        }
     }
 }
