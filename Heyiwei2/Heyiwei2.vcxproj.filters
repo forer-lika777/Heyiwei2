@@ -7,10 +7,13 @@
     <Page Include="DormListPage.xaml">
       <Filter>Pages</Filter>
     </Page>
+    <Page Include="MainWindow.xaml">
+      <Filter>Pages</Filter>
+    </Page>
     <Page Include="HomePage.xaml">
       <Filter>Pages</Filter>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainPage.xaml">
       <Filter>Pages</Filter>
     </Page>
   </ItemGroup>
