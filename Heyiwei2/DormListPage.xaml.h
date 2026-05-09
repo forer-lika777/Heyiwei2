@@ -1,15 +1,13 @@
 #pragma once
 
-#include "MainWindow.g.h"
+#include "DormListPage.g.h"
 
 namespace winrt::Heyiwei2::implementation
 {
-    struct MainWindow : MainWindowT<MainWindow>
+    struct DormListPage : DormListPageT<DormListPage>
     {
-        MainWindow()
+        DormListPage()
         {
-            ExtendsContentIntoTitleBar(true);
-
             // Xaml objects should not call InitializeComponent during construction.
             // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
         }
@@ -21,7 +19,7 @@ namespace winrt::Heyiwei2::implementation
 
 namespace winrt::Heyiwei2::factory_implementation
 {
-    struct MainWindow : MainWindowT<MainWindow, implementation::MainWindow>
+    struct DormListPage : DormListPageT<DormListPage, implementation::DormListPage>
     {
     };
 }

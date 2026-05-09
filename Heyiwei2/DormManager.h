@@ -1,7 +1,7 @@
-﻿#pragma once
-class StudentManager
+#pragma once
+class DormManager
 {
 public:
-	void outputInfo();
+	int addNum(int a, int b);
 };
 

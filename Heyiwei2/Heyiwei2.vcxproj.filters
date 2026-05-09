@@ -4,7 +4,15 @@
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainWindow.xaml" />
+    <Page Include="DormListPage.xaml">
+      <Filter>Pages</Filter>
+    </Page>
+    <Page Include="HomePage.xaml">
+      <Filter>Pages</Filter>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Filter>Pages</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />
@@ -12,16 +20,24 @@
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="StudentManager.cpp" />
-    <ClCompile Include="RecordManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="DormManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="StudentManager.h" />
-    <ClInclude Include="RecordManager.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="DormManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -49,6 +65,12 @@
   <ItemGroup>
     <Filter Include="Assets">
       <UniqueIdentifier>{9391e2ea-bbfb-400b-8ca2-108efe1033c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{4075f9d4-a7c5-40f9-b9f2-1d4d4b8f7e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pages">
+      <UniqueIdentifier>{ceb5dcc3-87d4-4e04-b9c5-e6f1e9cf077b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
-﻿#include "pch.h"
-#include "StudentManager.h"
-#include <iostream>
+#include "pch.h"
+#include "DormManager.h"
 
-void StudentManager::outputInfo() {
-	std::cout << "123";
+int DormManager::addNum(int a, int b) {
+	return a + b;
 }

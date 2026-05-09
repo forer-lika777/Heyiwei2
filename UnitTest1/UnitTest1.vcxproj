@@ -156,8 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Heyiwei2\RecordManager.cpp" />
-    <ClCompile Include="..\Heyiwei2\StudentManager.cpp" />
+    <ClCompile Include="..\Heyiwei2\DormManager.cpp" />
     <ClCompile Include="..\Heyiwei2\Utils.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

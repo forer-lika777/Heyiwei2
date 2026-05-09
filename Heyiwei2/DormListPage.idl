@@ -1,0 +1,9 @@
+namespace Heyiwei2
+{
+    [default_interface]
+    runtimeclass DormListPage : Microsoft.UI.Xaml.Controls.Page
+    {
+        DormListPage();
+        Int32 MyProperty;
+    }
+}

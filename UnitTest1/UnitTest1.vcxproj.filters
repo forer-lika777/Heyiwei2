@@ -21,13 +21,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Heyiwei2\StudentManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Heyiwei2\RecordManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\Heyiwei2\Utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Heyiwei2\DormManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
