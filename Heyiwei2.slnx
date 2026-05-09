@@ -1,0 +1,13 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Heyiwei2/Heyiwei2.vcxproj" Id="9391e2ea-bbfb-400b-8ca2-108efe1033c1">
+    <Deploy />
+  </Project>
+  <Project Path="UnitTest1/UnitTest1.vcxproj">
+    <Platform Solution="*|ARM64" Project="x64" />
+  </Project>
+</Solution>
