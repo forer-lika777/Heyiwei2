@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "StudentManager.h"
+#include <iostream>
 
-int StudentManager::outputInfo() {
-	return 10;
+void StudentManager::outputInfo() {
+	std::cout << "123";
 }
