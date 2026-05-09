@@ -3,35 +3,37 @@ Heyiwei2
 
 汪泽群 竹永琪 吴溢轩选择1、2、3写：
 
-1. StudentManager编写
+1. DormManager编写
 
-StudentManager包含以下功能：
+DormManager包含以下功能：
 包含一个学生对象列表；vector<Student> students;
 
-添加学生记录；addStudent(Student student)
+包含一个水费记录对象列表；vector<WaterRecord> waterRecords;
 
-删除学生记录；removeStudent(string id)
+添加学生；addStudent(Student student)
+
+删除学生；removeStudent(string id)
 
 修改学生姓名；updateStudentName(string id, string name)
 
-查询学生记录；queryStudent(string id)
+查询学生；queryStudent(string id)
 
-查询学生水费记录；queryWaterRecords(string id)（返回一整个水费记录列表）
+查询宿舍水费记录；queryWaterRecords(string id)（返回一整个水费记录列表）
 
-查询学生特定水费记录；querySpecificWaterRecord(string id, int year, int month)（返回一个水费记录对象）
+查询宿舍特定水费记录；querySpecificWaterRecord(string id, int year, int month)（返回一个水费记录对象）
 
-添加学生水费记录；addWaterRecord(WaterRecord record)（要返回一个Result对象。新建一个Result对象，修改他的属性success和info，然后返回）
+添加宿舍水费记录；addWaterRecord(WaterRecord record)（要返回一个Result对象。新建一个Result对象，修改他的属性success和info，然后返回）
 
-删除学生水费记录；removeWaterRecord(int year, int month)
+删除宿舍水费记录；removeWaterRecord(int year, int month)
 
-修改学生水费记录；updateWaterRecord(int year, int month, double usage)
+修改宿舍水费记录；updateWaterRecord(int year, int month, double usage)
 
 
 2. RecordManager编写
 
 RecordManager包含以下功能：
 
-包含一个水费记录对象列表；vector<WaterRecord> waterRecords;
+包含一个水费记录对象列表引用；vector<WaterRecord>& waterRecords;
 
 添加水费记录；addWaterRecord(WaterRecord record);（要返回一个Result对象。新建一个Result对象，修改属性success和info）
 
@@ -44,13 +46,13 @@ RecordManager包含以下功能：
 查询特定水费记录：querySpecificWaterRecord(string id, int year, int month);（返回一个水费记录对象）
 
 
-RecordManager如何获取学生对象？
+RecordManager如何获取宿舍对象？
 
 每次要执行与学生相关的水费记录操作时，
 
-RecordManager需要通过StudentManager来获取对应的学生对象。（注意是引用或者引用，否则只会传递副本）
+RecordManager需要通过DormManager来获取对应的学生对象。（注意是引用或者引用，否则只会传递副本）
 
-可以在RecordManager中添加一个成员变量来引用StudentManager，并在构造函数中进行初始化。
+可以在RecordManager中添加一个成员变量来引用DormManager，并在构造函数中进行初始化。
 
 
 3. Utils编写
