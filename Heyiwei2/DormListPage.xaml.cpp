@@ -2,6 +2,7 @@
 #include "DormListPage.xaml.h"
 #if __has_include("DormListPage.g.cpp")
 #include "DormListPage.g.cpp"
+#include "winrt/Windows.UI.Popups.h"
 #endif
 
 using namespace winrt;
@@ -17,7 +18,7 @@ namespace winrt::Heyiwei2::implementation
         InitializeComponent();
         if (dormListView())
         {
-            dormListView().Items().Append(winrt::box_value(L"628"));
+            dormListView().Items().Append(winrt::box_value(L"628宿舍"));
         }
     }
 
@@ -30,4 +31,12 @@ namespace winrt::Heyiwei2::implementation
     {
         throw hresult_not_implemented();
     }
+}
+
+void winrt::Heyiwei2::implementation::DormListPage::Button_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
+{
+    // 1. 获取按钮对象 (转换类型)
+    auto btn = sender.as<Microsoft::UI::Xaml::Controls::Button>();
+
+    btn.Content(winrt::box_value(L"用水量:\n10000吨"));
 }
