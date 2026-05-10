@@ -17,19 +17,17 @@
                     FontFamily="Segoe UI Semibold"
                     Text="以下展示所有宿舍用水记录" />
         <ListView Grid.Row="1"
-                  x:Name="mylistview">
+                  x:Name="dormListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Button Content="宿舍用水"
-                        Width="100"
-                        Height="100"
-                        CornerRadius="8"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Margin="20, 20 , 20 , 20"
-                        Background="Black"
-                        Foreground="White"/>
+                                Width="100"
+                                Height="100"
+                                CornerRadius="8"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Margin="20, 20 , 20 , 20"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -6,12 +6,8 @@ namespace winrt::Heyiwei2::implementation
 {
     struct DormListPage : DormListPageT<DormListPage>
     {
-        DormListPage()
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
-
+        DormListPage();
+        
         int32_t MyProperty();
         void MyProperty(int32_t value);
     };

@@ -15,9 +15,19 @@ namespace winrt::Heyiwei2::implementation
     DormListPage::DormListPage()
     {
         InitializeComponent();
-        if (mylistview())
+        if (dormListView())
         {
-            mylistview().Items().Append(winrt::box_value(L"628"));
+            dormListView().Items().Append(winrt::box_value(L"628"));
         }
+    }
+
+    int32_t DormListPage::MyProperty()
+    {
+        throw hresult_not_implemented();
+    }
+
+    void DormListPage::MyProperty(int32_t /* value */)
+    {
+        throw hresult_not_implemented();
     }
 }
