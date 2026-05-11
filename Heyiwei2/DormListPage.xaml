@@ -8,34 +8,93 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Padding="20, 80, 20, 20">
+    <Grid Padding="20, 70, 20, 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock  Grid.Row="0"
-                    FontFamily="Segoe UI Semibold"
-                    Text="以下展示所有宿舍用水记录"/>
+        <TextBlock Grid.Row="0"
+                   Padding="20"
+                   FontFamily="Segoe UI Semibold"
+                   Text="以下展示所有宿舍用水记录"/>
         <ListView Grid.Row="1"
                   x:Name="dormListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Button 
-                                Click="Button_Click"
-                                Width="100"
-                                Height="100"
+                    <Grid Height="120">
+                        <StackPanel Padding="10">
+                            <TextBlock Text="{Binding info}" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <Button x:Name="openDormButton"
+                                Click="openDormButton_Click"
+                                HorizontalAlignment="Right"
                                 CornerRadius="8"
-                                HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Margin="20, 20 , 20 , 20"
-                                >
-                            <TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center"/>
-
+                                Margin="20, 20 , 20 , 20">
+                            <TextBlock Text="打开详细信息" 
+                                       TextWrapping="Wrap" 
+                                       TextAlignment="Center"/>
                         </Button>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
+
+    <!--<Popup x:Name="managePopup" 
+       HorizontalAlignment="Right"
+       VerticalAlignment="Stretch"
+       IsLightDismissEnabled="True">
+         点击外部关闭 
+        <Border Background="White" 
+            Width="400"
+            BorderBrush="LightGray"
+            BorderThickness="1"
+            CornerRadius="8"
+            Shadow="True">
+            <Grid x:Name="manageContent" Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                       Text="管理宿舍" 
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20"/>
+
+                <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                    <TextBlock Text="宿舍信息" FontWeight="Semibold"/>
+                    <TextBlock x:Name="dormInfoText" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                    <TextBlock Text="学生列表" FontWeight="Semibold"/>
+                    <ListView x:Name="studentListView" Height="200"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Margin="0,0,0,10">
+                    <TextBlock Text="用水记录" FontWeight="Semibold"/>
+                    <ListView x:Name="waterRecordListView" Height="200"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
+                    <Button Click="ClosePopup_Click" 
+                        Content="关闭" 
+                        Margin="0,0,10,0"
+                        CornerRadius="8"/>
+                    <Button Click="SaveChanges_Click" 
+                        Content="保存修改" 
+                        CornerRadius="8"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Popup>-->
 </Page>

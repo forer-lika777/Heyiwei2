@@ -9,15 +9,16 @@
     mc:Ignorable="d"
     Loaded="Page_Loaded">
 
-    <NavigationView IsSettingsVisible="True"
+    <NavigationView x:Name="navigationView"
+                    IsSettingsVisible="True"
                     ItemInvoked="NavigationView_Invoked">
         <NavigationView.MenuItems>
             <NavigationViewItem Content="Home"
                                 Icon="Home"
                                 Tag="home" />
             <NavigationViewItem Content="DormList"
-            Icon="List"
-            Tag="dormlist" />
+                                Icon="List"
+                                Tag="dormlist" />
         </NavigationView.MenuItems>
         <NavigationView.Content>
             <Frame x:Name="mainFrame" />

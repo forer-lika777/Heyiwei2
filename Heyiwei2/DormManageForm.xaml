@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Heyiwei2.DormManageForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Heyiwei2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="12" Spacing="12" MinWidth="300">
+        <TextBox x:Name="StudentIdBox" Header="学号" PlaceholderText="请输入学号"/>
+        <TextBox x:Name="StudentNameBox" Header="姓名" PlaceholderText="请输入姓名"/>
+        <TextBlock x:Name="ErrorMsg" Foreground="Red" Visibility="Collapsed"/>
+    </StackPanel>
+</UserControl>

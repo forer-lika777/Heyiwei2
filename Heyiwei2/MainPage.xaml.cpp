@@ -32,7 +32,8 @@ namespace winrt::Heyiwei2::implementation
     }
 
     void MainPage::Page_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
-
+        openHomePage();
+		navigationView().SelectedItem(navigationView().MenuItems().GetAt(0));
     }
 
     void MainPage::NavigationView_Invoked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::NavigationViewItemInvokedEventArgs const& args) {

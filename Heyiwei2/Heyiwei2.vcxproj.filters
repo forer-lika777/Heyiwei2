@@ -16,21 +16,28 @@
     <Page Include="MainPage.xaml">
       <Filter>Pages</Filter>
     </Page>
+    <Page Include="DormManageForm.xaml">
+      <Filter>Pages\Controls</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />
+    <Midl Include="DormPaneItem.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Model.cpp" />
     <ClCompile Include="DormManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="RecordManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="MainManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Generated Files\sources\DormPaneItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -41,6 +48,12 @@
     <ClInclude Include="RecordManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Models.h" />
+    <ClInclude Include="IDormManager.h" />
+    <ClInclude Include="MainManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Generated Files\sources\DormPaneItem.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -74,6 +87,9 @@
     </Filter>
     <Filter Include="Pages">
       <UniqueIdentifier>{ceb5dcc3-87d4-4e04-b9c5-e6f1e9cf077b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pages\Controls">
+      <UniqueIdentifier>{d3fbedf2-5b2d-4dba-9840-ae9fb95fcf64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

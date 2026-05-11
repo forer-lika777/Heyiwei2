@@ -1,0 +1,9 @@
+namespace Heyiwei2
+{
+    [default_interface]
+    runtimeclass DormManageForm : Microsoft.UI.Xaml.Controls.UserControl
+    {
+        DormManageForm();
+        Int32 MyProperty;
+    }
+}
