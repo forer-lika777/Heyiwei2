@@ -3,6 +3,6 @@
 
 class RecordManager
 {
-	Models::WaterRecord
+	
 };
 

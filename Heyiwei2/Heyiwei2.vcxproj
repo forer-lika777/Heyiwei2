@@ -131,7 +131,7 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="DormManager.h" />
-    <ClInclude Include="Generated Files\sources\DormPaneItem.h" />
+    <ClInclude Include="DormPaneItem.h" />
     <ClInclude Include="HomePage.xaml.h">
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -179,7 +179,7 @@
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="DormManager.cpp" />
-    <ClCompile Include="Generated Files\sources\DormPaneItem.cpp" />
+    <ClCompile Include="DormPaneItem.cpp" />
     <ClCompile Include="HomePage.xaml.cpp">
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>

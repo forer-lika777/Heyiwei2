@@ -17,6 +17,8 @@ namespace winrt::Heyiwei2::implementation
         int32_t MyProperty();
         void MyProperty(int32_t value);
     };
+
+
 }
 
 namespace winrt::Heyiwei2::factory_implementation

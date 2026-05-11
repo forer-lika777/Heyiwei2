@@ -37,7 +37,7 @@
     <ClCompile Include="MainManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Generated Files\sources\DormPaneItem.cpp" />
+    <ClCompile Include="DormPaneItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -53,7 +53,7 @@
     <ClInclude Include="MainManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Generated Files\sources\DormPaneItem.h" />
+    <ClInclude Include="DormPaneItem.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">

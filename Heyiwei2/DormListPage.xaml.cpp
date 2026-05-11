@@ -44,7 +44,7 @@ namespace winrt::Heyiwei2::implementation
 
     void DormListPage::AddDormItem(Models::Dorm& dorm)
     {
-		dorms.push_back(dorm);
+		dorms.Append(winrt::make<DormPaneItem>(dorm.info, dorms.Size()));
         RefreshDormListView();
     }
 
@@ -52,9 +52,9 @@ namespace winrt::Heyiwei2::implementation
     {
 		auto items = winrt::single_threaded_observable_vector<IInspectable>();
 
-        for (size_t i = 0; i < dorms.size(); ++i)
+        for (size_t i = 0; i < dorms.Size(); ++i)
         {
-			winrt::hstring dormInfo = dorms[i].info.toString();
+			winrt::hstring dormInfo = dorms.GetAt(i).info.toString();
 
             auto create_item = [](int32_t index, hstring text) {
                 PropertySet item;
