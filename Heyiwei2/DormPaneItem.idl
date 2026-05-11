@@ -1,0 +1,11 @@
+
+namespace Heyiwei2
+{
+	[default_interface]
+	runtimeclass DormPaneItem
+	{
+		DormPaneItem(String name, Int32 index);
+		String DormInfo;
+		Int32 Index;
+	};
+}
