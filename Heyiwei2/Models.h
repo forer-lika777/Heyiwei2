@@ -17,6 +17,7 @@ namespace Models {
 		int month;
 		double usage;
 		double cost;
+		bool hasPaid;
 	};
 
 	struct Student {
