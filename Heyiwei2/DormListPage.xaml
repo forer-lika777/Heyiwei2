@@ -6,40 +6,50 @@
     xmlns:local="using:Heyiwei2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="local:DormListPage"
     mc:Ignorable="d">
 
     <Grid Padding="20, 70, 20, 20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"
-                   Padding="20"
-                   FontFamily="Segoe UI Semibold"
-                   Text="以下展示所有宿舍用水记录"/>
-        <ListView Grid.Row="1"
-                  x:Name="dormListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="120">
-                        <StackPanel Padding="10">
-                            <TextBlock Text="{Binding info}" 
-                                       VerticalAlignment="Center"/>
-                        </StackPanel>
-                        <Button x:Name="openDormButton"
-                                Click="openDormButton_Click"
-                                HorizontalAlignment="Right"
-                                CornerRadius="8"
-                                VerticalAlignment="Top"
-                                Margin="20, 20 , 20 , 20">
-                            <TextBlock Text="打开详细信息" 
-                                       TextWrapping="Wrap" 
-                                       TextAlignment="Center"/>
-                        </Button>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <StackPanel>
+            <TextBlock Grid.Row="0"
+                       Padding="20"
+                       FontFamily="Segoe UI Semibold"
+                       Text="以下展示所有宿舍用水记录"/>
+            <ScrollView>
+                <ListView Grid.Row="1"
+                          x:Name="dormListView"
+                          ItemsSource="{x:Bind DormItems}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:DormPaneItem">
+                            <Grid Height="120">
+                                <StackPanel Padding="10">
+                                    <TextBlock Text="{Binding DormInfo}" 
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Index}"
+                                               />
+                                </StackPanel>
+                                <Button x:Name="openDormButton"
+                                        Click="openDormButton_Click"
+                                        HorizontalAlignment="Right"
+                                        CornerRadius="8"
+                                        VerticalAlignment="Top"
+                                        Margin="20, 20 , 20 , 20">
+                                    <TextBlock Text="打开详细信息" 
+                                               TextWrapping="Wrap" 
+                                               TextAlignment="Center"/>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+        </StackPanel>
+        <Button x:Name="addDormButton"
+                Content="添加宿舍"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Click="addDormButton_Click"
+                Margin="30"/>
     </Grid>
 
     <!--<Popup x:Name="managePopup" 

@@ -7,11 +7,16 @@ namespace winrt::Heyiwei2::implementation
     {
         DormPaneItem() = default;
 
-        DormPaneItem(hstring const& name, int32_t index);
-        hstring DormInfo();
-        void DormInfo(hstring const& value);
-        int32_t Index();
-        void Index(int32_t value);
+		DormPaneItem(hstring const& info, int32_t index) : dormInfo(info), index(index) {}
+
+		hstring DormInfo() { return dormInfo; }
+		void DormInfo(hstring const& value) { dormInfo = value; }
+
+        int32_t Index() const { return index; }
+		void Index(int32_t value) { index = value; }
+    private:
+        hstring dormInfo;
+		int32_t index = 0;
     };
 }
 namespace winrt::Heyiwei2::factory_implementation

@@ -22,7 +22,9 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />
-    <Midl Include="DormPaneItem.idl" />
+    <Midl Include="DormPaneItem.idl">
+      <Filter>Models</Filter>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -37,7 +39,9 @@
     <ClCompile Include="MainManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="DormPaneItem.cpp" />
+    <ClCompile Include="DormPaneItem.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -48,12 +52,18 @@
     <ClInclude Include="RecordManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Models.h" />
-    <ClInclude Include="IDormManager.h" />
     <ClInclude Include="MainManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="DormPaneItem.h" />
+    <ClInclude Include="DormPaneItem.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="IDormManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -90,6 +100,9 @@
     </Filter>
     <Filter Include="Pages\Controls">
       <UniqueIdentifier>{d3fbedf2-5b2d-4dba-9840-ae9fb95fcf64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{ba4640c0-9cb4-48bb-afc5-8022910d6aca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

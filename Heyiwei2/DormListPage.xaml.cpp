@@ -6,6 +6,7 @@
 #endif
 #include "Models.h"
 #include "DormManageForm.xaml.h"
+#include "DormPaneItem.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -27,48 +28,44 @@ namespace winrt::Heyiwei2::implementation
         info.floor = 6;
         info.roomNumber = 28;
         dorm.info = info;
-        std::vector<Models::Dorm> dorms = { dorm };
-        AddDormItem(dorm);
+        std::vector<Models::Dorm> dorms = { dorm, dorm };
+        AddDorms(dorms);
 #endif
     }
 
-    int32_t DormListPage::MyProperty()
-    {
-        throw hresult_not_implemented();
-    }
+  //  void DormListPage::AddDormItem(Models::Dorm& dorm)
+  //  {
+		//dorms.Append(winrt::make<DormPaneItem>(dorm.info, dorms.Size()));
+  //      RefreshDormListView({ dorm });
+  //  }
 
-    void DormListPage::MyProperty(int32_t /* value */)
+    void DormListPage::AddDorms(std::vector<Models::Dorm>& dorms)
     {
-        throw hresult_not_implemented();
-    }
-
-    void DormListPage::AddDormItem(Models::Dorm& dorm)
-    {
-		dorms.Append(winrt::make<DormPaneItem>(dorm.info, dorms.Size()));
-        RefreshDormListView();
-    }
-
-    void DormListPage::RefreshDormListView()
-    {
-		auto items = winrt::single_threaded_observable_vector<IInspectable>();
-
-        for (size_t i = 0; i < dorms.Size(); ++i)
+        for (size_t i = 0; i < dorms.size(); ++i)
         {
-			winrt::hstring dormInfo = dorms.GetAt(i).info.toString();
+			winrt::hstring dormInfo = dorms[i].info.toString();
 
-            auto create_item = [](int32_t index, hstring text) {
-                PropertySet item;
-                item.Insert(L"info", box_value(text));
-                return item; };
-
-			items.Append(create_item(static_cast<int32_t>(i), dormInfo));
+			dormItems.Append(winrt::make<DormPaneItem>(dormInfo, i));
         }
-
-		dormListView().ItemsSource(items);
+        
+		//dormListView().ItemsSource(dormItems);
     }
 }
 
 void winrt::Heyiwei2::implementation::DormListPage::openDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
 {
 
+}
+
+void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
+{
+    Models::Dorm dorm;
+    Models::DormInfo info{};
+    info.region = Models::Region::East;
+    info.buildingNumber = 9;
+    info.floor = 6;
+    info.roomNumber = 28;
+    dorm.info = info;
+    std::vector<Models::Dorm> dorms = { dorm };
+    AddDorms(dorms);
 }

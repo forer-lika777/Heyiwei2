@@ -11,11 +11,11 @@ RecordManager::RecordManager(std::vector<WaterRecord>& records)
 Result RecordManager::addWaterRecord(const WaterRecord& record) {
     for (const auto& r : waterRecords) {
         if (r.year == record.year && r.month == record.month) {
-            return Result(false, "记录已存在");
+            return Result(false, L"记录已存在");
         }
     }
     waterRecords.push_back(record);
-    return Result(true, "添加成功");
+    return Result(true, L"添加成功");
 }
 
 //根据年月删除水费记录

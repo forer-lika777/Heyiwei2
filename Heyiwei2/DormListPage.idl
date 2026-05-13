@@ -4,6 +4,6 @@ namespace Heyiwei2
     runtimeclass DormListPage : Microsoft.UI.Xaml.Controls.Page
     {
         DormListPage();
-        Int32 MyProperty;
+		Windows.Foundation.Collections.IObservableVector<Object> DormItems{ get; };
     }
 }

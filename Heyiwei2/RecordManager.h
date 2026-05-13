@@ -15,6 +15,6 @@ public:
     void removeWaterRecord(int year, int month);
     void updateWaterRecord(int year, int month, double usage);
     std::vector<WaterRecord> queryWaterRecord(int year, int month);
-    WaterRecord* querySpecificWaterRecord(const std::string& id, int year, int month);
+    WaterRecord* querySpecificWaterRecord(int year, int month);
 };
 
