@@ -18,8 +18,8 @@ namespace winrt::Heyiwei2::implementation
         InitializeComponent();
     }
 
-    MainPage::MainPage(MainManager& manager)
-        : mainManager(&manager)
+    MainPage::MainPage(MainManager* manager)
+        : mainManager(manager)
     {
         InitializeComponent();
         // 这里用 mainManager 绑定数据

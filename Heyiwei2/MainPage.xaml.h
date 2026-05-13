@@ -13,7 +13,7 @@ namespace winrt::Heyiwei2::implementation
         void openDormListPage();
     public:
         MainPage();
-        MainPage(MainManager& manager);
+        MainPage(MainManager* manager);
 
         void Page_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void NavigationView_Invoked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::NavigationViewItemInvokedEventArgs const& args);

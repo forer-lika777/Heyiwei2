@@ -8,7 +8,7 @@ namespace winrt::Heyiwei2::implementation
     struct MainWindow : MainWindowT<MainWindow>
     {
     public:
-        MainWindow() {};
+        MainWindow();
         MainWindow(MainManager& manager);
     private:
         MainManager* mainManager = nullptr;
