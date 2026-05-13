@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DormListPage.g.h"
-#include "Models.h"
 #include <winrt/Windows.Foundation.Collections.h>
 #include "DormPaneItem.h"
 

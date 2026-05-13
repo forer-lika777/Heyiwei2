@@ -13,5 +13,6 @@
        <MicaBackdrop Kind="Base"/>
     </Window.SystemBackdrop>
     
-    <local:MainPage />
+    
+    
 </Window>

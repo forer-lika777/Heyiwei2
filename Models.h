@@ -44,6 +44,9 @@ namespace Models {
 	struct Dorm {
 		std::vector<Student> students;
 		std::vector<WaterRecord> records;
+		int startDateYear;
+		int startDateMonth;
+		int index;
 		DormInfo info;
 	};
 
@@ -99,6 +102,6 @@ namespace cereal {
 	// Dorm 序列化
 	template<class Archive>
 	void serialize(Archive& archive, Models::Dorm& dorm) {
-		archive(dorm.students, dorm.records, dorm.info);
+		archive(dorm.students, dorm.records, dorm.info, dorm.startDateYear, dorm.startDateMonth);
 	}
 }

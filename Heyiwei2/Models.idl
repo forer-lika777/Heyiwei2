@@ -1,0 +1,45 @@
+
+namespace Heyiwei2.Models
+{
+	[bindable]
+	[default_interface]
+	runtimeclass WaterRecord
+	{
+		Int32 Year;
+		Int32 Month;
+		Double Usage;
+		Double Cost;
+		Boolean HasPaid;
+	};
+
+	[bindable]
+	[default_interface]
+	runtimeclass Student
+	{
+		String Name;
+		String StudentId;
+	};
+
+	[bindable]
+	[default_interface]
+	runtimeclass DormInfo
+	{
+		Int32 Region;
+		Int32 BuildingNumber;
+		Int32 Floor;
+		Int32 RoomNumber;
+		String ToString();
+	};
+
+	[bindable]
+	[default_interface]
+	runtimeclass Dorm
+	{
+		Windows.Foundation.Collections.IObservableVector<Object> Students;
+		Windows.Foundation.Collections.IObservableVector<Object> Records;
+		Int32 StartDateYear;
+		Int32 StartDateMonth;
+		Int32 Index;
+		DormInfo Info;
+	};
+}

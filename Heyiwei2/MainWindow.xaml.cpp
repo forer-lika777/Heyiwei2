@@ -12,13 +12,11 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::Heyiwei2::implementation
 {
-    int32_t MainWindow::MyProperty()
+    MainWindow::MainWindow(MainManager& manager)
+        : mainManager(manager)
     {
-        throw hresult_not_implemented();
-    }
+        mainPage = winrt::make<MainPage>(mainManager);
 
-    void MainWindow::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
+        this->Content(mainPage);
     }
 }

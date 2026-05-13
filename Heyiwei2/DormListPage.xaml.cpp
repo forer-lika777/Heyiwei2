@@ -5,12 +5,13 @@
 #include "winrt/Windows.UI.Popups.h"
 #endif
 #include "Models.h"
-#include "DormManageForm.xaml.h"
+//#include "DormManageForm.xaml.h"
 #include "DormPaneItem.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 using namespace Windows::Foundation::Collections;
+using namespace Models;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

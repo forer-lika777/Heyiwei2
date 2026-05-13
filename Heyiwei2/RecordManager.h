@@ -1,20 +1,21 @@
 ﻿#pragma once
-#include "Models.h"
+#include "Models.WaterRecord.h"
+#include "Models.Result.h"
 
-using namespace Models;
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Heyiwei2::Models;
+using namespace Heyiwei2::Models;
 
 class RecordManager
 {
 private:
-    std::vector<WaterRecord>& waterRecords;
-
+    IObservableVector<WaterRecord>& waterRecords;
 public:
-    RecordManager(std::vector<WaterRecord>& records);
+    RecordManager(IObservableVector<WaterRecord>& records);
 
-    Result addWaterRecord(const WaterRecord& record);
-    void removeWaterRecord(int year, int month);
-    void updateWaterRecord(int year, int month, double usage);
-    std::vector<WaterRecord> queryWaterRecord(int year, int month);
-    WaterRecord* querySpecificWaterRecord(int year, int month);
+    Result addWaterRecord(WaterRecord const& record);
+    Result removeWaterRecord(int year, int month);
+    Result updateWaterRecord(int year, int month, double usage);
+    int32_t querySpecificWaterRecord(int year, int month);
 };
 

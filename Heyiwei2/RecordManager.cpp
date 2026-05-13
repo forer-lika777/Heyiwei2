@@ -1,60 +1,59 @@
 ﻿#include "pch.h"
 #include "RecordManager.h"
 #include <algorithm>
+#include "Models.Result.h"
+#include "Models.WaterRecord.h"
+
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Heyiwei2::Models;
 
 //初始化RecordManager，传入水费记录
-RecordManager::RecordManager(std::vector<WaterRecord>& records)
+RecordManager::RecordManager(IObservableVector<WaterRecord>& records)
     : waterRecords(records) {
 }
 
 //添加水费记录，检查是否已存在相同年月的记录
 Result RecordManager::addWaterRecord(const WaterRecord& record) {
-    for (const auto& r : waterRecords) {
-        if (r.year == record.year && r.month == record.month) {
-            return Result(false, L"记录已存在");
-        }
+    auto r = querySpecificWaterRecord(record.Year(), record.Month());
+    if (r != -1)
+    {
+        return Result(false, L"添加失败：记录已存在");
     }
-    waterRecords.push_back(record);
+    waterRecords.Append(record);
     return Result(true, L"添加成功");
 }
 
 //根据年月删除水费记录
-void RecordManager::removeWaterRecord(int year, int month) {
-    waterRecords.erase(
-        std::remove_if(waterRecords.begin(), waterRecords.end(),
-            [year, month](const WaterRecord& r) {
-                return r.year == year && r.month == month;
-            }),
-        waterRecords.end());
+Result RecordManager::removeWaterRecord(int year, int month) {
+	auto r = querySpecificWaterRecord(year, month);
+    if (r == -1)
+    {
+        return Result(false, L"删除失败：未找到记录");
+	}
+    waterRecords.RemoveAt(r);
+    return Result(true, L"删除成功");
 }
 
 //根据年月更新水费记录的用量
-void RecordManager::updateWaterRecord(int year, int month, double usage) {
-    for (auto& r : waterRecords) {
-        if (r.year == year && r.month == month) {
-            r.usage = usage;
-            break;
-        }
+Result RecordManager::updateWaterRecord(int year, int month, double usage) {
+	auto r = querySpecificWaterRecord(year, month);
+	if (r == -1)
+    {
+        return Result(false, L"更新失败：未找到记录");
     }
+    waterRecords.GetAt(r).Usage(usage);
+    return Result(true, L"更新成功");
 }
 
-//根据年月查询水费记录，返回符合条件的记录列表
-std::vector<WaterRecord> RecordManager::queryWaterRecord(int year, int month) {
-    std::vector<WaterRecord> result;
-    for (const auto& r : waterRecords) {
-        if (r.year == year && r.month == month) {
-            result.push_back(r);
+//根据年月查询特定的水费记录，返回指向该记录的索引，如果未找到则返回-1
+int32_t RecordManager::querySpecificWaterRecord(int year, int month) {
+    for (uint32_t i = 0; i < waterRecords.Size(); i++)
+    {
+        auto r = waterRecords.GetAt(i);
+        if (r.Year() == year && r.Month() == month)
+        {
+            return i;
         }
     }
-    return result;
-}
-
-//根据年月查询特定的水费记录，返回指向该记录的指针，如果未找到则返回nullptr
-WaterRecord* RecordManager::querySpecificWaterRecord(int year, int month) {
-    for (auto& r : waterRecords) {
-        if (r.year == year && r.month == month) {
-            return &r;
-        }
-    }
-    return nullptr;
+    return -1;
 }

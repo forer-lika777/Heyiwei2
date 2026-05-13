@@ -25,6 +25,9 @@
     <Midl Include="DormPaneItem.idl">
       <Filter>Models</Filter>
     </Midl>
+    <Midl Include="Models.idl">
+      <Filter>Models</Filter>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -40,6 +43,21 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="DormPaneItem.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models.Dorm.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models.DormInfo.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models.Student.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models.WaterRecord.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models.Result.cpp">
       <Filter>Models</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,7 +79,19 @@
     <ClInclude Include="IDormManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Models.h">
+    <ClInclude Include="Models.Dorm.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.DormInfo.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.Student.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.WaterRecord.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.Result.h">
       <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>

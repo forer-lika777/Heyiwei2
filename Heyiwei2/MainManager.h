@@ -1,14 +1,17 @@
 #pragma once
 #include <vector>
-#include "Models.h"
+#include "Models.Dorm.h"
+
+using namespace winrt::Heyiwei2::Models;
+using namespace winrt::Windows::Foundation;
 
 class MainManager
 {
 private:
-	std::vector<Models::Dorm> dorms;
-
+	IObservableVector<IInspectable>& dorms;
 
 public:
-	const std::vector<Models::Dorm>& getAllDorms();
+	MainManager(IObservableVector<IInspectable>& dorms) : dorms(dorms) {}
+	const std::vector<Dorm>& getAllDorms();
 };
 
