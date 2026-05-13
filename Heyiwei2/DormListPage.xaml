@@ -5,10 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Heyiwei2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="local:DormListPage"
-    mc:Ignorable="d">
+    DataContext="local:DormListPage"    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 
+    mc:Ignorable="d">
+    <Page.Resources>
+
+    </Page.Resources>
     <Grid Padding="20, 70, 20, 20">
         <StackPanel> <!--排列方式：默认vertical(垂直堆叠)、horizonal(水平堆叠)-->
             <TextBlock Grid.Row="0"
@@ -52,6 +54,16 @@
                 HorizontalAlignment="Right"
                 Click="addDormButton_Click"
                 Margin="30"/>
+        <ContentDialog x:Name="AddUserDialog"
+                   Title="添加新用水用户"
+                   PrimaryButtonText="添加"
+                   CloseButtonText="取消"
+                   DefaultButton="Primary">
+            <StackPanel Spacing="10" Width="300" >
+                <TextBlock Text="请输入宿舍："/>
+                <TextBox x:Name="UserNameInput" PlaceholderText="例如：9628"/>
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 
     <!--<Popup x:Name="managePopup" 
