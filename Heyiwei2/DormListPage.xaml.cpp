@@ -64,7 +64,7 @@ void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::W
     info.region = Models::Region::East;
     info.buildingNumber = 9;
     info.floor = 6;
-    info.roomNumber = 28;
+    info.roomNumber = 30;
     dorm.info = info;
     std::vector<Models::Dorm> dorms = { dorm };
     AddDorms(dorms);
