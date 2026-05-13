@@ -88,11 +88,14 @@
     <ClInclude Include="Models.WaterRecord.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="Models.Result.h">
-      <Filter>Models</Filter>
-    </ClInclude>
     <ClInclude Include="IDormManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="IMainManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.Result.h">
+      <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

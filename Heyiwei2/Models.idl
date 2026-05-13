@@ -42,4 +42,11 @@ namespace Heyiwei2.Models
 		Int32 Index;
 		DormInfo Info;
 	};
+
+	[default_interface]
+	runtimeclass Result
+	{
+		Boolean Success;
+		String Message;
+	}
 }

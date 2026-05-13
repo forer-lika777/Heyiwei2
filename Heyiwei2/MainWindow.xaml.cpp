@@ -17,8 +17,8 @@ namespace winrt::Heyiwei2::implementation
         ExtendsContentIntoTitleBar(true);
     }
 
-    MainWindow::MainWindow(MainManager& manager)
-        : mainManager(&manager)
+    MainWindow::MainWindow(MainManager* manager)
+        : mainManager(manager)
     {
         ExtendsContentIntoTitleBar(true);
 

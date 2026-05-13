@@ -9,7 +9,7 @@ namespace winrt::Heyiwei2::implementation
     {
     public:
         MainWindow();
-        MainWindow(MainManager& manager);
+        MainWindow(MainManager* manager);
     private:
         MainManager* mainManager = nullptr;
         winrt::Heyiwei2::MainPage mainPage{ nullptr };

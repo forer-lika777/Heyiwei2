@@ -8,3 +8,13 @@ const Collections::IObservableVector<IInspectable>& MainManager::getAllDorms()
 {
 	return dorms;
 }
+
+Result MainManager::addStudent(Student const& student)
+{
+	return Result();
+}
+
+Result MainManager::removeStudent(const winrt::hstring& id)
+{
+	return Result();
+}

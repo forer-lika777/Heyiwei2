@@ -37,7 +37,7 @@ namespace winrt::Heyiwei2::implementation
     /// <param name="e">Details about the launch request and process.</param>
     void App::OnLaunched([[maybe_unused]] LaunchActivatedEventArgs const& e)
     {
-        window = make<winrt::Heyiwei2::implementation::MainWindow>(mainManager);
+        window = make<MainWindow>(&mainManager);
         window.Activate();
     }
 }

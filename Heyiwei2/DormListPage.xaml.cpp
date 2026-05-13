@@ -5,7 +5,7 @@
 #include "winrt/Windows.UI.Popups.h"
 #endif
 //#include "DormManageForm.xaml.h"
-#include "DormPaneItem.h"
+//#include "DormPaneItem.h"
 #include "Models.Dorm.h"
 #include "Models.DormInfo.h"
 #include "Models.Result.h"
@@ -15,7 +15,7 @@
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 using namespace Windows::Foundation::Collections;
-using namespace winrt::Heyiwei2::Models::implementation;
+using namespace winrt::Heyiwei2::Models;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -37,7 +37,7 @@ namespace winrt::Heyiwei2::implementation
         dorm.StartDateMonth(5);
         dorm.Index(0);
 
-		dormItems.Append(winrt::make<DormPaneItem>(dorm.Info().ToString(), 0)); // 直接添加到 dormItems 中
+		//dormItems.Append(winrt::make<DormPaneItem>(dorm.Info().ToString(), 0)); // 直接添加到 dormItems 中
 #endif
     }
 
@@ -73,10 +73,10 @@ void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::W
     dormInfo.RoomNumber(28);
 
     auto dorm = winrt::make<Dorm>();
-    dorm.Info(dormInfo);                        // 传入 DormInfo
+    dorm.Info(dormInfo);
     dorm.StartDateYear(2026);
     dorm.StartDateMonth(5);
     dorm.Index(0);
 
-    dormItems.Append(winrt::make<DormPaneItem>(dorm.Info().ToString(), 0)); // 直接添加到 dormItems 中
+    //dormItems.Append(winrt::make<DormPaneItem>(dorm.Info().ToString(), 0)); // 直接添加到 dormItems 中
 }

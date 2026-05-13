@@ -3,7 +3,6 @@
 #include "Models.Result.h"
 
 using namespace winrt::Heyiwei2::Models;
-using namespace Heyiwei2::Models;
 
 namespace Heyiwei2::Interfaces {
 	class IDormManager {

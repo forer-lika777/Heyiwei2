@@ -137,6 +137,7 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="IDormManager.h" />
+    <ClInclude Include="IMainManager.h" />
     <ClInclude Include="MainManager.h" />
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -144,6 +145,7 @@
     </ClInclude>
     <ClInclude Include="Models.Dorm.h" />
     <ClInclude Include="Models.DormInfo.h" />
+    <ClInclude Include="Models.Result.h" />
     <ClInclude Include="Models.Student.h" />
     <ClInclude Include="Models.WaterRecord.h" />
     <ClInclude Include="pch.h" />
@@ -154,7 +156,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="RecordManager.h" />
-    <ClInclude Include="Models.Result.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +196,7 @@
     </ClCompile>
     <ClCompile Include="Models.Dorm.cpp" />
     <ClCompile Include="Models.DormInfo.cpp" />
+    <ClCompile Include="Models.Result.cpp" />
     <ClCompile Include="Models.Student.cpp" />
     <ClCompile Include="Models.WaterRecord.cpp" />
     <ClCompile Include="pch.cpp">
@@ -208,7 +210,6 @@
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="RecordManager.cpp" />
-    <ClCompile Include="Models.Result.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

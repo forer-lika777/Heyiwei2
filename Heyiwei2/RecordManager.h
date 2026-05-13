@@ -3,19 +3,17 @@
 #include "Models.Result.h"
 
 using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Heyiwei2::Models;
-using namespace Heyiwei2::Models;
 
 class RecordManager
 {
 private:
-    IObservableVector<WaterRecord>& waterRecords;
+    IObservableVector<winrt::Heyiwei2::Models::implementation::WaterRecord>& waterRecords;
 public:
-    RecordManager(IObservableVector<WaterRecord>& records);
+    RecordManager(IObservableVector<winrt::Heyiwei2::Models::implementation::WaterRecord>& records);
 
-    Result addWaterRecord(WaterRecord const& record);
-    Result removeWaterRecord(int year, int month);
-    Result updateWaterRecord(int year, int month, double usage);
+    winrt::Heyiwei2::Models::implementation::Result addWaterRecord(winrt::Heyiwei2::Models::implementation::WaterRecord const& record);
+    winrt::Heyiwei2::Models::implementation::Result removeWaterRecord(int year, int month);
+    winrt::Heyiwei2::Models::implementation::Result updateWaterRecord(int year, int month, double usage);
     int32_t querySpecificWaterRecord(int year, int month);
 };
 

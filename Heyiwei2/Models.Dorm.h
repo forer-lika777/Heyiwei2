@@ -1,6 +1,9 @@
 #pragma once
 #include "Models.Dorm.g.h"
 
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Heyiwei2::Models;
+
 namespace winrt::Heyiwei2::Models::implementation
 {
     struct Dorm : DormT<Dorm>
@@ -8,24 +11,24 @@ namespace winrt::Heyiwei2::Models::implementation
     public:
         Dorm() = default;
 
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> Students();
-        void Students(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> const& value);
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> Records();
-        void Records(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> const& value);
+        IObservableVector<IInspectable> Students();
+        void Students(IObservableVector<IInspectable> const& value);
+        IObservableVector<IInspectable> Records();
+        void Records(IObservableVector<IInspectable> const& value);
         int32_t StartDateYear();
         void StartDateYear(int32_t value);
         int32_t StartDateMonth();
         void StartDateMonth(int32_t value);
         int32_t Index();
         void Index(int32_t value);
-        winrt::Heyiwei2::Models::DormInfo Info();
-        void Info(winrt::Heyiwei2::Models::DormInfo const& value);
+        DormInfo Info();
+        void Info(DormInfo const& value);
     private:
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> students{ winrt::single_threaded_observable_vector<winrt::Windows::Foundation::IInspectable>() };
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> records{ winrt::single_threaded_observable_vector<winrt::Windows::Foundation::IInspectable>() };
+        IObservableVector<IInspectable> students{ winrt::single_threaded_observable_vector<IInspectable>() };
+        IObservableVector<IInspectable> records{ winrt::single_threaded_observable_vector<IInspectable>() };
         int32_t startDateYear = 0;
         int32_t startDateMonth = 0;
         int32_t index = 0;
-		winrt::Heyiwei2::Models::DormInfo info{ nullptr };
+		DormInfo info{ nullptr };
     };
 }

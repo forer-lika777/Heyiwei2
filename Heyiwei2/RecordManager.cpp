@@ -5,7 +5,6 @@
 #include "Models.WaterRecord.h"
 
 using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Heyiwei2::Models;
 
 //初始化RecordManager，传入水费记录
 RecordManager::RecordManager(IObservableVector<WaterRecord>& records)
@@ -13,18 +12,18 @@ RecordManager::RecordManager(IObservableVector<WaterRecord>& records)
 }
 
 //添加水费记录，检查是否已存在相同年月的记录
-Result RecordManager::addWaterRecord(const WaterRecord& record) {
+winrt::Heyiwei2::Models::implementation::Result RecordManager::addWaterRecord(const WaterRecord& record) {
     auto r = querySpecificWaterRecord(record.Year(), record.Month());
     if (r != -1)
     {
-        return Result(false, L"添加失败：记录已存在");
+        return winrt::make<Result>(false, L"添加失败：记录已存在");
     }
     waterRecords.Append(record);
-    return Result(true, L"添加成功");
+    return winrt::make<Result>(true, L"添加成功");
 }
 
 //根据年月删除水费记录
-Result RecordManager::removeWaterRecord(int year, int month) {
+winrt::Heyiwei2::Models::implementation::Result RecordManager::removeWaterRecord(int year, int month) {
 	auto r = querySpecificWaterRecord(year, month);
     if (r == -1)
     {
@@ -35,7 +34,7 @@ Result RecordManager::removeWaterRecord(int year, int month) {
 }
 
 //根据年月更新水费记录的用量
-Result RecordManager::updateWaterRecord(int year, int month, double usage) {
+winrt::Heyiwei2::Models::implementation::Result RecordManager::updateWaterRecord(int year, int month, double usage) {
 	auto r = querySpecificWaterRecord(year, month);
 	if (r == -1)
     {
