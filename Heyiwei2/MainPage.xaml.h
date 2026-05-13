@@ -1,23 +1,20 @@
 #pragma once
 
 #include "MainPage.g.h"
+#include "MainManager.h"
 
 namespace winrt::Heyiwei2::implementation
 {
     struct MainPage : MainPageT<MainPage>
     {
     private:
+        MainManager* mainManager = nullptr;
         void openHomePage();
         void openDormListPage();
     public:
-        MainPage()
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
+        MainPage();
+        MainPage(MainManager& manager);
 
-        int32_t MyProperty();
-        void MyProperty(int32_t value);
         void Page_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void NavigationView_Invoked(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::NavigationViewItemInvokedEventArgs const& args);
     };

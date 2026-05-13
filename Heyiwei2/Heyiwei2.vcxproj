@@ -136,7 +136,6 @@
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="IDormManager.h" />
     <ClInclude Include="MainManager.h" />
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>

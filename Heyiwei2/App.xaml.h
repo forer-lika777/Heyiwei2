@@ -1,6 +1,7 @@
 #pragma once
 
 #include "App.xaml.g.h"
+#include "MainManager.h"
 
 using namespace winrt::Windows::Foundation::Collections;
 

@@ -13,14 +13,16 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::Heyiwei2::implementation
 {
-    int32_t MainPage::MyProperty()
+    MainPage::MainPage()
     {
-        throw hresult_not_implemented();
+        InitializeComponent();
     }
 
-    void MainPage::MyProperty(int32_t /* value */)
+    MainPage::MainPage(MainManager& manager)
+        : mainManager(&manager)
     {
-        throw hresult_not_implemented();
+        InitializeComponent();
+        // 这里用 mainManager 绑定数据
     }
 
     void MainPage::openHomePage() {

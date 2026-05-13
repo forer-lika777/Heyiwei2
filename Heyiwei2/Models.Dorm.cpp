@@ -2,54 +2,57 @@
 #include "Models.Dorm.h"
 #include "Models.Dorm.g.cpp"
 
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Windows::Foundation;
+
 namespace winrt::Heyiwei2::Models::implementation
 {
-    winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> Dorm::Students()
+    IObservableVector<IInspectable> Dorm::Students()
     {
-        throw hresult_not_implemented();
+		return students;
     }
-    void Dorm::Students(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> const& value)
+    void Dorm::Students(IObservableVector<IInspectable> const& value)
     {
-        throw hresult_not_implemented();
+        students = value;
     }
-    winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> Dorm::Records()
+    IObservableVector<IInspectable> Dorm::Records()
     {
-        throw hresult_not_implemented();
+        return records;
     }
-    void Dorm::Records(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> const& value)
+    void Dorm::Records(IObservableVector<IInspectable> const& value)
     {
-        throw hresult_not_implemented();
+		records = value;
     }
     int32_t Dorm::StartDateYear()
     {
-        throw hresult_not_implemented();
+		return startDateYear;
     }
     void Dorm::StartDateYear(int32_t value)
     {
-        throw hresult_not_implemented();
+		startDateYear = value;
     }
     int32_t Dorm::StartDateMonth()
     {
-        throw hresult_not_implemented();
+		return startDateMonth;
     }
     void Dorm::StartDateMonth(int32_t value)
     {
-        throw hresult_not_implemented();
+		startDateMonth = value;
     }
     int32_t Dorm::Index()
     {
-        throw hresult_not_implemented();
+        return index;
     }
     void Dorm::Index(int32_t value)
     {
-        throw hresult_not_implemented();
+        index = value;
     }
     winrt::Heyiwei2::Models::DormInfo Dorm::Info()
     {
-        throw hresult_not_implemented();
+        return info;
     }
     void Dorm::Info(winrt::Heyiwei2::Models::DormInfo const& value)
     {
-        throw hresult_not_implemented();
+		info = value;
     }
 }

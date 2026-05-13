@@ -12,13 +12,5 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::Heyiwei2::implementation
 {
-    int32_t HomePage::MyProperty()
-    {
-        throw hresult_not_implemented();
-    }
 
-    void HomePage::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
-    }
 }

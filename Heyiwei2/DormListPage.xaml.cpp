@@ -4,14 +4,18 @@
 #include "DormListPage.g.cpp"
 #include "winrt/Windows.UI.Popups.h"
 #endif
-#include "Models.h"
 //#include "DormManageForm.xaml.h"
 #include "DormPaneItem.h"
+#include "Models.Dorm.h"
+#include "Models.DormInfo.h"
+#include "Models.Result.h"
+#include "Models.Student.h"
+#include "Models.WaterRecord.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 using namespace Windows::Foundation::Collections;
-using namespace Models;
+using namespace winrt::Heyiwei2::Models::implementation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -22,15 +26,18 @@ namespace winrt::Heyiwei2::implementation
     {
         InitializeComponent();
 #ifdef _DEBUG
-        Models::Dorm dorm;
-        Models::DormInfo info{};
-        info.region = Models::Region::East;
-        info.buildingNumber = 9;
-        info.floor = 6;
-        info.roomNumber = 28;
-        dorm.info = info;
-        std::vector<Models::Dorm> dorms = { dorm, dorm };
-        AddDorms(dorms);
+        auto dormInfo = winrt::make<DormInfo>();
+        dormInfo.BuildingNumber(9);
+        dormInfo.Floor(6);
+        dormInfo.RoomNumber(28);
+
+        auto dorm = winrt::make<Dorm>();
+        dorm.Info(dormInfo);                        // 传入 DormInfo
+        dorm.StartDateYear(2026);
+        dorm.StartDateMonth(5);
+        dorm.Index(0);
+
+		dormItems.Append(winrt::make<DormPaneItem>(dorm.Info().ToString(), 0)); // 直接添加到 dormItems 中
 #endif
     }
 
@@ -40,17 +47,17 @@ namespace winrt::Heyiwei2::implementation
   //      RefreshDormListView({ dorm });
   //  }
 
-    void DormListPage::AddDorms(std::vector<Models::Dorm>& dorms)
-    {
-        for (size_t i = 0; i < dorms.size(); ++i)
-        {
-			winrt::hstring dormInfo = dorms[i].info.toString();
+  //  void DormListPage::AddDorms(std::vector<Models::Dorm>& dorms)
+  //  {
+  //      for (size_t i = 0; i < dorms.size(); ++i)
+  //      {
+		//	winrt::hstring dormInfo = dorms[i].info.toString();
 
-			dormItems.Append(winrt::make<DormPaneItem>(dormInfo, i));
-        }
-        
-		//dormListView().ItemsSource(dormItems);
-    }
+		//	dormItems.Append(winrt::make<DormPaneItem>(dormInfo, i));
+  //      }
+  //      
+		////dormListView().ItemsSource(dormItems);
+  //  }
 }
 
 void winrt::Heyiwei2::implementation::DormListPage::openDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -60,13 +67,16 @@ void winrt::Heyiwei2::implementation::DormListPage::openDormButton_Click(winrt::
 
 void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
 {
-    Models::Dorm dorm;
-    Models::DormInfo info{};
-    info.region = Models::Region::East;
-    info.buildingNumber = 9;
-    info.floor = 6;
-    info.roomNumber = 30;
-    dorm.info = info;
-    std::vector<Models::Dorm> dorms = { dorm };
-    AddDorms(dorms);
+    auto dormInfo = winrt::make<DormInfo>();
+    dormInfo.BuildingNumber(9);
+    dormInfo.Floor(6);
+    dormInfo.RoomNumber(28);
+
+    auto dorm = winrt::make<Dorm>();
+    dorm.Info(dormInfo);                        // 传入 DormInfo
+    dorm.StartDateYear(2026);
+    dorm.StartDateMonth(5);
+    dorm.Index(0);
+
+    dormItems.Append(winrt::make<DormPaneItem>(dorm.Info().ToString(), 0)); // 直接添加到 dormItems 中
 }

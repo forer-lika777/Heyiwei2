@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "DormListPage.g.h"
 #include <winrt/Windows.Foundation.Collections.h>
@@ -18,7 +18,6 @@ namespace winrt::Heyiwei2::implementation
         
         Collections::IObservableVector<IInspectable> DormItems() { return dormItems; }
 		//void AddDormItem(Models::Dorm& dorm);
-		void AddDorms(std::vector<Models::Dorm>& dorms);
         //void Button_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void openDormButton_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);

@@ -76,9 +76,6 @@
     <ClInclude Include="DormPaneItem.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="IDormManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Models.Dorm.h">
       <Filter>Models</Filter>
     </ClInclude>
