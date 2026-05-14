@@ -1,23 +1,25 @@
 #include "pch.h"
 #include "Utils.h"
 #include "Models.WaterRecord.h"
+#include "Models.Student.h"
 
-using namespace winrt::Heyiwei2::Models::implementation;
-void Utils::calculateTotalWaterFee(WaterRecord& record)
+using namespace winrt::Heyiwei2::Models;
+
+void Utils::calculateTotalWaterFee(WaterRecord const& record)
 {
 	record.Cost(record.Usage() * 24.5);
 }
-bool Utils::validateStudentId(Student const& record)
+bool Utils::validateStudentId(Student const& student)
 {
 	int i = 0;
-	std::string studentId = record.StudentId;
-	if (studentId.length() != 10)
+	winrt::hstring studentId = student.StudentId();
+	if (studentId.size() != 10)
 	{
 		return false;
 	}
 	else
 	{
-		while (i < studentId.length())
+		while (i < studentId.size())
 		{
 			int jiance = studentId[i];
 			if (jiance < '0' || jiance > '9')
@@ -29,17 +31,18 @@ bool Utils::validateStudentId(Student const& record)
 		}
 		return true;
 	}
-bool Utils::validateWaterRecord(WaterRecord const& record)
+}
+bool Utils::validateWaterRecord(winrt::Heyiwei2::Models::WaterRecord const& record)
 {
-	if (record.Year < 2026)
+	if (record.Year() < 2026)
 	{
 		return false;
 	}
-	else if (record.Month < 1 || record.Month > 12)
+	else if (record.Month() < 1 || record.Month() > 12)
 	{
 		return false;
 	}
-	else if (record.Usage < 0)
+	else if (record.Usage() < 0)
 	{
 		return false;
 	}
@@ -48,7 +51,7 @@ bool Utils::validateWaterRecord(WaterRecord const& record)
 		return true;
 	}
 }
-void Utils::sortWaterRecords(std::vector<WaterRecord>& records)
+void Utils::sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<WaterRecord>& records)
 {
 	std::sort(records.begin(), records.end(),
 		[](const WaterRecord& a, const WaterRecord& b)

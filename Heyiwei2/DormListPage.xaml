@@ -60,8 +60,54 @@
                    CloseButtonText="取消"
                    DefaultButton="Primary">
             <StackPanel Spacing="10" Width="300" >
-                <TextBlock Text="请输入宿舍："/>
-                <TextBox x:Name="UserNameInput" PlaceholderText="例如：9628"/>
+                <TextBlock Text="添加宿舍"/>
+                <TextBlock Text="选择宿舍区域："/>
+                <ComboBox x:Name="RegionSelectComboBox"
+                          SelectedIndex="0">
+                    <x:String>西区</x:String>
+                    <x:String>东区</x:String>
+                </ComboBox>
+                <TextBlock Text="选择宿舍楼栋："/>
+                <ComboBox x:Name="BuildingSelectComboBox"
+                          SelectedIndex="0">
+                    <x:String>1号楼</x:String>
+                    <x:String>2号楼</x:String>
+                    <x:String>3号楼</x:String>
+                    <x:String>4号楼</x:String>
+                    <x:String>5号楼</x:String>
+                    <x:String>6号楼</x:String>
+                    <x:String>7号楼</x:String>
+                    <x:String>8号楼</x:String>
+                    <x:String>9号楼</x:String>
+                    <x:String>10号楼</x:String>
+                    <x:String>11号楼</x:String>
+                    <x:String>12号楼</x:String>
+                    <x:String>13号楼</x:String>
+                    <x:String>14号楼</x:String>
+                    <x:String>15号楼</x:String>
+                    <x:String>16号楼</x:String>
+                    <x:String>17号楼</x:String>
+                    <x:String>18号楼</x:String>
+                    <x:String>19号楼</x:String>
+                    <x:String>20号楼</x:String>
+                    <x:String>21号楼</x:String>
+                    <x:String>22号楼</x:String>
+                    <x:String>23号楼</x:String>
+                    <x:String>24号楼</x:String>
+                </ComboBox>
+                <TextBlock Text="选择宿舍楼层："/>
+                <ComboBox x:Name="FloorSelectComboBox"
+                          SelectedIndex="0">
+                    <x:String>1层</x:String>
+                    <x:String>2层</x:String>
+                    <x:String>3层</x:String>
+                    <x:String>4层</x:String>
+                    <x:String>5层</x:String>
+                    <x:String>6层</x:String>
+                </ComboBox>
+                <TextBlock Text="输入宿舍号："/>
+                <TextBox x:Name="DormNumberInput" PlaceholderText="例如：101"/>
+                <TextBlock x:Name="OutputInfoTextBlock"/>
             </StackPanel>
         </ContentDialog>
     </Grid>

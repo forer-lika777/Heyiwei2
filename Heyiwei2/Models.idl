@@ -37,6 +37,7 @@ namespace Heyiwei2.Models
 	{
 		Windows.Foundation.Collections.IObservableVector<Object> Students;
 		Windows.Foundation.Collections.IObservableVector<Object> Records;
+		String DormId;
 		Int32 StartDateYear;
 		Int32 StartDateMonth;
 		Int32 Index;

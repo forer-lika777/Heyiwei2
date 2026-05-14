@@ -63,46 +63,24 @@ void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::W
             {
                 this->DispatcherQueue().TryEnqueue([this]()
                     {
-                        // 修改点 2: 变量名统一。你前面拿的是 name，后面用的是 code，这里统一成 code
-                        hstring name = UserNameInput().Text();
-                        std::wstring code = name.c_str();
+                        try {
+                            auto dormInfo = winrt::make<DormInfo>();
+                            dormInfo.Region(RegionSelectComboBox().SelectedIndex());
+                            dormInfo.BuildingNumber(BuildingSelectComboBox().SelectedIndex());
+                            dormInfo.Floor(FloorSelectComboBox().SelectedIndex());
+                            dormInfo.RoomNumber(std::stoi(DormNumberInput().Text().c_str()));
 
-                        if (!name.empty() && code.length() >= 3) // 增加长度检查防止拆分崩溃
-                        {
-                            try {
-                                // 拆分逻辑
-                                int bld = code[0] - L'0';
-                                int flr = code[1] - L'0';
-                                int rm = std::stoi(code.substr(2));
+                            auto dorm = winrt::make<Dorm>();
+                            dorm.Info(dormInfo);
+                            dorm.StartDateYear(2026);
+                            dorm.StartDateMonth(5);
 
-                                std::wstring formattedName = std::to_wstring(bld) + L"栋" +
-                                    std::to_wstring(flr) + L"-" +
-                                    std::to_wstring(rm);
-
-                                auto dormInfo = winrt::make<DormInfo>();
-                                dormInfo.Region(0);
-                                dormInfo.BuildingNumber(bld);
-                                dormInfo.Floor(flr);
-                                dormInfo.RoomNumber(rm);
-
-                                auto dorm = winrt::make<Dorm>();
-                                dorm.Info(dormInfo);
-                                dorm.StartDateYear(2026);
-                                dorm.StartDateMonth(5);
-
-                                // 修改点 3: 你需要先“制做”要添加的项目对象 newItem
-                                // 假设 DormPaneItem 接收一个字符串作为显示名称
-                                auto newItem = winrt::make<DormPaneItem>(hstring(formattedName), 0);
-
-                                // 修改点 4: 确保 dormItems 已经在头文件定义
-                                dormItems.Append(newItem);
-
-                                UserNameInput().Text(L"");
-                            }
-                            catch (...) {
-                                // 处理 stoi 转换失败的情况
-                            }
+                            dormItems.Append(dorm);
                         }
+                        catch (...) {
+                            OutputInfoTextBlock().Text(L"输入格式不正确，请重新输入。");
+                        }
+                        
                     }); // 这里是 TryEnqueue 的结束括号
             }
         }); // 这里是 Completed 的结束括号

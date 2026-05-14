@@ -23,12 +23,14 @@ namespace winrt::Heyiwei2::Models::implementation
         void Index(int32_t value);
         DormInfo Info();
         void Info(DormInfo const& value);
+        hstring DormID();
     private:
         IObservableVector<IInspectable> students{ winrt::single_threaded_observable_vector<IInspectable>() };
         IObservableVector<IInspectable> records{ winrt::single_threaded_observable_vector<IInspectable>() };
+		hstring dormId;
         int32_t startDateYear = 0;
         int32_t startDateMonth = 0;
         int32_t index = 0;
-		DormInfo info{ nullptr };
+        winrt::Heyiwei2::Models::DormInfo info{ nullptr };
     };
 }

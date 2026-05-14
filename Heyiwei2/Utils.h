@@ -1,19 +1,22 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include <vector>
 #include <algorithm>
+#include "Models.WaterRecord.h"
+#include "Models.Student.h"
+
+using namespace winrt::Heyiwei2::Models;
+
 class Utils
 {
 public:
 	//计算总水费
-	static double calculateTotalWaterFee(Heyiwei2::Models::WaterRecord const& record);
+	static void calculateTotalWaterFee(WaterRecord const& record);
 	//检验学生ID是否合法
-	static bool validateStudentId(Heyiwei2::Models::Student const& record);
+	static bool validateStudentId(Student const& student);
 	//检测水费记录是否合法
-	static bool validateWaterRecord(Heyiwei2::Models::WaterRecord const& record);
+	static bool validateWaterRecord(WaterRecord const& record);
 	//排序水费记录
-	static void sortWaterRecords(vector<Heyiwei2::Models::WaterRecord>& records);
-
+	static void sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<WaterRecord>& records);
 };
 

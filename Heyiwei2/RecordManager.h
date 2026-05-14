@@ -2,18 +2,20 @@
 #include "Models.WaterRecord.h"
 #include "Models.Result.h"
 
+using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Heyiwei2::Models;
 
 class RecordManager
 {
 private:
-    IObservableVector<winrt::Heyiwei2::Models::implementation::WaterRecord>& waterRecords;
+    IObservableVector<IInspectable> waterRecords;
 public:
-    RecordManager(IObservableVector<winrt::Heyiwei2::Models::implementation::WaterRecord>& records);
+    RecordManager(IObservableVector<IInspectable> records);
 
-    winrt::Heyiwei2::Models::implementation::Result addWaterRecord(winrt::Heyiwei2::Models::implementation::WaterRecord const& record);
-    winrt::Heyiwei2::Models::implementation::Result removeWaterRecord(int year, int month);
-    winrt::Heyiwei2::Models::implementation::Result updateWaterRecord(int year, int month, double usage);
+    Result addWaterRecord(WaterRecord const& record);
+    Result removeWaterRecord(int year, int month);
+    Result updateWaterRecord(int year, int month, double usage);
     int32_t querySpecificWaterRecord(int year, int month);
 };
 

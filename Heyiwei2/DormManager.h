@@ -8,21 +8,20 @@
 using namespace winrt::Heyiwei2::Models;
 using namespace winrt::Windows::Foundation::Collections;
 
-class DormManager : public IDormManager
+class DormManager : public Interfaces::IDormManager
 {
 private:
-    std::vector<Student> students;
-    IObservableVector<WaterRecord> waterRecords;
-    RecordManager recordManager;
+    Dorm dorm{ nullptr };
+	RecordManager recordManager{ nullptr };
 
 public:
     DormManager();
-    std::vector<Student> getAllStudents() override;
+    IObservableVector<IInspectable> getAllStudents() override;
     Result addStudent(const Student& student) override;
     Result removeStudent(const winrt::hstring& id) override;
     Result updateStudentName(const winrt::hstring& id, const winrt::hstring& name) override;
-    Student queryStudent(const winrt::hstring& id);
-    IObservableVector<WaterRecord> queryWaterRecords();
+    int32_t queryStudent(const winrt::hstring& id);
+    IObservableVector<IInspectable> getWaterRecords();
     WaterRecord querySpecificWaterRecord(int year, int month);
     Result addWaterRecord(WaterRecord const& record);
     Result removeWaterRecord(int year, int month);

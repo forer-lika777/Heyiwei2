@@ -53,6 +53,14 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void Dorm::Info(winrt::Heyiwei2::Models::DormInfo const& value)
     {
+		dormId = L"Dorm-" + winrt::to_hstring(value.Region()) + 
+            L"-" + winrt::to_hstring(value.BuildingNumber()) + 
+            L"-" + winrt::to_hstring(value.Floor()) + 
+            L"-" + winrt::to_hstring(value.RoomNumber());
 		info = value;
+    }
+    hstring Dorm::DormID()
+    {
+        return dormId;
     }
 }

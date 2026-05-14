@@ -5,22 +5,27 @@
 #include "Models.Result.h"
 
 using namespace winrt::Heyiwei2::Models;
+using winrt::hstring;
 
 namespace Interfaces
 {
 	class IMainManager
 	{
 	public:
-		virtual Result addStudent(Student const& student) = 0;
-		virtual Result removeStudent(const winrt::hstring& id) = 0;
-		virtual Result updateStudent(const winrt::hstring& id, const winrt::hstring& name) = 0;
-		virtual Result addDorm(Dorm const& dorm) = 0;
-		virtual Result removeDorm(int index) = 0;
-		virtual Result updateDorm(int index, Dorm const& dorm) = 0;
-		virtual Result assignStudentToDorm(int dormIndex, const winrt::hstring& studentId) = 0;
-		virtual Result removeStudentFromDorm(int dormIndex, const winrt::hstring& studentId) = 0;
-		virtual Result addWaterRecord(int dormIndex, WaterRecord const& record) = 0;
-		virtual Result removeWaterRecord(int dormIndex, int year, int month) = 0;
-		virtual Result updateWaterRecord(int dormIndex, int year, int month, double usage) = 0;
+		virtual Result addStudent(const hstring dormId, Student const student) = 0;
+		virtual Result removeStudent(const hstring dormId, const hstring studentId) = 0;
+		virtual Result updateStudent(const hstring dormId, const hstring studentId, const hstring name) = 0;
+
+		virtual Result addDorm(const Dorm dorm) = 0;
+		virtual Result removeDorm(const hstring dormId) = 0;
+		virtual Result updateDorm(const hstring dormId, const Dorm dorm) = 0;
+
+		virtual Result addStudentToDorm(const hstring dormId, const hstring studentId) = 0;
+		virtual Result removeStudentFromDorm(const hstring dormId, const hstring studentId) = 0;
+		virtual Result updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) = 0;
+
+		virtual Result addWaterRecord(const hstring dormId, const WaterRecord record) = 0;
+		virtual Result removeWaterRecord(const hstring dormId, int year, int month) = 0;
+		virtual Result updateWaterRecord(const hstring dormId, int year, int month, const WaterRecord record) = 0;
 	};
 }

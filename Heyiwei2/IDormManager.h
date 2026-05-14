@@ -4,10 +4,10 @@
 
 using namespace winrt::Heyiwei2::Models;
 
-namespace Heyiwei2::Interfaces {
+namespace Interfaces {
 	class IDormManager {
 	public:
-		virtual std::vector<Student> getAllStudents() = 0;
+		virtual IObservableVector<IInspectable> getAllStudents() = 0;
 		virtual Result addStudent(const Student& student) = 0;
 		virtual Result removeStudent(const winrt::hstring& id) = 0;
 		virtual Result updateStudentName(const winrt::hstring& id, const winrt::hstring& name) = 0;
