@@ -9,6 +9,11 @@ DormManager::DormManager()
 {
 }
 
+void DormManager::setDorm(const Dorm dorm)
+{
+    this->dorm = dorm;
+}
+
 IObservableVector<IInspectable> DormManager::getAllStudents()
 {
     return dorm.Students();

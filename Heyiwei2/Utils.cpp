@@ -31,7 +31,8 @@ bool Utils::validateStudentId(winrt::Heyiwei2::Models::implementation::Student c
     return true;
 }
 
-bool Utils::validateWaterRecord(winrt::Heyiwei2::Models::implementation::WaterRecord const& record)
+bool Utils::validateWaterRecord(winrt::Heyiwei2::Models::implementation::WaterRecord const& record){
+
 	int i = 0;
 	winrt::hstring studentId = student.StudentId();
 	if (studentId.size() != 10)

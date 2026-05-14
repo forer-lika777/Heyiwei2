@@ -16,6 +16,7 @@ private:
 
 public:
     DormManager();
+	void setDorm(const Dorm dorm);
     IObservableVector<IInspectable> getAllStudents() override;
     Result addStudent(const Student& student) override;
     Result removeStudent(const winrt::hstring& id) override;
