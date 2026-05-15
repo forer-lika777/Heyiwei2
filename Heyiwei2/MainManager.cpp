@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "MainManager.h"
 
 using namespace winrt::Heyiwei2::Models;
@@ -7,6 +7,11 @@ using namespace winrt::Windows::Foundation;
 MainManager::MainManager(IObservableVector<IInspectable>& dorms) : dorms(dorms)
 {
 
+}
+
+winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> MainManager::getDormItems()
+{
+	return dorms;
 }
 
 Result MainManager::addStudent(const hstring dormId, Student const student)

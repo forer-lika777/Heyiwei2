@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "Models.h"
+#include "Models.Result.h"
+#include "Models.Dorm.h"
 
-void SaveData(const std::vector<Models::Dorm>& dorms, const std::string& filename);
-std::vector<Models::Dorm> LoadData(const std::string& filename);
+void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
+winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);

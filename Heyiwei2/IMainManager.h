@@ -12,6 +12,8 @@ namespace Interfaces
 	class IMainManager
 	{
 	public:
+		virtual winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> getDormItems() = 0;
+
 		virtual Result addStudent(const hstring dormId, Student const student) = 0;
 		virtual Result removeStudent(const hstring dormId, const hstring studentId) = 0;
 		virtual Result updateStudent(const hstring dormId, const hstring studentId, const hstring name) = 0;

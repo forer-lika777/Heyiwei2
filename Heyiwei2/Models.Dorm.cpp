@@ -59,7 +59,7 @@ namespace winrt::Heyiwei2::Models::implementation
             L"-" + winrt::to_hstring(value.RoomNumber());
 		info = value;
     }
-    hstring Dorm::DormID()
+    hstring Dorm::DormId()
     {
         return dormId;
     }

@@ -37,7 +37,7 @@ namespace Heyiwei2.Models
 	{
 		Windows.Foundation.Collections.IObservableVector<Object> Students;
 		Windows.Foundation.Collections.IObservableVector<Object> Records;
-		String DormId;
+		String DormId{ get; };
 		Int32 StartDateYear;
 		Int32 StartDateMonth;
 		Int32 Index;
@@ -47,6 +47,8 @@ namespace Heyiwei2.Models
 	[default_interface]
 	runtimeclass Result
 	{
+		Result();
+		Result(Boolean success, String message);  // 必须有这个
 		Boolean Success;
 		String Message;
 	}

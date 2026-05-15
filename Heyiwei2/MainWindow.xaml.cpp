@@ -13,16 +13,11 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::Heyiwei2::implementation
 {
-    MainWindow::MainWindow() {
-        ExtendsContentIntoTitleBar(true);
-    }
-
-    MainWindow::MainWindow(MainManager* manager)
-        : mainManager(manager)
+    MainWindow::MainWindow()
     {
         ExtendsContentIntoTitleBar(true);
 
-        mainPage = winrt::make<winrt::Heyiwei2::implementation::MainPage>(mainManager);
+        mainPage = winrt::make<winrt::Heyiwei2::implementation::MainPage>();
 
         this->Content(mainPage);
     };

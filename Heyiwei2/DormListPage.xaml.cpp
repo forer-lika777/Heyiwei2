@@ -4,84 +4,113 @@
 #include "DormListPage.g.cpp"
 #include "winrt/Windows.UI.Popups.h"
 #endif
-//#include "DormManageForm.xaml.h"
-//#include "DormPaneItem.h"
 #include "Models.Dorm.h"
 #include "Models.DormInfo.h"
 #include "Models.Result.h"
 #include "Models.Student.h"
 #include "Models.WaterRecord.h"
+#include "IMainManager.h"
+#include "AddDormForm.xaml.h"
 #include <winrt/Windows.Foundation.h>
+#include "App.xaml.h"
 
-using namespace winrt;
-using namespace Microsoft::UI::Xaml;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Controls;
-using namespace Windows::Foundation::Collections;
-using namespace winrt::Heyiwei2::Models;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace winrt::Heyiwei2::implementation
 {
     DormListPage::DormListPage()
     {
         InitializeComponent();
-#ifdef _DEBUG
-        auto dormInfo = winrt::make<DormInfo>();
-        dormInfo.BuildingNumber(9);
-        dormInfo.Floor(6);
-        dormInfo.RoomNumber(28);
-
-        auto dorm = winrt::make<Dorm>();
-        dorm.Info(dormInfo);                        // 传入 DormInfo
-        dorm.StartDateYear(2026);
-        dorm.StartDateMonth(5);
-        dorm.Index(0);
-
-		//dormItems.Append(winrt::make<DormPaneItem>(dorm.Info().ToString(), 0)); // 直接添加到 dormItems 中
-#endif
+        mainManager = App::GetMainManager();
+        dormItems = mainManager->getDormItems();
     }
+}
+
+winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> winrt::Heyiwei2::implementation::DormListPage::DormItems()
+{
+    return dormItems;
 }
 
 void winrt::Heyiwei2::implementation::DormListPage::openDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
 {
-
+    
 }
 
 void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
 {
-    AddUserDialog().XamlRoot(this->XamlRoot());
-    auto showOperation = AddUserDialog().ShowAsync();
+    openCreateDormDialogAsync();
+}
 
-    showOperation.Completed([this](auto&& operation, auto&& /*status*/)
+winrt::Windows::Foundation::IAsyncAction winrt::Heyiwei2::implementation::DormListPage::openCreateDormDialogAsync()
+{
+    auto form = winrt::make_self<winrt::Heyiwei2::implementation::AddDormForm>();
+
+    ContentDialog dialog;
+    dialog.Title(winrt::box_value(L"添加宿舍"));
+    dialog.Content(form.as<winrt::Heyiwei2::AddDormForm>()); // 将 UserControl 设为内容
+
+    dialog.PrimaryButtonText(L"确认");
+    dialog.CloseButtonText(L"取消");
+    dialog.DefaultButton(ContentDialogButton::Primary);
+
+    dialog.XamlRoot(this->XamlRoot());
+
+    dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+
+        auto f = form.get();
+
+        // 校验表单数据
+        //if (form.get()->Region() == L"" || form.get()->BuildingNumber() <= 0)
+        //{
+        //    form.get()->showInfo(L"请完整填写宿舍信息");
+        //    args.Cancel(true);  // 阻止对话框关闭
+        //    return;
+        //}
+
+        if (f->DormNumber() == L"") {
+            f->showInfo(L"请输入宿舍号");
+            args.Cancel(true);
+            return;
+        }
+
+        // 调用 addDorm 逻辑
+        if (mainManager == nullptr)
         {
-            auto result = operation.GetResults();
+            f->showInfo(L"发生了程序内部错误：内部管理器变量指向了空指针");
+            args.Cancel(true);
+            return;
+        }
 
-            // 修改点 1: 确保 ContentDialogResult 的命名空间正确
-            if (result == winrt::Microsoft::UI::Xaml::Controls::ContentDialogResult::Primary)
-            {
-                this->DispatcherQueue().TryEnqueue([this]()
-                    {
-                        try {
-                            auto dormInfo = winrt::make<DormInfo>();
-                            dormInfo.Region(RegionSelectComboBox().SelectedIndex());
-                            dormInfo.BuildingNumber(BuildingSelectComboBox().SelectedIndex());
-                            dormInfo.Floor(FloorSelectComboBox().SelectedIndex());
-                            dormInfo.RoomNumber(std::stoi(DormNumberInput().Text().c_str()));
+        auto dormInfo = winrt::make<winrt::Heyiwei2::Models::implementation::DormInfo>();
+        dormInfo.Region(form.get()->Region());
+        dormInfo.BuildingNumber(form.get()->BuildingNumber());
+        dormInfo.Floor(form.get()->FloorNumber());
+        try {
+            dormInfo.RoomNumber(std::stoi(form.get()->DormNumber().c_str()));
+        }
+        catch (const std::exception&) {
+            f->showInfo(L"无法读取宿舍号：" + form.get()->DormNumber());
+            args.Cancel(true);
+            return;
+        }
 
-                            auto dorm = winrt::make<Dorm>();
-                            dorm.Info(dormInfo);
-                            dorm.StartDateYear(2026);
-                            dorm.StartDateMonth(5);
+        auto dorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>();
+        dorm.Info(dormInfo);
+        dorm.StartDateYear(2026);
+        dorm.StartDateMonth(5);
 
-                            dormItems.Append(dorm);
-                        }
-                        catch (...) {
-                            OutputInfoTextBlock().Text(L"输入格式不正确，请重新输入。");
-                        }
-                        
-                    }); // 这里是 TryEnqueue 的结束括号
-            }
-        }); // 这里是 Completed 的结束括号
+        auto result = mainManager->addDorm(dorm);
+
+        if (!result.Success()) {
+            form.get()->showInfo(result.Message());
+            args.Cancel(true);
+            return;
+        }
+        });
+
+    // 等待用户选择
+    auto result = co_await dialog.ShowAsync();
+
+    
 }

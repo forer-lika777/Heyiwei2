@@ -23,7 +23,8 @@ namespace winrt::Heyiwei2::Models::implementation
         void Index(int32_t value);
         DormInfo Info();
         void Info(DormInfo const& value);
-        hstring DormID();
+        hstring DormId();
+
     private:
         IObservableVector<IInspectable> students{ winrt::single_threaded_observable_vector<IInspectable>() };
         IObservableVector<IInspectable> records{ winrt::single_threaded_observable_vector<IInspectable>() };

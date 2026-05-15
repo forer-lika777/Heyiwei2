@@ -37,7 +37,17 @@ namespace winrt::Heyiwei2::implementation
     /// <param name="e">Details about the launch request and process.</param>
     void App::OnLaunched([[maybe_unused]] LaunchActivatedEventArgs const& e)
     {
-        window = make<MainWindow>(&mainManager);
+        dorms = winrt::single_threaded_observable_vector<IInspectable>();
+        mainManager = new MainManager(dorms);
+
+        window = make<MainWindow>();
         window.Activate();
     }
+
+    Interfaces::IMainManager* App::GetMainManager()
+    {
+        return mainManager;
+    }
+
+    Interfaces::IMainManager* App::mainManager{ nullptr };
 }

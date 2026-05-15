@@ -5,29 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Heyiwei2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    DataContext="local:DormListPage"    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
+    DataContext="local:DormListPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Page.Resources>
 
-    </Page.Resources>
     <Grid Padding="20, 70, 20, 20">
-        <StackPanel> <!--排列方式：默认vertical(垂直堆叠)、horizonal(水平堆叠)-->
+        <StackPanel>
+            <!--排列方式：默认vertical(垂直堆叠)、horizonal(水平堆叠)-->
             <TextBlock Grid.Row="0"
                        Padding="20"
                        FontFamily="Segoe UI Semibold" 
-                       Text="以下展示所有宿舍用水记录"/> <!--FontFamily: 设定字体 Padding: 内边距(元素内容与元素边界的距离) TextBlock: 展示静态字符串或者动态数组绑定的内容-->
-            <ScrollView Height="600"> <!--给画布提供滚动条以预览超出画布的部分-->
+                       Text="以下展示所有宿舍用水记录"/>
+            <!--FontFamily: 设定字体 Padding: 内边距(元素内容与元素边界的距离) TextBlock: 展示静态字符串或者动态数组绑定的内容-->
+            <ScrollView Height="600">
+                <!--给画布提供滚动条以预览超出画布的部分-->
                 <ListView Grid.Row="1"
                           x:Name="dormListView"
                           ItemsSource="{x:Bind DormItems}">
                     <!--ListView: 垂直排列内容，实时渲染屏幕出现的内容 ItemsSource：提供数据来源-->
-                    <ListView.ItemTemplate> <!--ItemTemplate：设定每行的外观、作为一个地址引向渲染DataTemplate-->
-                        <DataTemplate x:DataType="local:DormPaneItem"> <!--定义由数据向ui转变时的外观如字体、布局-->
+                    <ListView.ItemTemplate>
+                        <!--ItemTemplate：设定每行的外观、作为一个地址引向渲染DataTemplate-->
+                        <DataTemplate x:DataType="local:DormPaneItem">
+                            <!--定义由数据向ui转变时的外观如字体、布局-->
                             <Grid Height="120">
                                 <StackPanel Padding="10">
                                     <TextBlock Text="{Binding DormInfo}" 
-                                               VerticalAlignment="Center"/> <!--VerticalAlignment：规定数据在垂直空间上的位置-->
+                                               VerticalAlignment="Center"/>
+                                    <!--VerticalAlignment：规定数据在垂直空间上的位置-->
                                     <TextBlock Text="{Binding Index}"
                                                />
                                 </StackPanel>
@@ -40,7 +44,8 @@
                                     <!--HorizontalAlignment：规定数据在水平空间上的位置 Margin: 定义按键大小 CornerRadius：定义圆弧度 Click: 设定点击功能-->
                                     <TextBlock Text="打开详细信息" 
                                                TextWrapping="Wrap" 
-                                               TextAlignment="Center"/> <!--TextWrapping：文字在空间内的折叠情况-->
+                                               TextAlignment="Center"/>
+                                    <!--TextWrapping：文字在空间内的折叠情况-->
                                 </Button>
                             </Grid>
                         </DataTemplate>
@@ -54,117 +59,5 @@
                 HorizontalAlignment="Right"
                 Click="addDormButton_Click"
                 Margin="30"/>
-        <ContentDialog x:Name="AddUserDialog"
-                   Title="添加新用水用户"
-                   PrimaryButtonText="添加"
-                   CloseButtonText="取消"
-                   DefaultButton="Primary">
-            <StackPanel Spacing="10" Width="300" >
-                <TextBlock Text="添加宿舍"/>
-                <TextBlock Text="选择宿舍区域："/>
-                <ComboBox x:Name="RegionSelectComboBox"
-                          SelectedIndex="0">
-                    <x:String>西区</x:String>
-                    <x:String>东区</x:String>
-                </ComboBox>
-                <TextBlock Text="选择宿舍楼栋："/>
-                <ComboBox x:Name="BuildingSelectComboBox"
-                          SelectedIndex="0">
-                    <x:String>1号楼</x:String>
-                    <x:String>2号楼</x:String>
-                    <x:String>3号楼</x:String>
-                    <x:String>4号楼</x:String>
-                    <x:String>5号楼</x:String>
-                    <x:String>6号楼</x:String>
-                    <x:String>7号楼</x:String>
-                    <x:String>8号楼</x:String>
-                    <x:String>9号楼</x:String>
-                    <x:String>10号楼</x:String>
-                    <x:String>11号楼</x:String>
-                    <x:String>12号楼</x:String>
-                    <x:String>13号楼</x:String>
-                    <x:String>14号楼</x:String>
-                    <x:String>15号楼</x:String>
-                    <x:String>16号楼</x:String>
-                    <x:String>17号楼</x:String>
-                    <x:String>18号楼</x:String>
-                    <x:String>19号楼</x:String>
-                    <x:String>20号楼</x:String>
-                    <x:String>21号楼</x:String>
-                    <x:String>22号楼</x:String>
-                    <x:String>23号楼</x:String>
-                    <x:String>24号楼</x:String>
-                </ComboBox>
-                <TextBlock Text="选择宿舍楼层："/>
-                <ComboBox x:Name="FloorSelectComboBox"
-                          SelectedIndex="0">
-                    <x:String>1层</x:String>
-                    <x:String>2层</x:String>
-                    <x:String>3层</x:String>
-                    <x:String>4层</x:String>
-                    <x:String>5层</x:String>
-                    <x:String>6层</x:String>
-                </ComboBox>
-                <TextBlock Text="输入宿舍号："/>
-                <TextBox x:Name="DormNumberInput" PlaceholderText="例如：101"/>
-                <TextBlock x:Name="OutputInfoTextBlock"/>
-            </StackPanel>
-        </ContentDialog>
     </Grid>
-
-    <!--<Popup x:Name="managePopup" 
-       HorizontalAlignment="Right"
-       VerticalAlignment="Stretch"
-       IsLightDismissEnabled="True">
-         点击外部关闭 
-        <Border Background="White" 
-            Width="400"
-            BorderBrush="LightGray"
-            BorderThickness="1"
-            CornerRadius="8"
-            Shadow="True">
-            <Grid x:Name="manageContent" Padding="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" 
-                       Text="管理宿舍" 
-                       FontSize="20"
-                       FontWeight="Bold"
-                       Margin="0,0,0,20"/>
-
-                <StackPanel Grid.Row="1" Margin="0,0,0,10">
-                    <TextBlock Text="宿舍信息" FontWeight="Semibold"/>
-                    <TextBlock x:Name="dormInfoText" TextWrapping="Wrap"/>
-                </StackPanel>
-
-                <StackPanel Grid.Row="2" Margin="0,0,0,10">
-                    <TextBlock Text="学生列表" FontWeight="Semibold"/>
-                    <ListView x:Name="studentListView" Height="200"/>
-                </StackPanel>
-
-                <StackPanel Grid.Row="3" Margin="0,0,0,10">
-                    <TextBlock Text="用水记录" FontWeight="Semibold"/>
-                    <ListView x:Name="waterRecordListView" Height="200"/>
-                </StackPanel>
-
-                <StackPanel Grid.Row="4" Orientation="Horizontal" 
-                        HorizontalAlignment="Right">
-                    <Button Click="ClosePopup_Click" 
-                        Content="关闭" 
-                        Margin="0,0,10,0"
-                        CornerRadius="8"/>
-                    <Button Click="SaveChanges_Click" 
-                        Content="保存修改" 
-                        CornerRadius="8"/>
-                </StackPanel>
-            </Grid>
-        </Border>
-    </Popup>-->
 </Page>

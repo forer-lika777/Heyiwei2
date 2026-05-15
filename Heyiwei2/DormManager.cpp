@@ -1,4 +1,4 @@
-// 预处理头文件
+﻿// 预处理头文件
 #include "pch.h"
 #include "DormManager.h"
 
@@ -40,7 +40,7 @@ Result DormManager::removeStudent(const winrt::hstring& id)
 		dorm.Students().RemoveAt(index);
 		return winrt::make<implementation::Result>(true, L"删除成功");
 	}
-    return winrt::make<implementation::Result>(false, L"删除失败：未找到该学生" );
+    return winrt::make<implementation::Result>(false, L"123");
 }
 
 // updateStudentName: 根据学号修改学生姓名，若未找到则返回失败

@@ -4,6 +4,7 @@
 #include "MainPage.g.cpp"
 #endif
 #include "winrt/Windows.UI.Xaml.Interop.h"
+#include "DormListPage.xaml.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -18,19 +19,14 @@ namespace winrt::Heyiwei2::implementation
         InitializeComponent();
     }
 
-    MainPage::MainPage(MainManager* manager)
-        : mainManager(manager)
-    {
-        InitializeComponent();
-        // 这里用 mainManager 绑定数据
-    }
-
     void MainPage::openHomePage() {
         mainFrame().Navigate(xaml_typename<HomePage>());
     }
 
     void MainPage::openDormListPage() {
-        mainFrame().Navigate(xaml_typename<DormListPage>());
+
+        auto page_impl = winrt::make_self<winrt::Heyiwei2::implementation::DormListPage>();
+        mainFrame().Navigate(xaml_typename<winrt::Heyiwei2::DormListPage>(), *page_impl);  // 传参导航
     }
 
     void MainPage::Page_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {

@@ -19,6 +19,9 @@
     <Page Include="DormManageForm.xaml">
       <Filter>Pages\Controls</Filter>
     </Page>
+    <Page Include="AddDormForm.xaml">
+      <Filter>Pages\Controls</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />

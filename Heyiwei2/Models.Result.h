@@ -6,6 +6,8 @@ namespace winrt::Heyiwei2::Models::implementation
     struct Result : ResultT<Result>
     {
         Result() = default;
+        Result(bool success, winrt::hstring const& message)
+            : success(success), message(message) {}
 
         bool Success();
         void Success(bool value);
@@ -15,4 +17,10 @@ namespace winrt::Heyiwei2::Models::implementation
         bool success;
 		hstring message;
     };
+}
+
+namespace winrt::Heyiwei2::Models::factory_implementation
+{
+    struct Result : ResultT<Result, implementation::Result>
+    {};
 }

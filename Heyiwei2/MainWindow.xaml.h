@@ -1,7 +1,6 @@
 #pragma once
 
 #include "MainWindow.g.h"
-#include "MainManager.h"
 
 namespace winrt::Heyiwei2::implementation
 {
@@ -9,9 +8,7 @@ namespace winrt::Heyiwei2::implementation
     {
     public:
         MainWindow();
-        MainWindow(MainManager* manager);
     private:
-        MainManager* mainManager = nullptr;
         winrt::Heyiwei2::MainPage mainPage{ nullptr };
     };
 }

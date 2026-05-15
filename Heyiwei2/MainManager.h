@@ -18,6 +18,8 @@ class MainManager : public Interfaces::IMainManager
 public:
     MainManager(IObservableVector<IInspectable>& dorms);
 
+    winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> getDormItems();
+
     // 学生管理
     Result addStudent(const hstring dormId, Student const student) override;
     Result removeStudent(const hstring dormId, const hstring studentId) override;
@@ -39,9 +41,9 @@ public:
     Result updateWaterRecord(const hstring dormId, int year, int month, const WaterRecord record) override;
 
 private:
-    IObservableVector<IInspectable>& dorms;
+    IObservableVector<IInspectable> dorms;
     DormManager dormManager;
 
-    DormManager* getDormManager(const hstring dormId);
+    //DormManager* getDormManager(const hstring dormId);
     int32_t findDormIndex(const hstring dormId);
 };

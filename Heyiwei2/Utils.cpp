@@ -3,15 +3,15 @@
 #include "Models.WaterRecord.h"
 #include "Models.Student.h" 
 
-void Utils::calculateTotalWaterFee(winrt::Heyiwei2::Models::implementation::WaterRecord& record)
+void Utils::calculateTotalWaterFee(winrt::Heyiwei2::Models::WaterRecord& record)
 {
     record.Cost(record.Usage() * 24.5);
 }
 
-bool Utils::validateStudentId(winrt::Heyiwei2::Models::implementation::Student const& record)
+bool Utils::validateStudentId(winrt::Heyiwei2::Models::Student const& record)
 {
     // StudentId() 返回 winrt::hstring，record 是 const 引用，使用 const_cast 调用非 const 成员以修复匹配错误
-    winrt::hstring hId = const_cast<winrt::Heyiwei2::Models::implementation::Student&>(record).StudentId();
+    winrt::hstring hId = const_cast<winrt::Heyiwei2::Models::Student&>(record).StudentId();
     std::wstring studentId(hId.c_str());
 
     if (studentId.length() != 10)
@@ -31,33 +31,10 @@ bool Utils::validateStudentId(winrt::Heyiwei2::Models::implementation::Student c
     return true;
 }
 
-bool Utils::validateWaterRecord(winrt::Heyiwei2::Models::implementation::WaterRecord const& record){
-
-	int i = 0;
-	winrt::hstring studentId = student.StudentId();
-	if (studentId.size() != 10)
-	{
-		return false;
-	}
-	else
-	{
-		while (i < studentId.size())
-		{
-			int jiance = studentId[i];
-			if (jiance < '0' || jiance > '9')
-			{
-				return false;
-				break;
-			}
-			i = i + 1;
-		}
-		return true;
-	}
-}
 bool Utils::validateWaterRecord(winrt::Heyiwei2::Models::WaterRecord const& record)
 {
     // record 是 const 引用，直接使用 const_cast 获取可变引用以调用非 const 成员，避免拷贝（拷贝构造被删除）
-    auto& r = const_cast<winrt::Heyiwei2::Models::implementation::WaterRecord&>(record);
+    auto& r = const_cast<winrt::Heyiwei2::Models::WaterRecord&>(record);
 
     if (r.Year() < 2026)
     {
@@ -93,10 +70,10 @@ bool Utils::validateWaterRecord(winrt::Heyiwei2::Models::WaterRecord const& reco
 	}
 }
 
-void Utils::sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Heyiwei2::Models::implementation::WaterRecord>& records)
+void Utils::sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Heyiwei2::Models::WaterRecord>& records)
 {
     uint32_t n = records.Size();
-    std::vector<winrt::Heyiwei2::Models::implementation::WaterRecord> vec;
+    std::vector<winrt::Heyiwei2::Models::WaterRecord> vec;
     vec.reserve(n);
 
     for (uint32_t i = 0; i < n; ++i)
@@ -105,7 +82,7 @@ void Utils::sortWaterRecords(winrt::Windows::Foundation::Collections::IObservabl
     }
 
     std::sort(vec.begin(), vec.end(),
-        [](const winrt::Heyiwei2::Models::implementation::WaterRecord& a, const winrt::Heyiwei2::Models::implementation::WaterRecord& b)
+        [](const winrt::Heyiwei2::Models::WaterRecord& a, const winrt::Heyiwei2::Models::WaterRecord& b)
         {
             if (a.Year() != b.Year())
             {
