@@ -11,6 +11,7 @@
 #include "Models.WaterRecord.h"
 #include "IMainManager.h"
 #include "AddDormForm.xaml.h"
+#include "DormManageForm.xaml.h"
 #include <winrt/Windows.Foundation.h>
 #include "App.xaml.h"
 
@@ -34,7 +35,16 @@ winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Found
 
 void winrt::Heyiwei2::implementation::DormListPage::openDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
 {
-    
+    auto button = sender.as<winrt::Microsoft::UI::Xaml::Controls::Button>();
+    auto dataContext = button.DataContext();
+
+    if (dataContext)
+    {
+        auto form = winrt::make_self<winrt::Heyiwei2::implementation::DormManageForm>();
+        form->Dorm(dataContext.as<winrt::Heyiwei2::Models::Dorm>());
+        DormManageView().Children().Append(*form);
+        DormManageView().Visibility(winrt::Microsoft::UI::Xaml::Visibility::Visible);
+    }
 }
 
 void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -111,6 +121,4 @@ winrt::Windows::Foundation::IAsyncAction winrt::Heyiwei2::implementation::DormLi
 
     // 等待用户选择
     auto result = co_await dialog.ShowAsync();
-
-    
 }

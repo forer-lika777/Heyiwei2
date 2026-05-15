@@ -28,7 +28,7 @@ namespace Heyiwei2.Models
 		Int32 BuildingNumber;
 		Int32 Floor;
 		Int32 RoomNumber;
-		String ToString();
+		String ToString{ get; };
 	};
 
 	[bindable]

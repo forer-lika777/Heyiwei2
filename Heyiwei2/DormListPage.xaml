@@ -4,60 +4,64 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Heyiwei2"
+    xmlns:models="using:Heyiwei2.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     DataContext="local:DormListPage"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Padding="20, 70, 20, 20">
-        <StackPanel>
+    <Grid Padding="0">
+        <Grid Padding="20, 70, 20, 20">
             <!--排列方式：默认vertical(垂直堆叠)、horizonal(水平堆叠)-->
-            <TextBlock Grid.Row="0"
-                       Padding="20"
-                       FontFamily="Segoe UI Semibold" 
-                       Text="以下展示所有宿舍用水记录"/>
-            <!--FontFamily: 设定字体 Padding: 内边距(元素内容与元素边界的距离) TextBlock: 展示静态字符串或者动态数组绑定的内容-->
-            <ScrollView Height="600">
-                <!--给画布提供滚动条以预览超出画布的部分-->
-                <ListView Grid.Row="1"
-                          x:Name="dormListView"
-                          ItemsSource="{x:Bind DormItems}">
-                    <!--ListView: 垂直排列内容，实时渲染屏幕出现的内容 ItemsSource：提供数据来源-->
-                    <ListView.ItemTemplate>
-                        <!--ItemTemplate：设定每行的外观、作为一个地址引向渲染DataTemplate-->
-                        <DataTemplate x:DataType="local:DormPaneItem">
-                            <!--定义由数据向ui转变时的外观如字体、布局-->
-                            <Grid Height="120">
-                                <StackPanel Padding="10">
-                                    <TextBlock Text="{Binding DormInfo}" 
-                                               VerticalAlignment="Center"/>
-                                    <!--VerticalAlignment：规定数据在垂直空间上的位置-->
-                                    <TextBlock Text="{Binding Index}"
-                                               />
-                                </StackPanel>
-                                <Button x:Name="openDormButton"
-                                        Click="openDormButton_Click"
-                                        HorizontalAlignment="Right"
-                                        CornerRadius="8"
-                                        VerticalAlignment="Top"
-                                        Margin="20, 20 , 20 , 20">
-                                    <!--HorizontalAlignment：规定数据在水平空间上的位置 Margin: 定义按键大小 CornerRadius：定义圆弧度 Click: 设定点击功能-->
-                                    <TextBlock Text="打开详细信息" 
-                                               TextWrapping="Wrap" 
-                                               TextAlignment="Center"/>
-                                    <!--TextWrapping：文字在空间内的折叠情况-->
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </ScrollView>
-        </StackPanel>
+        <TextBlock Padding="20"
+                   FontFamily="Segoe UI Semibold" 
+                   Text="以下展示所有宿舍用水记录"/>
+        <!--FontFamily: 设定字体 Padding: 内边距(元素内容与元素边界的距离) TextBlock: 展示静态字符串或者动态数组绑定的内容-->
+        <ScrollView Margin="0, 60, 0, 90" VerticalScrollMode="Enabled">
+            <!--给画布提供滚动条以预览超出画布的部分-->
+            <ListView x:Name="dormListView"
+                      ItemsSource="{x:Bind DormItems}">
+                <!--ListView: 垂直排列内容，实时渲染屏幕出现的内容 ItemsSource：提供数据来源-->
+                <ListView.ItemTemplate>
+                    <!--ItemTemplate：设定每行的外观、作为一个地址引向渲染DataTemplate-->
+                    <DataTemplate x:DataType="models:Dorm">
+                        <!--定义由数据向ui转变时的外观如字体、布局-->
+                        <Grid Height="120">
+                            <StackPanel Padding="10">
+                                <TextBlock Text="{Binding Info.ToString}" 
+                                            VerticalAlignment="Center"/>
+                                <!--VerticalAlignment：规定数据在垂直空间上的位置-->
+                                <TextBlock Text="{Binding DormId}"
+                                            />
+                            </StackPanel>
+                            <Button x:Name="openDormButton"
+                                    Click="openDormButton_Click"
+                                    HorizontalAlignment="Right"
+                                    CornerRadius="8"
+                                    VerticalAlignment="Top"
+                                    Margin="20, 20 , 20 , 20">
+                                <!--HorizontalAlignment：规定数据在水平空间上的位置 Margin: 定义按键大小 CornerRadius：定义圆弧度 Click: 设定点击功能-->
+                                <TextBlock Text="打开详细信息" 
+                                           TextWrapping="Wrap" 
+                                           TextAlignment="Center"/>
+                                <!--TextWrapping：文字在空间内的折叠情况-->
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
         <Button x:Name="addDormButton"
                 Content="添加宿舍"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right"
                 Click="addDormButton_Click"
-                Margin="30"/>
+                Margin="20"/>
+        </Grid>
+        
+        <Grid x:Name="DormManageView"
+              Visibility="Collapsed">
+            
+        </Grid>
     </Grid>
 </Page>

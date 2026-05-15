@@ -12,13 +12,15 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::Heyiwei2::implementation
 {
-    int32_t DormManageForm::MyProperty()
-    {
-        throw hresult_not_implemented();
+    DormManageForm::DormManageForm() {
+
     }
 
-    void DormManageForm::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
+    winrt::Heyiwei2::Models::Dorm DormManageForm::Dorm() {
+        return dorm;
+    }
+
+    void DormManageForm::Dorm(winrt::Heyiwei2::Models::Dorm const& dorm) {
+        this->dorm = dorm;
     }
 }
