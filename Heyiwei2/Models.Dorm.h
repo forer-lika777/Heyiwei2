@@ -1,5 +1,6 @@
-#pragma once
+﻿#pragma once
 #include "Models.Dorm.g.h"
+#include <winrt/Windows.UI.Xaml.Data.h>
 
 using namespace winrt::Windows::Foundation::Collections;
 using namespace winrt::Heyiwei2::Models;
@@ -19,8 +20,6 @@ namespace winrt::Heyiwei2::Models::implementation
         void StartDateYear(int32_t value);
         int32_t StartDateMonth();
         void StartDateMonth(int32_t value);
-        int32_t Index();
-        void Index(int32_t value);
         DormInfo Info();
         void Info(DormInfo const& value);
         hstring DormId();

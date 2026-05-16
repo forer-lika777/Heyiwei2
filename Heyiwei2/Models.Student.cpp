@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Models.Student.h"
 #include "Models.Student.g.cpp"
 
@@ -10,7 +10,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void Student::Name(hstring const& value)
     {
-		name = value;
+        if (name != value) {
+            name = value;
+        }
     }
     hstring Student::StudentId()
     {
@@ -18,6 +20,8 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void Student::StudentId(hstring const& value)
     {
-		studentId = value;
+        if (studentId != value) {
+            studentId = value;
+        }
     }
 }

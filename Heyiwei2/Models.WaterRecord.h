@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Models.WaterRecord.g.h"
 
 namespace winrt::Heyiwei2::Models::implementation
@@ -18,6 +18,7 @@ namespace winrt::Heyiwei2::Models::implementation
         void Cost(double value);
         bool HasPaid();
         void HasPaid(bool value);
+
     private:
 		int32_t year = 0;
 		int32_t month = 0;

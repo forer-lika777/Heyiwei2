@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UserControl
-    x:Class="Heyiwei2.AddDormForm"
+    x:Class="Heyiwei2.EditDormForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Heyiwei2"
@@ -55,6 +55,14 @@
         </ComboBox>
         <TextBlock Text="输入宿舍号："/>
         <TextBox x:Name="DormNumberInput" PlaceholderText="例如：101"/>
+        <TextBlock Text="选择起始年份："/>
+        <ComboBox x:Name="StartYearSelectComboBox"
+                  SelectedIndex="0"
+                  ItemsSource="{x:Bind Years}"/>
+        <TextBlock Text="选择起始月份："/>
+        <ComboBox x:Name="StartMonthSelectComboBox"
+                  SelectedIndex="0"
+                  ItemsSource="{x:Bind Months}"/>
         <TextBlock x:Name="OutputInfoTextBlock"/>
     </StackPanel>
 </UserControl>

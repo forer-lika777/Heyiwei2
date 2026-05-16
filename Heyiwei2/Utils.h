@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <iostream>
 #include <algorithm>
@@ -18,5 +18,8 @@ public:
 	//排序水费记录
 	static void sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Heyiwei2::Models::WaterRecord>& records);
 
+	static int32_t getCurrentYear();
+
+	static int32_t getCurrentMonth();
 };
 

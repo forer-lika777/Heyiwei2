@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Models.Dorm.h"
 #include "Models.Dorm.g.cpp"
 
@@ -29,7 +29,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void Dorm::StartDateYear(int32_t value)
     {
-		startDateYear = value;
+        if (startDateYear != value) {
+            startDateYear = value;
+        }
     }
     int32_t Dorm::StartDateMonth()
     {
@@ -37,15 +39,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void Dorm::StartDateMonth(int32_t value)
     {
-		startDateMonth = value;
-    }
-    int32_t Dorm::Index()
-    {
-        return index;
-    }
-    void Dorm::Index(int32_t value)
-    {
-        index = value;
+        if (startDateMonth != value) {
+            startDateMonth = value;
+        }
     }
     winrt::Heyiwei2::Models::DormInfo Dorm::Info()
     {
@@ -53,11 +49,16 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void Dorm::Info(winrt::Heyiwei2::Models::DormInfo const& value)
     {
-		dormId = L"Dorm-" + winrt::to_hstring(value.Region()) + 
+        if (info != value) {
+            info = value;
+        }
+		hstring id = L"Dorm-" + winrt::to_hstring(value.Region()) + 
             L"-" + winrt::to_hstring(value.BuildingNumber()) + 
             L"-" + winrt::to_hstring(value.Floor()) + 
             L"-" + winrt::to_hstring(value.RoomNumber());
-		info = value;
+        if (dormId != id) {
+            dormId = id;
+        }
     }
     hstring Dorm::DormId()
     {

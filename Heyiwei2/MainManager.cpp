@@ -87,6 +87,15 @@ Result MainManager::addDorm(const Dorm dorm)
 		);
 	}
 
+	int32_t roomNumber = dorm.Info().RoomNumber();
+
+	if (roomNumber >= 100 || roomNumber <= 0) {
+		return winrt::make<implementation::Result>(
+			false,
+			L"添加失败：房间号格式有误"
+		);
+	}
+
 	dorms.Append(dorm);
 
 	return winrt::make<implementation::Result>(

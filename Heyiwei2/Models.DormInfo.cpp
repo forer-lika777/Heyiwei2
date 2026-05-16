@@ -10,7 +10,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void DormInfo::Region(int32_t value)
     {
-        region = value;
+        if (region != value) {
+            region = value;
+        }
     }
     int32_t DormInfo::BuildingNumber() const
     {
@@ -18,7 +20,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void DormInfo::BuildingNumber(int32_t value)
     {
-		buildingNumber = value;
+        if (buildingNumber != value) {
+            buildingNumber = value;
+        }
     }
     int32_t DormInfo::Floor() const
     {
@@ -26,6 +30,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void DormInfo::Floor(int32_t value)
     {
+        if (floor != value) {
+            floor = value;
+        }
 		floor = value;
     }
     int32_t DormInfo::RoomNumber() const
@@ -34,7 +41,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void DormInfo::RoomNumber(int32_t value)
     {
-		roomNumber = value;
+        if (roomNumber != value) {
+            roomNumber = value;
+        }
     }
     hstring DormInfo::ToString()
     {

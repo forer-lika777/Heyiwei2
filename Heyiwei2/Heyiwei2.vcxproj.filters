@@ -19,7 +19,10 @@
     <Page Include="DormManageForm.xaml">
       <Filter>Pages\Controls</Filter>
     </Page>
-    <Page Include="AddDormForm.xaml">
+    <Page Include="EditDormForm.xaml">
+      <Filter>Pages\Controls</Filter>
+    </Page>
+    <Page Include="EditRecordForm.xaml">
       <Filter>Pages\Controls</Filter>
     </Page>
   </ItemGroup>

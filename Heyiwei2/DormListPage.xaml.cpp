@@ -10,7 +10,7 @@
 #include "Models.Student.h"
 #include "Models.WaterRecord.h"
 #include "IMainManager.h"
-#include "AddDormForm.xaml.h"
+#include "EditDormForm.xaml.h"
 #include "DormManageForm.xaml.h"
 #include <winrt/Windows.Foundation.h>
 #include "App.xaml.h"
@@ -42,7 +42,14 @@ void winrt::Heyiwei2::implementation::DormListPage::openDormButton_Click(winrt::
     {
         auto form = winrt::make_self<winrt::Heyiwei2::implementation::DormManageForm>();
         form->Dorm(dataContext.as<winrt::Heyiwei2::Models::Dorm>());
+
+        form->SetOnCloseCallback([this, form]() {
+            DormManageView().Visibility(winrt::Microsoft::UI::Xaml::Visibility::Collapsed);
+            DormManageView().Children().RemoveAt(0);
+            });
+
         DormManageView().Children().Append(*form);
+        
         DormManageView().Visibility(winrt::Microsoft::UI::Xaml::Visibility::Visible);
     }
 }
@@ -54,29 +61,20 @@ void winrt::Heyiwei2::implementation::DormListPage::addDormButton_Click(winrt::W
 
 winrt::Windows::Foundation::IAsyncAction winrt::Heyiwei2::implementation::DormListPage::openCreateDormDialogAsync()
 {
-    auto form = winrt::make_self<winrt::Heyiwei2::implementation::AddDormForm>();
+    auto form = winrt::make_self<winrt::Heyiwei2::implementation::EditDormForm>();
 
     ContentDialog dialog;
     dialog.Title(winrt::box_value(L"添加宿舍"));
-    dialog.Content(form.as<winrt::Heyiwei2::AddDormForm>()); // 将 UserControl 设为内容
+    dialog.Content(form.as<winrt::Heyiwei2::EditDormForm>()); // 将 UserControl 设为内容
 
     dialog.PrimaryButtonText(L"确认");
     dialog.CloseButtonText(L"取消");
     dialog.DefaultButton(ContentDialogButton::Primary);
 
     dialog.XamlRoot(this->XamlRoot());
-
     dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
 
         auto f = form.get();
-
-        // 校验表单数据
-        //if (form.get()->Region() == L"" || form.get()->BuildingNumber() <= 0)
-        //{
-        //    form.get()->showInfo(L"请完整填写宿舍信息");
-        //    args.Cancel(true);  // 阻止对话框关闭
-        //    return;
-        //}
 
         if (f->DormNumber() == L"") {
             f->showInfo(L"请输入宿舍号");
@@ -84,7 +82,6 @@ winrt::Windows::Foundation::IAsyncAction winrt::Heyiwei2::implementation::DormLi
             return;
         }
 
-        // 调用 addDorm 逻辑
         if (mainManager == nullptr)
         {
             f->showInfo(L"发生了程序内部错误：内部管理器变量指向了空指针");
@@ -107,13 +104,13 @@ winrt::Windows::Foundation::IAsyncAction winrt::Heyiwei2::implementation::DormLi
 
         auto dorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>();
         dorm.Info(dormInfo);
-        dorm.StartDateYear(2026);
-        dorm.StartDateMonth(5);
+        dorm.StartDateYear(form.get()->StartYear());
+        dorm.StartDateMonth(form.get()->StartMonth());
 
         auto result = mainManager->addDorm(dorm);
 
         if (!result.Success()) {
-            form.get()->showInfo(result.Message());
+            f->showInfo(result.Message());
             args.Cancel(true);
             return;
         }

@@ -1,5 +1,6 @@
-#pragma once
+﻿#pragma once
 #include "Models.DormInfo.g.h"
+#include <winrt/Windows.UI.Xaml.Data.h>
 
 namespace winrt::Heyiwei2::Models::implementation
 {

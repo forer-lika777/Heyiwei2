@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Models.WaterRecord.h"
 #include "Models.WaterRecord.g.cpp"
 
@@ -10,7 +10,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void WaterRecord::Year(int32_t value)
     {
-        year = value;
+        if (year != value) {
+            year = value;
+        }
     }
     int32_t WaterRecord::Month()
     {
@@ -18,7 +20,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void WaterRecord::Month(int32_t value)
     {
-		month = value;
+        if (month != value) {
+            month = value;
+        }
     }
     double WaterRecord::Usage()
     {
@@ -26,7 +30,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void WaterRecord::Usage(double value)
     {
-        usage = value;
+        if (usage != value) {
+            usage = value;
+        }
     }
     double WaterRecord::Cost()
     {
@@ -34,7 +40,9 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void WaterRecord::Cost(double value)
     {
-		cost = value;
+        if (cost != value) {
+            cost = value;
+        }
     }
     bool WaterRecord::HasPaid()
     {
@@ -42,6 +50,8 @@ namespace winrt::Heyiwei2::Models::implementation
     }
     void WaterRecord::HasPaid(bool value)
     {
-        hasPaid = value;
+        if (hasPaid != value) {
+            hasPaid = value;
+        }
     }
 }

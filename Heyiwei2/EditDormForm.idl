@@ -1,0 +1,17 @@
+﻿namespace Heyiwei2
+{
+    [default_interface]
+    runtimeclass EditDormForm : Microsoft.UI.Xaml.Controls.UserControl
+    {
+        EditDormForm();
+        Int32 Region{ get; set; };
+        Int32 BuildingNumber{ get; set; };
+        Int32 FloorNumber{ get; set; };
+        String DormNumber{ get; set; };
+        Int32 StartYear{ get; set; };
+        Int32 StartMonth{ get; set; };
+
+        Windows.Foundation.Collections.IObservableVector<Int32> Years{ get; };
+        Windows.Foundation.Collections.IObservableVector<Int32> Months{ get; };
+    }
+}

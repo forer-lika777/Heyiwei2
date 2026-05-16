@@ -1,4 +1,4 @@
-
+﻿
 namespace Heyiwei2.Models
 {
 	[bindable]
@@ -40,7 +40,6 @@ namespace Heyiwei2.Models
 		String DormId{ get; };
 		Int32 StartDateYear;
 		Int32 StartDateMonth;
-		Int32 Index;
 		DormInfo Info;
 	};
 
@@ -48,7 +47,7 @@ namespace Heyiwei2.Models
 	runtimeclass Result
 	{
 		Result();
-		Result(Boolean success, String message);  // 必须有这个
+		Result(Boolean success, String message);
 		Boolean Success;
 		String Message;
 	}

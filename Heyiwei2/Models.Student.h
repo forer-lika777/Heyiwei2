@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Models.Student.g.h"
 
 namespace winrt::Heyiwei2::Models::implementation
@@ -12,6 +12,7 @@ namespace winrt::Heyiwei2::Models::implementation
         void Name(hstring const& value);
         hstring StudentId();
         void StudentId(hstring const& value);
+
     private:
          hstring name;
 		 hstring studentId;

@@ -1,4 +1,4 @@
-namespace Heyiwei2
+﻿namespace Heyiwei2
 {
     [default_interface]
     runtimeclass DormManageForm : Microsoft.UI.Xaml.Controls.UserControl
