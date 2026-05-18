@@ -153,4 +153,18 @@ private:
 public:
     RecordManager(StudentManager& sm) : studentManager(sm) {}
 
-    ```这代码自动补全太神人了，别写了
+```
+
+这代码自动补全太神人了，别写了
+
+如果你喜欢经受折磨，那就快来写winui c++吧！
+
+喜欢我c++编译器的超级报错吗？😍😍😍
+
+喜欢我控件自动创建命令把函数放命名空间外面吗？😍😍
+
+
+
+我最初的架构设计可以说是专门针对数据绑定做的。MainManager、StudentManager、RecordManager，一层层修改接受到的引用，直接操作源对象，然后反映到UI层...想象很美好，现实很骨感。什么叫只有IOvservableVector有自动数据绑定的能力？什么叫我还要在Model层面手动实现INotifyPropertyChanged？彳亍，那我去实现吧，我去修改数据结构了...什么叫UI线程冲突？我那线程不就是在UI上的吗？这集神了，我又得把INotifyPripertyChanged删了。还是得回退到最基本的操作——直接后台代码操控UI文本。
+
+你不是都没有用ViewModel吗？你都用数据绑定了，不用viewmodel？意义为何？我也不知道。可能因为我讨厌ViewModel，但不讨厌数据绑定。
