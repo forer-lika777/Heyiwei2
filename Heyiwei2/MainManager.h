@@ -20,6 +20,8 @@ public:
 
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> getDormItems();
     void saveToJsonFile();
+    void TriggerSave(const std::string& filename);
+    void TriggerLoad(const std::string& filename);
 
     Dorm getDorm(const hstring dormId) override;
 
