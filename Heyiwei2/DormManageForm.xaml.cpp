@@ -29,7 +29,8 @@ namespace winrt::Heyiwei2::implementation
 
     void DormManageForm::Dorm(winrt::Heyiwei2::Models::Dorm const& dorm) {
         this->dorm = dorm;
-        this->DataContext(dorm);
+        this->DataContext(dorm); 
+    //DormManageForm: /*所有文本均绑定dorm*/
     }
 
     void DormManageForm::CloseButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
