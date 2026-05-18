@@ -154,3 +154,7 @@ public:
     RecordManager(StudentManager& sm) : studentManager(sm) {}
 
     ```这代码自动补全太神人了，别写了
+
+如果你喜欢经受折磨，那就快来写winui c++吧！
+
+喜欢我c++编译器的超级报错吗？😍😍😍
