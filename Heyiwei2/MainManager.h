@@ -20,6 +20,8 @@ public:
 
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> getDormItems();
 
+    Dorm getDorm(const hstring dormId) override;
+
     // 学生管理
     Result addStudent(const hstring dormId, Student const student) override;
     Result removeStudent(const hstring dormId, const hstring studentId) override;

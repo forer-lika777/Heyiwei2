@@ -4,7 +4,7 @@
 
 namespace winrt::Heyiwei2::Models::implementation
 {
-    struct DormInfo : DormInfoT<DormInfo>
+    struct DormInfo : DormInfoT<DormInfo, winrt::Windows::UI::Xaml::Data::INotifyPropertyChanged>
     {
     public:
         DormInfo() = default;
@@ -18,10 +18,40 @@ namespace winrt::Heyiwei2::Models::implementation
         int32_t RoomNumber() const;
         void RoomNumber(int32_t value);
         hstring ToString();
+
+        int32_t StartDateYear();
+        void StartDateYear(int32_t value);
+        int32_t StartDateMonth();
+        void StartDateMonth(int32_t value);
+
+        winrt::event<winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged;
+
+        // 实现 INotifyPropertyChanged
+        winrt::event_token PropertyChanged(
+            winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+        {
+            return propertyChanged.add(handler);
+        }
+
+        void PropertyChanged(winrt::event_token const& token)
+        {
+            propertyChanged.remove(token);
+        }
+
+        // 辅助方法：触发属性变更
+        void RaisePropertyChanged(hstring const& propertyName)
+        {
+            propertyChanged(*this,
+                winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(propertyName));
+        }
+
     private:
         int32_t region = 0;
         int32_t buildingNumber = 0;
         int32_t floor = 0;
         int32_t roomNumber = 0;
+
+        int32_t startDateYear = 0;
+        int32_t startDateMonth = 0;
     };
 }

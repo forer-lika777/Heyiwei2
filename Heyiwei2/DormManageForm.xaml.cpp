@@ -57,8 +57,8 @@ namespace winrt::Heyiwei2::implementation
         f->BuildingNumber(info.BuildingNumber());
         f->FloorNumber(info.Floor());
         f->DormNumber(winrt::to_hstring(info.RoomNumber()));
-        f->StartYear(dorm.StartDateYear());
-        f->StartMonth(dorm.StartDateMonth());
+        f->StartYear(info.StartDateYear());
+        f->StartMonth(info.StartDateMonth());
 
         ContentDialog dialog;
         dialog.Title(winrt::box_value(L"编辑宿舍"));
@@ -97,20 +97,21 @@ namespace winrt::Heyiwei2::implementation
                 args.Cancel(true);
                 return;
             }
+            dormInfo.StartDateYear(form.get()->StartYear());
+            dormInfo.StartDateMonth(form.get()->StartMonth());
 
-            auto dorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>();
-            dorm.Info(dormInfo);
-            dorm.StartDateYear(form.get()->StartYear());
-            dorm.StartDateMonth(form.get()->StartMonth());
+            //auto dorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>();
+            //dorm.Info(dormInfo);
 
             // 调用 addDorm 逻辑
-            auto result = mainManager->updateDorm(this->dorm.DormId(), dorm);
+            auto result = mainManager->updateDormInfo(this->dorm.DormId(), dormInfo);
 
             if (!result.Success()) {
                 args.Cancel(true);
                 f->showInfo(result.Message());
                 return;
             }
+
             this->Dorm();
         });
 

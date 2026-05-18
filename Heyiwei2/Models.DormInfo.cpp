@@ -50,4 +50,25 @@ namespace winrt::Heyiwei2::Models::implementation
         hstring regionStr = (region == 0) ? L"东" : L"西";
         return regionStr + L"区 " + winrt::to_hstring(buildingNumber) + L" 栋 " + winrt::to_hstring(floor) + L"-" + winrt::to_hstring(roomNumber);
     }
+    int32_t DormInfo::StartDateYear()
+    {
+        return startDateYear;
+    }
+    void DormInfo::StartDateYear(int32_t value)
+    {
+        if (startDateYear != value) {
+            startDateYear = value;
+            RaisePropertyChanged(L"StartDateYear");
+        }
+    }
+    int32_t DormInfo::StartDateMonth()
+    {
+        return startDateMonth;
+    }
+    void DormInfo::StartDateMonth(int32_t value)
+    {
+        if (startDateMonth != value) {
+            startDateMonth = value;
+        }
+    }
 }

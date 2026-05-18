@@ -27,9 +27,9 @@
                                        VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="加入时间："/>
-                                <TextBlock Text="{Binding StartDateYear}"/>
+                                <TextBlock Text="{Binding Info.StartDateYear}"/>
                                 <TextBlock Text="年"/>
-                                <TextBlock Text="{Binding StartDateMonth}"/>
+                                <TextBlock Text="{Binding Info.StartDateMonth}"/>
                                 <TextBlock Text="月"/>
                             </StackPanel>
                         </StackPanel>

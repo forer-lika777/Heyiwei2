@@ -15,6 +15,15 @@ winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Found
 	return dorms;
 }
 
+Dorm MainManager::getDorm(const hstring dormId)
+{
+	int32_t index = findDormIndex(dormId);
+
+	if (index == -1) return nullptr;
+
+	return dorms.GetAt(index).as<Dorm>();
+}
+
 Result MainManager::addStudent(const hstring dormId, Student const student)
 {
 	int32_t index = findDormIndex(dormId);
@@ -145,13 +154,7 @@ Result MainManager::updateDorm(const hstring dormId, const Dorm dorm)
 		);
 	}
 
-	auto d = dorms.GetAt(index).as<Dorm>();
-
-	d.Info(dorm.Info());
-	d.StartDateMonth(dorm.StartDateMonth());
-	d.StartDateYear(dorm.StartDateYear());
-
-	dorms.SetAt(index, d);
+	dorms.SetAt(index, dorm);
 
 	return winrt::make<implementation::Result>(
 		true,

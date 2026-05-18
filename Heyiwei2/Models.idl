@@ -29,6 +29,9 @@ namespace Heyiwei2.Models
 		Int32 Floor;
 		Int32 RoomNumber;
 		String ToString{ get; };
+
+		Int32 StartDateYear;
+		Int32 StartDateMonth;
 	};
 
 	[bindable]
@@ -38,8 +41,6 @@ namespace Heyiwei2.Models
 		Windows.Foundation.Collections.IObservableVector<Object> Students;
 		Windows.Foundation.Collections.IObservableVector<Object> Records;
 		String DormId{ get; };
-		Int32 StartDateYear;
-		Int32 StartDateMonth;
 		DormInfo Info;
 	};
 
