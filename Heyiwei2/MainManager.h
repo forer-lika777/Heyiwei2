@@ -19,6 +19,7 @@ public:
     MainManager(IObservableVector<IInspectable>& dorms);
 
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> getDormItems();
+    void saveToJsonFile();
 
     // 学生管理
     Result addStudent(const hstring dormId, Student const student) override;
@@ -44,6 +45,7 @@ public:
 private:
     IObservableVector<IInspectable> dorms;
     DormManager dormManager;
+    winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms;
 
     //DormManager* getDormManager(const hstring dormId);
     int32_t findDormIndex(const hstring dormId);

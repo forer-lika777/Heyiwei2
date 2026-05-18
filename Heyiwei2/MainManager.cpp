@@ -1,11 +1,12 @@
 ﻿#include "pch.h"
 #include "MainManager.h"
 #include "Models.Result.h"
+#
 
 using namespace winrt::Heyiwei2::Models;
 using namespace winrt::Windows::Foundation;
 
-MainManager::MainManager(IObservableVector<IInspectable>& dorms) : dorms(dorms)
+MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数据改变而改变*/<IInspectable>& dorms) : dorms(dorms)
 {
 
 }

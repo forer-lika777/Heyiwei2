@@ -13,10 +13,10 @@
         <Grid Margin="100, 80, 100, 80">
             <Rectangle Fill="{ThemeResource SolidBackgroundFillColorTertiaryBrush}"
                        RadiusX="10"
-                       RadiusY="10"/>
+                       RadiusY="10"/> <!--Rectangle： 矩形图案，不能包含控件-->
             <ScrollView>
                 <StackPanel Padding="22, 22, 22, 80"
-                            Spacing="20">
+                            Spacing="20"> <!--排列方式-->
                     <TextBlock Text="查看宿舍信息"
                                FontSize="25"/>
                     <StackPanel Orientation="Horizontal"
@@ -24,7 +24,7 @@
                         <StackPanel Spacing="10">
                             <TextBlock Text="{Binding Info.ToString, Mode=OneWay}"
                                        FontSize="15"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center"/> <!--Mode: 数据绑定类型（oneway：单向、 twoway：双向、 onetime: 一次性） 默认onetime-->
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="加入时间："/>
                                 <TextBlock Text="{Binding StartDateYear}"/>
@@ -37,7 +37,7 @@
                                 Click="EditDormButton_Click">
                             <StackPanel Orientation="Horizontal"
                                         Spacing="6">
-                                <SymbolIcon Symbol="Edit"/>
+                                <SymbolIcon Symbol="Edit"/> <!--调用系统图案-->
                                 <TextBlock Text="编辑"/>
                             </StackPanel>
                         </Button>
