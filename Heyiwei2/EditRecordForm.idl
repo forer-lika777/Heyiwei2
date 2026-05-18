@@ -4,6 +4,7 @@
     runtimeclass EditRecordForm : Microsoft.UI.Xaml.Controls.UserControl
     {
         EditRecordForm();
+
         Windows.Foundation.Collections.IObservableVector<Int32> Years{ get; };
         Windows.Foundation.Collections.IObservableVector<Int32> Months{ get; };
     }

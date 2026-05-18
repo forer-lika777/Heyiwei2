@@ -7,8 +7,13 @@ namespace winrt::Heyiwei2::implementation
     struct EditDormForm : EditDormFormT<EditDormForm>
     {
     private:
+        void refreshMonths(int32_t const& year);
+
         winrt::Windows::Foundation::Collections::IObservableVector<int32_t> years{ winrt::single_threaded_observable_vector<int32_t>() };
         winrt::Windows::Foundation::Collections::IObservableVector<int32_t> months{ winrt::single_threaded_observable_vector<int32_t>() };
+
+        std::vector<int32_t> monthsPastYear;
+        std::vector<int32_t> monthsThisYear;
 
     public:
         EditDormForm();
@@ -35,6 +40,7 @@ namespace winrt::Heyiwei2::implementation
         winrt::Windows::Foundation::Collections::IObservableVector<int32_t> Months();
         
 		void showInfo(hstring const& info);
+        void StartYearSelectComboBox_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e);
     };
 }
 

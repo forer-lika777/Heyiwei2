@@ -84,7 +84,7 @@ winrt::Windows::Foundation::IAsyncAction winrt::Heyiwei2::implementation::DormLi
 
         if (mainManager == nullptr)
         {
-            f->showInfo(L"发生了程序内部错误：内部管理器变量指向了空指针");
+            f->showInfo(L"发生程序内部错误：内部管理器指向了空指针");
             args.Cancel(true);
             return;
         }

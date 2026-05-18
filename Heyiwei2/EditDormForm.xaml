@@ -54,11 +54,12 @@
             <x:String>6层</x:String>
         </ComboBox>
         <TextBlock Text="输入宿舍号："/>
-        <TextBox x:Name="DormNumberInput" PlaceholderText="例如：101"/>
+        <TextBox x:Name="DormNumberInput" PlaceholderText="例如：01"/>
         <TextBlock Text="选择起始年份："/>
         <ComboBox x:Name="StartYearSelectComboBox"
                   SelectedIndex="0"
-                  ItemsSource="{x:Bind Years}"/>
+                  ItemsSource="{x:Bind Years}"
+                  SelectionChanged="StartYearSelectComboBox_SelectionChanged"/>
         <TextBlock Text="选择起始月份："/>
         <ComboBox x:Name="StartMonthSelectComboBox"
                   SelectedIndex="0"

@@ -15,6 +15,7 @@ namespace winrt::Heyiwei2::implementation
         std::function<void()> onCloseCallback;
         Interfaces::IMainManager* mainManager = nullptr;
         winrt::Windows::Foundation::IAsyncAction openEditDormDialogAsync();
+        winrt::Windows::Foundation::IAsyncAction openAddRecordDialogAsync();
 
         //void RaisePropertyChanged(winrt::hstring const& propertyName)
         //{
@@ -41,6 +42,7 @@ namespace winrt::Heyiwei2::implementation
         //{
         //    propertyChanged.remove(token);
         //}
+        void AddRecordButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
     };
 }
 

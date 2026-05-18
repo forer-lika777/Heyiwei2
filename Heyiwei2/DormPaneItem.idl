@@ -1,5 +1,4 @@
-
-namespace Heyiwei2
+﻿namespace Heyiwei2
 {
 	[bindable]
 	[default_interface]

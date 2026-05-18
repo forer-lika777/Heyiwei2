@@ -25,6 +25,9 @@
     <Page Include="EditRecordForm.xaml">
       <Filter>Pages\Controls</Filter>
     </Page>
+    <Page Include="EditStudentForm.xaml">
+      <Filter>Pages\Controls</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />

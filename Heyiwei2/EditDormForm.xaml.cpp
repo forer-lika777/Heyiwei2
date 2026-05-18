@@ -13,16 +13,22 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::Heyiwei2::implementation
 {
+    void EditDormForm::refreshMonths(int32_t const& year) {
+        if (year == Utils::getCurrentYear()) {
+            months.ReplaceAll(monthsThisYear);
+        }
+        else {
+            months.ReplaceAll(monthsPastYear);
+        }
+        StartMonthSelectComboBox().SelectedIndex(0);
+    }
     EditDormForm::EditDormForm() {
-        int32_t year = Utils::getCurrentYear();
-        for (size_t i = 0; i < 20; ++i) {
-            years.Append(year);
-            year--;
-        }
-        int32_t month = Utils::getCurrentMonth();
-        for (; month >= 1; month--) {
-            months.Append(month);
-        }
+        years.ReplaceAll(Utils::generateYears(20));
+        monthsThisYear = Utils::generateThisYearMonths();
+        monthsPastYear = Utils::generatePastYearMonths();
+
+        months.ReplaceAll(monthsThisYear);
+        //StartYearSelectComboBox().DataContext(months);
     }
 
     int32_t EditDormForm::Region()
@@ -58,12 +64,10 @@ namespace winrt::Heyiwei2::implementation
         return StartYearSelectComboBox().SelectedItem().as<int32_t>();
     }
     void EditDormForm::StartYear(int32_t const& value) {
-        if (value == Utils::getCurrentYear()) {
-
-        }
         for (size_t i = 0; i < years.Size(); ++i) {
             if (years.GetAt(i) == value) {
                 StartYearSelectComboBox().SelectedIndex(i);
+                refreshMonths(value);
                 return;
             }
         }
@@ -90,5 +94,9 @@ namespace winrt::Heyiwei2::implementation
     }
     void EditDormForm::showInfo(hstring const& info) {
 		OutputInfoTextBlock().Text(info);
+    }
+    void EditDormForm::StartYearSelectComboBox_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e)
+    {
+        refreshMonths(StartYear());
     }
 }

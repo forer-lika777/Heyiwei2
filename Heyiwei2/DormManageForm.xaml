@@ -10,71 +10,90 @@
     mc:Ignorable="d">
     <Grid DataContext="{Binding}">
         <Rectangle Fill="{ThemeResource SmokeFillColorDefaultBrush}"/>
-        <Grid Margin="150, 80, 100, 80">
+        <Grid Margin="100, 80, 100, 80">
             <Rectangle Fill="{ThemeResource SolidBackgroundFillColorTertiaryBrush}"
                        RadiusX="10"
                        RadiusY="10"/>
-            <StackPanel Padding="22"
-                        Spacing="20">
-                <TextBlock Text="查看宿舍信息"
-                           FontSize="25"/>
-                <StackPanel Orientation="Horizontal"
-                            Spacing="50">
-                    <StackPanel>
-                        <TextBlock Text="{Binding Info.ToString, Mode=OneWay}"
-                                   FontSize="15"
-                                   VerticalAlignment="Center"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="加入时间："/>
-                            <TextBlock Text="{Binding StartDateYear}"/>
-                            <TextBlock Text="年"/>
-                            <TextBlock Text="{Binding StartDateMonth}"/>
-                            <TextBlock Text="月"/>
+            <ScrollView>
+                <StackPanel Padding="22, 22, 22, 80"
+                            Spacing="20">
+                    <TextBlock Text="查看宿舍信息"
+                               FontSize="25"/>
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="50">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{Binding Info.ToString, Mode=OneWay}"
+                                       FontSize="15"
+                                       VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="加入时间："/>
+                                <TextBlock Text="{Binding StartDateYear}"/>
+                                <TextBlock Text="年"/>
+                                <TextBlock Text="{Binding StartDateMonth}"/>
+                                <TextBlock Text="月"/>
+                            </StackPanel>
                         </StackPanel>
+                        <Button x:Name="EditDormButton"
+                                Click="EditDormButton_Click">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="6">
+                                <SymbolIcon Symbol="Edit"/>
+                                <TextBlock Text="编辑"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-                    <Button x:Name="EditDormButton"
-                            Click="EditDormButton_Click">
-                        <StackPanel Orientation="Horizontal"
-                                    Spacing="6">
-                            <SymbolIcon Symbol="Edit"/>
-                            <TextBlock Text="编辑"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-                <StackPanel Spacing="20">
-                    <TextBlock Text="学生列表"/>
-                    <ListView ItemsSource="{Binding Students}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Student">
-                                <StackPanel Orientation="Horizontal"
-                                            Spacing="30">
-                                    <TextBlock Text="{x:Bind Name}"/>
-                                    <TextBlock Text="{x:Bind StudentId}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-                <StackPanel Spacing="20">
-                    <TextBlock Text="所有用水信息"/>
-                    <ListView ItemsSource="{Binding Records}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:WaterRecord">
-                                <StackPanel Orientation="Horizontal"
-                                            Spacing="30">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Bind Year}"/>
-                                        <TextBlock Text="年"/>
-                                        <TextBlock Text="{x:Bind Month}"/>
-                                        <TextBlock Text="月"/>
+                    <StackPanel Spacing="20">
+                        <TextBlock Text="学生列表"/>
+                        <ListView ItemsSource="{Binding Students}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Student">
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="30">
+                                        <TextBlock Text="{x:Bind Name}"/>
+                                        <TextBlock Text="{x:Bind StudentId}"/>
                                     </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Spacing="20">
+                        <TextBlock Text="所有用水信息"/>
+                        <ListView Height="200"
+                                  ItemsSource="{Binding Records}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:WaterRecord">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0"
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="{x:Bind Year}"/>
+                                            <TextBlock Text="年"/>
+                                            <TextBlock Text="{x:Bind Month}"/>
+                                            <TextBlock Text="月"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1"
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="用水量："/>
+                                            <TextBlock Text="{x:Bind Usage}"/>
+                                            <TextBlock Text="吨"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2"
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="计费："/>
+                                            <TextBlock Text="{x:Bind Cost}"/>
+                                            <TextBlock Text="元"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
                 </StackPanel>
-
-            </StackPanel>
+            </ScrollView>
             <Button x:Name="CloseButton"
                     Style="{StaticResource SubtleButtonStyle}"
                     CornerRadius="8"
@@ -116,7 +135,8 @@
                 </Button>
                 <Button x:Name="AddRecordButton"
                         MinWidth="130"
-                        Style="{StaticResource AccentButtonStyle}">
+                        Style="{StaticResource AccentButtonStyle}"
+                        Click="AddRecordButton_Click">
                     <StackPanel Orientation="Horizontal"
                                 Spacing="6">
                         <SymbolIcon Symbol="Add"/>

@@ -7,6 +7,7 @@ using namespace winrt::Heyiwei2::Models;
 
 DormManager::DormManager()
 {
+    
 }
 
 /// <summary>
@@ -15,6 +16,7 @@ DormManager::DormManager()
 /// <param name="dorm"></param>
 void DormManager::setDorm(const Dorm dorm)
 {
+    recordManager = RecordManager(dorm.Records());
     this->dorm = dorm;
 }
 

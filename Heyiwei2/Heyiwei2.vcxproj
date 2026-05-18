@@ -140,6 +140,10 @@
       <DependentUpon>EditRecordForm.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="EditStudentForm.xaml.h">
+      <DependentUpon>EditStudentForm.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="HomePage.xaml.h">
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -180,6 +184,9 @@
     <Page Include="EditRecordForm.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="EditStudentForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -205,6 +212,10 @@
     <ClCompile Include="DormPaneItem.cpp" />
     <ClCompile Include="EditRecordForm.xaml.cpp">
       <DependentUpon>EditRecordForm.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="EditStudentForm.xaml.cpp">
+      <DependentUpon>EditStudentForm.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="HomePage.xaml.cpp">
@@ -250,6 +261,10 @@
     <Midl Include="DormPaneItem.idl" />
     <Midl Include="EditRecordForm.idl">
       <DependentUpon>EditRecordForm.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="EditStudentForm.idl">
+      <DependentUpon>EditStudentForm.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
     <Midl Include="HomePage.idl">

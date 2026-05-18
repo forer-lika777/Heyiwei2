@@ -128,6 +128,15 @@ Result MainManager::updateDorm(const hstring dormId, const Dorm dorm)
 {
 	int32_t index = findDormIndex(dormId);
 
+	int32_t roomNumber = dorm.Info().RoomNumber();
+
+	if (roomNumber >= 100 || roomNumber <= 0) {
+		return winrt::make<implementation::Result>(
+			false,
+			L"添加失败：房间号格式有误"
+		);
+	}
+
 	if (index == -1)
 	{
 		return winrt::make<implementation::Result>(
@@ -136,7 +145,35 @@ Result MainManager::updateDorm(const hstring dormId, const Dorm dorm)
 		);
 	}
 
-	dorms.SetAt(index, dorm);
+	auto d = dorms.GetAt(index).as<Dorm>();
+
+	d.Info(dorm.Info());
+	d.StartDateMonth(dorm.StartDateMonth());
+	d.StartDateYear(dorm.StartDateYear());
+
+	dorms.SetAt(index, d);
+
+	return winrt::make<implementation::Result>(
+		true,
+		L"修改成功"
+	);
+}
+
+Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info)
+{
+	int32_t index = findDormIndex(dormId);
+
+	if (index == -1)
+	{
+		return winrt::make<implementation::Result>(
+			false,
+			L"修改失败：宿舍不存在"
+		);
+	}
+
+	auto dorm = dorms.GetAt(index).as<Dorm>();
+
+	dorm.Info(info);
 
 	return winrt::make<implementation::Result>(
 		true,

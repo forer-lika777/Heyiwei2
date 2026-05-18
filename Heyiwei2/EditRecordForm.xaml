@@ -8,19 +8,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Spacing="10" Width="300" >
+    <StackPanel Spacing="10"
+                Width="300" >
         <TextBlock Text="选择记录年份："/>
-        <ComboBox x:Name="RegionSelectComboBox"
+        <ComboBox x:Name="YearSelectComboBox"
                   SelectedIndex="0"
+                  SelectionChanged="YearSelectComboBox_SelectionChanged"
                   ItemsSource="{x:Bind Years}">
         </ComboBox>
         <TextBlock Text="选择记录月份："/>
-        <ComboBox x:Name="BuildingSelectComboBox"
-              SelectedIndex="0"
+        <ComboBox x:Name="MonthSelectComboBox"
+                  SelectedIndex="0"
                   ItemsSource="{x:Bind Months}">
         </ComboBox>
         <TextBlock Text="输入用水量："/>
-        <TextBox x:Name="DormNumberInput" PlaceholderText="例如：1"/>
+        <TextBox x:Name="UsageInput" 
+                 TextChanged="UsageInput_TextChanged"
+                 PlaceholderText="例如：1"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="共计消费："/>
+            <TextBlock x:Name="CostTextBlock"/>
+        </StackPanel>
         <TextBlock x:Name="OutputInfoTextBlock"/>
     </StackPanel>
 </UserControl>

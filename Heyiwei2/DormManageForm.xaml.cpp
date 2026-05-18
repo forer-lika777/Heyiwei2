@@ -7,6 +7,8 @@
 #include "App.xaml.h"
 #include "EditDormForm.xaml.h"
 #include "Models.DormInfo.h"
+#include "EditRecordForm.xaml.h"
+#include "Models.WaterRecord.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml::Controls;
@@ -28,7 +30,6 @@ namespace winrt::Heyiwei2::implementation
     void DormManageForm::Dorm(winrt::Heyiwei2::Models::Dorm const& dorm) {
         this->dorm = dorm;
         this->DataContext(dorm);
-        //RaisePropertyChanged(L"Dorm");
     }
 
     void DormManageForm::CloseButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -69,9 +70,7 @@ namespace winrt::Heyiwei2::implementation
 
         dialog.XamlRoot(this->XamlRoot());
 
-        dialog.PrimaryButtonClick([this, form](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
-            auto f = form.get();
+        dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
 
             if (f->DormNumber() == L"") {
                 f->showInfo(L"请输入宿舍号");
@@ -81,7 +80,7 @@ namespace winrt::Heyiwei2::implementation
 
             if (mainManager == nullptr)
             {
-                f->showInfo(L"发生了程序内部错误：内部管理器变量指向了空指针");
+                f->showInfo(L"发生程序内部错误：内部管理器指向了空指针");
                 args.Cancel(true);
                 return;
             }
@@ -94,7 +93,7 @@ namespace winrt::Heyiwei2::implementation
                 dormInfo.RoomNumber(std::stoi(form.get()->DormNumber().c_str()));
             }
             catch (const std::exception&) {
-                f->showInfo(L"无法读取宿舍号：" + form.get()->DormNumber());
+                f->showInfo(L"无法读取数据：" + form.get()->DormNumber());
                 args.Cancel(true);
                 return;
             }
@@ -112,10 +111,59 @@ namespace winrt::Heyiwei2::implementation
                 f->showInfo(result.Message());
                 return;
             }
-            this->Dorm(dorm);
+            this->Dorm();
         });
 
         // 等待用户选择
         auto result = co_await dialog.ShowAsync();
+    }
+    winrt::Windows::Foundation::IAsyncAction DormManageForm::openAddRecordDialogAsync()
+    {
+        auto form = winrt::make_self<winrt::Heyiwei2::implementation::EditRecordForm>();
+
+        auto f = form.get();
+
+        ContentDialog dialog;
+        dialog.Title(winrt::box_value(L"添加用水记录"));
+        dialog.Content(form.as<winrt::Heyiwei2::EditRecordForm>()); // 将 UserControl 设为内容
+
+        dialog.PrimaryButtonText(L"确认");
+        dialog.CloseButtonText(L"取消");
+        dialog.DefaultButton(ContentDialogButton::Primary);
+
+        dialog.XamlRoot(this->XamlRoot());
+
+        dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+
+            auto record = winrt::make<winrt::Heyiwei2::Models::implementation::WaterRecord>();
+
+            record.Year(f->Year());
+            record.Month(f->Month());
+
+            try {
+                record.Usage(std::stoi(form.get()->Usage().c_str()));
+            }
+            catch (const std::exception&) {
+                f->showInfo(L"无法读取数据：" + form.get()->Usage());
+                args.Cancel(true);
+                return;
+            }
+            //record.Usage(f->Usage());
+            record.Cost(f->Cost());
+
+            auto result = mainManager->addWaterRecord(dorm.DormId(), record);
+
+            if (!result.Success()) {
+                args.Cancel(true);
+                f->showInfo(result.Message());
+                return;
+            }
+        });
+
+        auto result = co_await dialog.ShowAsync();
+    }
+    void DormManageForm::AddRecordButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
+    {
+        openAddRecordDialogAsync();
     }
 }

@@ -1,4 +1,4 @@
-// MainManager.h
+﻿// MainManager.h
 #pragma once
 #include "IMainManager.h"
 #include "DormManager.h"
@@ -29,6 +29,7 @@ public:
     Result addDorm(const Dorm dorm) override;
     Result removeDorm(const hstring dormId) override;
     Result updateDorm(const hstring dormId, const Dorm dorm) override;
+    Result updateDormInfo(const hstring dormId, const DormInfo info) override;
 
     // 学生分配
     Result addStudentToDorm(const hstring dormId, const hstring studentId) override;

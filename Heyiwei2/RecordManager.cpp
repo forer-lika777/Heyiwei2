@@ -20,6 +20,9 @@ Result RecordManager::addWaterRecord(const WaterRecord& record) {
     {
         return winrt::make<implementation::Result>(false, L"添加失败：记录已存在");
     }
+    if (record.Usage() > 30000) {
+        return winrt::make<implementation::Result>(false, L"你是超人嘛？一个月用 " + winrt::to_hstring(record.Usage()) + L" 吨水？");
+    }
     waterRecords.Append(record);
     return winrt::make<implementation::Result>(true, L"添加成功");
 }

@@ -3,9 +3,26 @@
 #include "Models.WaterRecord.h"
 #include "Models.Student.h" 
 
-void Utils::calculateTotalWaterFee(winrt::Heyiwei2::Models::WaterRecord& record)
+double Utils::calculateTotalWaterFee(double const& usage)
 {
-    record.Cost(record.Usage() * 24.5);
+    constexpr double tier1Limit = 26.0;
+    constexpr double tier2Limit = 34.0;
+    constexpr double tier1Price = 2.93;
+    constexpr double tier2Price = 4.40;
+    constexpr double tier3Price = 7.87;
+
+    if (usage <= tier1Limit)
+    {
+        return usage * tier1Price;
+    }
+    else if (usage <= tier2Limit)
+    {
+        return tier1Limit * tier1Price + (usage - tier1Limit) * tier2Price;
+    }
+    else
+    {
+        return tier1Limit * tier1Price + (tier2Limit - tier1Limit) * tier2Price + (usage - tier2Limit) * tier3Price;
+    }
 }
 
 bool Utils::validateStudentId(winrt::Heyiwei2::Models::Student const& record)
@@ -112,4 +129,34 @@ int32_t Utils::getCurrentMonth()
     std::tm now = {};
     localtime_s(&now, &t);
     return now.tm_mon + 1;
+}
+
+std::vector<int32_t> Utils::generateThisYearMonths()
+{
+    std::vector<int32_t> monthsThisYear;
+    int32_t month = Utils::getCurrentMonth();
+    for (; month >= 1; month--) {
+        monthsThisYear.push_back(month);
+    }
+    return monthsThisYear;
+}
+
+std::vector<int32_t> Utils::generatePastYearMonths()
+{
+    std::vector<int32_t> monthsPastYear;
+    for (int32_t i = 12; i >= 1; i--) {
+        monthsPastYear.push_back(i);
+    }
+    return monthsPastYear;
+}
+
+std::vector<int32_t> Utils::generateYears(int32_t const& count)
+{
+    std::vector<int32_t> years;
+    int32_t year = Utils::getCurrentYear();
+    for (int32_t i = 0; i < count; ++i) {
+        years.push_back(year);
+        year--;
+    }
+    return years;
 }

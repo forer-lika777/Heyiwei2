@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Models.Student.h"
 #include "Models.Dorm.h"
 #include "Models.WaterRecord.h"
@@ -21,6 +21,7 @@ namespace Interfaces
 		virtual Result addDorm(const Dorm dorm) = 0;
 		virtual Result removeDorm(const hstring dormId) = 0;
 		virtual Result updateDorm(const hstring dormId, const Dorm dorm) = 0;
+		virtual Result updateDormInfo(const hstring dormId, const DormInfo info) = 0;
 
 		virtual Result addStudentToDorm(const hstring dormId, const hstring studentId) = 0;
 		virtual Result removeStudentFromDorm(const hstring dormId, const hstring studentId) = 0;
