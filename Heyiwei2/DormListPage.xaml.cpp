@@ -102,10 +102,11 @@ winrt::Windows::Foundation::IAsyncAction winrt::Heyiwei2::implementation::DormLi
             return;
         }
 
+        dormInfo.StartDateYear(form.get()->StartYear());
+        dormInfo.StartDateMonth(form.get()->StartMonth());
+
         auto dorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>();
         dorm.Info(dormInfo);
-        dorm.StartDateYear(form.get()->StartYear());
-        dorm.StartDateMonth(form.get()->StartMonth());
 
         auto result = mainManager->addDorm(dorm);
 

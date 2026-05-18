@@ -12,8 +12,8 @@
         <TextBlock Text="选择宿舍区域："/>
         <ComboBox x:Name="RegionSelectComboBox"
                   SelectedIndex="0">
-            <x:String>西区</x:String>
             <x:String>东区</x:String>
+            <x:String>西区</x:String>
         </ComboBox>
         <TextBlock Text="选择宿舍楼栋："/>
         <ComboBox x:Name="BuildingSelectComboBox"

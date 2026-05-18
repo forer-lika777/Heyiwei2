@@ -27,9 +27,9 @@
                                        VerticalAlignment="Center"/> <!--Mode: 数据绑定类型（oneway：单向、 twoway：双向、 onetime: 一次性） 默认onetime-->
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="加入时间："/>
-                                <TextBlock Text="{Binding StartDateYear}"/>
+                                <TextBlock Text="{Binding Info.StartDateYear}"/>
                                 <TextBlock Text="年"/>
-                                <TextBlock Text="{Binding StartDateMonth}"/>
+                                <TextBlock Text="{Binding Info.StartDateMonth}"/>
                                 <TextBlock Text="月"/>
                             </StackPanel>
                         </StackPanel>

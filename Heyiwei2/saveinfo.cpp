@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "saveinfo.h"
 #include <fstream>
 #include <filesystem>
@@ -19,19 +19,6 @@ using namespace winrt;
 using namespace Windows::Storage;
 
 namespace cereal {
-	// Result 序列化
-	template<class Archive>
-	void serialize(Archive& archive, Result& r) {
-		std::string msg;
-		if (Archive::is_loading::value) {
-			archive(r.success, msg);
-			r.message = winrt::to_hstring(msg);
-		} else {
-			msg = winrt::to_string(r.message);
-			archive(r.success, msg);
-		}
-	}
-
 	// WaterRecord 序列化
 	template<class Archive>
 	void serialize(Archive& archive, WaterRecord& w) {

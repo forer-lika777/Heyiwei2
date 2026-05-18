@@ -23,26 +23,6 @@ namespace winrt::Heyiwei2::Models::implementation
     {
 		records = value;
     }
-    int32_t Dorm::StartDateYear()
-    {
-		return startDateYear;
-    }
-    void Dorm::StartDateYear(int32_t value)
-    {
-        if (startDateYear != value) {
-            startDateYear = value;
-        }
-    }
-    int32_t Dorm::StartDateMonth()
-    {
-		return startDateMonth;
-    }
-    void Dorm::StartDateMonth(int32_t value)
-    {
-        if (startDateMonth != value) {
-            startDateMonth = value;
-        }
-    }
     winrt::Heyiwei2::Models::DormInfo Dorm::Info()
     {
         return info;
@@ -51,6 +31,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (info != value) {
             info = value;
+            RaisePropertyChanged(L"Info");
         }
 		hstring id = L"Dorm-" + winrt::to_hstring(value.Region()) + 
             L"-" + winrt::to_hstring(value.BuildingNumber()) + 
@@ -58,6 +39,7 @@ namespace winrt::Heyiwei2::Models::implementation
             L"-" + winrt::to_hstring(value.RoomNumber());
         if (dormId != id) {
             dormId = id;
+            RaisePropertyChanged(L"DormId");
         }
     }
     hstring Dorm::DormId()
