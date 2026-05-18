@@ -3,11 +3,11 @@
 #include <winrt/Windows.UI.Xaml.Data.h>
 
 using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Heyiwei2::Models;
+//using namespace winrt::Heyiwei2::Models;
 
 namespace winrt::Heyiwei2::Models::implementation
 {
-    struct Dorm : DormT<Dorm, winrt::Windows::UI::Xaml::Data::INotifyPropertyChanged>
+    struct Dorm : DormT<Dorm>
     {
     public:
         Dorm() = default;
@@ -20,22 +20,12 @@ namespace winrt::Heyiwei2::Models::implementation
         void Info(DormInfo const& value);
         hstring DormId();
 
-        winrt::event<winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged;
-        winrt::event_token PropertyChanged(
-            winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
-        {
+        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler) {
             return propertyChanged.add(handler);
         }
-        void PropertyChanged(winrt::event_token const& token)
-        {
-            propertyChanged.remove(token);
-        }
 
-        // 辅助方法：触发属性变更
-        void RaisePropertyChanged(hstring const& propertyName)
-        {
-            propertyChanged(*this,
-                winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(propertyName));
+        void PropertyChanged(winrt::event_token const& token) noexcept {
+            propertyChanged.remove(token);
         }
 
     private:
@@ -44,5 +34,13 @@ namespace winrt::Heyiwei2::Models::implementation
 		hstring dormId;
         int32_t index = 0;
         winrt::Heyiwei2::Models::DormInfo info{ nullptr };
+
+        event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
     };
+}
+
+namespace winrt::Heyiwei2::Models::factory_implementation
+{
+    struct Dorm : DormT<Dorm, implementation::Dorm>
+    {};
 }

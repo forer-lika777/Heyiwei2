@@ -18,3 +18,9 @@ namespace winrt::Heyiwei2::Models::implementation
 		 hstring studentId;
     };
 }
+
+namespace winrt::Heyiwei2::Models::factory_implementation
+{
+    struct Student : StudentT<Student, implementation::Student>
+    {};
+}

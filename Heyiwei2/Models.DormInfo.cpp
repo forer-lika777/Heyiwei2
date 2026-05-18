@@ -2,6 +2,8 @@
 #include "Models.DormInfo.h"
 #include "Models.DormInfo.g.cpp"
 
+using namespace winrt::Windows::UI::Xaml::Data;
+
 namespace winrt::Heyiwei2::Models::implementation
 {
     int32_t DormInfo::Region() const
@@ -58,7 +60,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (startDateYear != value) {
             startDateYear = value;
-            RaisePropertyChanged(L"StartDateYear");
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"StartDateYear"));
         }
     }
     int32_t DormInfo::StartDateMonth()

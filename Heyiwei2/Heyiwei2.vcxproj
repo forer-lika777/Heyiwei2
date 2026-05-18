@@ -168,8 +168,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="RecordManager.h" />
-    <ClInclude Include="saveinfo.h" />
+    <ClInclude Include="stdDataModels.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="WinRTSerializationHelpers.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -244,7 +245,6 @@
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="RecordManager.cpp" />
-    <ClCompile Include="saveinfo.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

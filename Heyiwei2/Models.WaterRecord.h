@@ -27,3 +27,10 @@ namespace winrt::Heyiwei2::Models::implementation
 		bool hasPaid = false;
     };
 }
+
+namespace winrt::Heyiwei2::Models::factory_implementation
+{
+    struct WaterRecord : WaterRecordT<WaterRecord, implementation::WaterRecord> {
+
+    };
+}

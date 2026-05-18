@@ -69,7 +69,6 @@
     <ClCompile Include="Models.Result.cpp">
       <Filter>Models</Filter>
     </ClCompile>
-    <ClCompile Include="saveinfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -107,7 +106,10 @@
     <ClInclude Include="Models.Result.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="saveinfo.h" />
+    <ClInclude Include="WinRTSerializationHelpers.hpp" />
+    <ClInclude Include="stdDataModels.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">

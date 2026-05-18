@@ -27,5 +27,7 @@ public:
 	static std::vector<int32_t> generatePastYearMonths();
 
 	static std::vector<int32_t> generateYears(int32_t const& count);
+
+	static winrt::hstring generateDormId(winrt::Heyiwei2::Models::DormInfo info);
 };
 

@@ -5,6 +5,7 @@ namespace Heyiwei2.Models
 	[default_interface]
 	runtimeclass WaterRecord
 	{
+		WaterRecord();
 		Int32 Year;
 		Int32 Month;
 		Double Usage;
@@ -16,14 +17,16 @@ namespace Heyiwei2.Models
 	[default_interface]
 	runtimeclass Student
 	{
+		Student();
 		String Name;
 		String StudentId;
 	};
 
 	[bindable]
 	[default_interface]
-	runtimeclass DormInfo
+	runtimeclass DormInfo : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
+		DormInfo();
 		Int32 Region;
 		Int32 BuildingNumber;
 		Int32 Floor;
@@ -36,8 +39,9 @@ namespace Heyiwei2.Models
 
 	[bindable]
 	[default_interface]
-	runtimeclass Dorm
+	runtimeclass Dorm : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
+		Dorm();
 		Windows.Foundation.Collections.IObservableVector<Object> Students;
 		Windows.Foundation.Collections.IObservableVector<Object> Records;
 		String DormId{ get; };

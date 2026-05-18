@@ -160,3 +160,11 @@ std::vector<int32_t> Utils::generateYears(int32_t const& count)
     }
     return years;
 }
+
+winrt::hstring Utils::generateDormId(winrt::Heyiwei2::Models::DormInfo info)
+{
+    return L"Dorm-" + winrt::to_hstring(info.Region()) +
+        L"-" + winrt::to_hstring(info.BuildingNumber()) +
+        L"-" + winrt::to_hstring(info.Floor()) +
+        L"-" + winrt::to_hstring(info.RoomNumber());
+}

@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "MainManager.h"
 #include "Models.Result.h"
+#include "Utils.h"
 
 using namespace winrt::Heyiwei2::Models;
 using namespace winrt::Windows::Foundation;
@@ -171,6 +172,15 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info)
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：宿舍不存在"
+		);
+	}
+
+	hstring id = Utils::generateDormId(info);
+
+	if (findDormIndex(id) != -1) {
+		return winrt::make<implementation::Result>(
+			false,
+			L"修改失败：已存在信息重合的宿舍"
 		);
 	}
 

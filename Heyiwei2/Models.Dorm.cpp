@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "Models.Dorm.h"
 #include "Models.Dorm.g.cpp"
+#include "Utils.h"
 
 using namespace winrt::Windows::Foundation::Collections;
 using namespace winrt::Windows::Foundation;
@@ -31,15 +32,12 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (info != value) {
             info = value;
-            RaisePropertyChanged(L"Info");
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Info"));
         }
-		hstring id = L"Dorm-" + winrt::to_hstring(value.Region()) + 
-            L"-" + winrt::to_hstring(value.BuildingNumber()) + 
-            L"-" + winrt::to_hstring(value.Floor()) + 
-            L"-" + winrt::to_hstring(value.RoomNumber());
+        hstring id = Utils::generateDormId(info);
         if (dormId != id) {
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"DormId"));
             dormId = id;
-            RaisePropertyChanged(L"DormId");
         }
     }
     hstring Dorm::DormId()
