@@ -12,6 +12,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (year != value) {
             year = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Year"));
         }
     }
     int32_t WaterRecord::Month()
@@ -22,6 +23,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (month != value) {
             month = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Month"));
         }
     }
     double WaterRecord::Usage()
@@ -32,6 +34,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (usage != value) {
             usage = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Usage"));
         }
     }
     double WaterRecord::Cost()
@@ -42,6 +45,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (cost != value) {
             cost = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Cost"));
         }
     }
     bool WaterRecord::HasPaid()
@@ -52,6 +56,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (hasPaid != value) {
             hasPaid = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"HasPaid"));
         }
     }
 }

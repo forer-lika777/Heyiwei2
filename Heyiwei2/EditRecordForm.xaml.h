@@ -39,6 +39,10 @@ namespace winrt::Heyiwei2::implementation
         double Cost();
         void Cost(double const& value);
         void CostDisplay(hstring const& value);
+        bool HasPaid();
+        void HasPaid(bool const& value);
+
+        void LockYearAndMonth();
 
         //winrt::Windows::Foundation::IInspectable Record();
         //void Record(winrt::Windows::Foundation::IInspectable const& value);

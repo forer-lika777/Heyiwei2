@@ -12,6 +12,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (name != value) {
             name = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Name"));
         }
     }
     hstring Student::StudentId()
@@ -22,6 +23,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (studentId != value) {
             studentId = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"StudentId"));
         }
     }
 }

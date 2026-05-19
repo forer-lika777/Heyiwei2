@@ -76,7 +76,7 @@ namespace winrt::Heyiwei2::implementation
         return UsageInput().Text();
     }
     void EditRecordForm::Usage(hstring const& value) {
-        UsageInput().Text() = value;
+        UsageInput().Text(value);
     }
     double EditRecordForm::Cost()
     {
@@ -87,6 +87,17 @@ namespace winrt::Heyiwei2::implementation
     }
     void EditRecordForm::CostDisplay(hstring const& value) {
         CostTextBlock().Text(value);
+    }
+    bool EditRecordForm::HasPaid()
+    {
+        return HasPaidCheckBox().IsChecked().GetBoolean();
+    }
+    void EditRecordForm::HasPaid(bool const& value) {
+        HasPaidCheckBox().IsChecked(value);
+    }
+    void EditRecordForm::LockYearAndMonth() {
+        YearSelectComboBox().IsEnabled(false);
+        MonthSelectComboBox().IsEnabled(false);
     }
     void EditRecordForm::UsageInput_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::TextChangedEventArgs const& e)
     {

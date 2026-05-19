@@ -14,6 +14,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (region != value) {
             region = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Region"));
         }
     }
     int32_t DormInfo::BuildingNumber() const
@@ -24,6 +25,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (buildingNumber != value) {
             buildingNumber = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"BuildingNumber"));
         }
     }
     int32_t DormInfo::Floor() const
@@ -34,8 +36,8 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (floor != value) {
             floor = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Floor"));
         }
-		floor = value;
     }
     int32_t DormInfo::RoomNumber() const
     {
@@ -45,6 +47,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (roomNumber != value) {
             roomNumber = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"RoomNumber"));
         }
     }
     hstring DormInfo::ToString()
@@ -71,6 +74,7 @@ namespace winrt::Heyiwei2::Models::implementation
     {
         if (startDateMonth != value) {
             startDateMonth = value;
+            propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"StartDateMonth"));
         }
     }
 }

@@ -3,7 +3,7 @@ namespace Heyiwei2.Models
 {
 	[bindable]
 	[default_interface]
-	runtimeclass WaterRecord
+	runtimeclass WaterRecord : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		WaterRecord();
 		Int32 Year;
@@ -15,7 +15,7 @@ namespace Heyiwei2.Models
 
 	[bindable]
 	[default_interface]
-	runtimeclass Student
+	runtimeclass Student : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		Student();
 		String Name;

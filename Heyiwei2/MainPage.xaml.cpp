@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "MainPage.xaml.h"
 #if __has_include("MainPage.g.cpp")
 #include "MainPage.g.cpp"
@@ -24,7 +24,6 @@ namespace winrt::Heyiwei2::implementation
     }
 
     void MainPage::openDormListPage() {
-
         auto page_impl = winrt::make_self<winrt::Heyiwei2::implementation::DormListPage>();
         mainFrame().Navigate(xaml_typename<winrt::Heyiwei2::DormListPage>(), *page_impl);  // 传参导航
     }
@@ -40,6 +39,8 @@ namespace winrt::Heyiwei2::implementation
         }
         else {
             hstring tag = unbox_value<hstring>(args.InvokedItemContainer().Tag());
+            if (currentPage == tag) return;
+            currentPage = tag;
             if (tag == L"home") {
                 openHomePage();
             }

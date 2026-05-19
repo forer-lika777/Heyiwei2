@@ -29,6 +29,8 @@
             <TextBlock Text="共计消费："/>
             <TextBlock x:Name="CostTextBlock"/>
         </StackPanel>
+        <CheckBox x:Name="HasPaidCheckBox"
+                  Content="已缴费"/>
         <TextBlock x:Name="OutputInfoTextBlock"/>
     </StackPanel>
 </UserControl>

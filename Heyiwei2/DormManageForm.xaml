@@ -5,9 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Heyiwei2"
     xmlns:models="using:Heyiwei2.Models"
+    xmlns:converters="using:Heyiwei2.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:HasPaidToStringConverter x:Key="HasPaidToStringConverter"/>
+    </UserControl.Resources>
+    
     <Grid DataContext="{Binding}">
         <Rectangle Fill="{ThemeResource SmokeFillColorDefaultBrush}"/>
         <Grid Margin="100, 80, 100, 80">
@@ -22,7 +27,7 @@
                     <StackPanel Orientation="Horizontal"
                                 Spacing="50">
                         <StackPanel Spacing="10">
-                            <TextBlock Text="{Binding Info.ToString, Mode=OneWay}"
+                            <TextBlock Text="{Binding Info.ToString}"
                                        FontSize="15"
                                        VerticalAlignment="Center"/> <!--Mode: 数据绑定类型（oneway：单向、 twoway：双向、 onetime: 一次性） 默认onetime-->
                             <StackPanel Orientation="Horizontal">
@@ -58,39 +63,81 @@
                     </StackPanel>
                     <StackPanel Spacing="20">
                         <TextBlock Text="所有用水信息"/>
-                        <ListView Height="200"
-                                  ItemsSource="{Binding Records}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="models:WaterRecord">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0"
-                                                    Orientation="Horizontal">
-                                            <TextBlock Text="{x:Bind Year}"/>
-                                            <TextBlock Text="年"/>
-                                            <TextBlock Text="{x:Bind Month}"/>
-                                            <TextBlock Text="月"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="1"
-                                                    Orientation="Horizontal">
-                                            <TextBlock Text="用水量："/>
-                                            <TextBlock Text="{x:Bind Usage}"/>
-                                            <TextBlock Text="吨"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="2"
-                                                    Orientation="Horizontal">
-                                            <TextBlock Text="计费："/>
-                                            <TextBlock Text="{x:Bind Cost}"/>
-                                            <TextBlock Text="元"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                        <ScrollView ContentOrientation="Horizontal">
+                            <ListView Height="200"
+                                      ItemsSource="{Binding Records, Mode=OneWay}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:WaterRecord">
+                                        <Grid Height="50"
+                                              MinWidth="650">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0"
+                                                        Orientation="Horizontal"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Left"
+                                                        Padding="10">
+                                                <TextBlock Text="{x:Bind Year, Mode=OneWay}"/>
+                                                <TextBlock Text="年"/>
+                                                <TextBlock Text="{x:Bind Month, Mode=OneWay}"/>
+                                                <TextBlock Text="月"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1"
+                                                        Orientation="Horizontal"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Left"
+                                                        Padding="10">
+                                                <TextBlock Text="用水量："/>
+                                                <TextBlock Text="{x:Bind Usage, Mode=OneWay}"/>
+                                                <TextBlock Text="吨"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2"
+                                                        Orientation="Horizontal"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Left"
+                                                        Padding="10">
+                                                <TextBlock Text="计费："/>
+                                                <TextBlock Text="{x:Bind Cost, Mode=OneWay}"/>
+                                                <TextBlock Text="元"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="3"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"
+                                                       Padding="10"
+                                                       Text="{x:Bind HasPaid, Mode=OneWay, Converter={StaticResource HasPaidToStringConverter}}"/>
+                                            <Button x:Name="EditRecordButton"
+                                                    Grid.Column="4"
+                                                    VerticalAlignment="Center"
+                                                    Click="EditRecordButton_Click">
+                                                <StackPanel Orientation="Horizontal"
+                                                            Spacing="6">
+                                                    <SymbolIcon Symbol="Edit"/>
+                                                    <!--调用系统图案-->
+                                                    <TextBlock Text="编辑"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button x:Name="DeleteRecordButton"
+                                                    Grid.Column="5"
+                                                    VerticalAlignment="Center"
+                                                    Click="DeleteRecordButton_Click">
+                                                <StackPanel Orientation="Horizontal"
+                                                            Spacing="6">
+                                                    <SymbolIcon Symbol="Delete"/>
+                                                    <!--调用系统图案-->
+                                                    <TextBlock Text="删除"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </ScrollView>
                     </StackPanel>
                 </StackPanel>
             </ScrollView>

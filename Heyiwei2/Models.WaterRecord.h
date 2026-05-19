@@ -19,12 +19,22 @@ namespace winrt::Heyiwei2::Models::implementation
         bool HasPaid();
         void HasPaid(bool value);
 
+        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler) {
+            return propertyChanged.add(handler);
+        }
+
+        void PropertyChanged(winrt::event_token const& token) noexcept {
+            propertyChanged.remove(token);
+        }
+
     private:
 		int32_t year = 0;
 		int32_t month = 0;
 		double usage = 0.0;
         double cost = 0.0;
 		bool hasPaid = false;
+
+        event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
     };
 }
 

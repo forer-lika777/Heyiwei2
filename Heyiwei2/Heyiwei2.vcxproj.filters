@@ -31,17 +31,16 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />
-    <Midl Include="DormPaneItem.idl">
-      <Filter>Models</Filter>
-    </Midl>
     <Midl Include="Models.idl">
       <Filter>Models</Filter>
+    </Midl>
+    <Midl Include="HasPaidToStringConverter.idl">
+      <Filter>Converters</Filter>
     </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="DormManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -50,9 +49,6 @@
     </ClCompile>
     <ClCompile Include="MainManager.cpp">
       <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="DormPaneItem.cpp">
-      <Filter>Models</Filter>
     </ClCompile>
     <ClCompile Include="Models.Dorm.cpp">
       <Filter>Models</Filter>
@@ -69,10 +65,21 @@
     <ClCompile Include="Models.Result.cpp">
       <Filter>Models</Filter>
     </ClCompile>
+    <ClCompile Include="StdModelsConverter.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="DataSaveService.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Converters.HasPaidToStringConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Utils.h" />
     <ClInclude Include="DormManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
@@ -81,9 +88,6 @@
     </ClInclude>
     <ClInclude Include="MainManager.h">
       <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="DormPaneItem.h">
-      <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="Models.Dorm.h">
       <Filter>Models</Filter>
@@ -107,8 +111,20 @@
       <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="WinRTSerializationHelpers.hpp" />
-    <ClInclude Include="stdDataModels.h">
+    <ClInclude Include="StdModels.h">
       <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="StdModelsConverter.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="DataSaveService.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Converters.HasPaidToStringConverter.h">
+      <Filter>Converters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +165,9 @@
     </Filter>
     <Filter Include="Models">
       <UniqueIdentifier>{ba4640c0-9cb4-48bb-afc5-8022910d6aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Converters">
+      <UniqueIdentifier>{838a77ae-870d-49e2-a52b-e55a03fbcd40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

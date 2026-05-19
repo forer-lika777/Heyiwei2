@@ -28,3 +28,4 @@
 #include "Models.DormInfo.h"
 #include "Models.Student.h"
 #include "Models.WaterRecord.h"
+#include "Converters.HasPaidToStringConverter.h"

@@ -8,28 +8,28 @@ using namespace winrt::Windows::Foundation;
 using namespace winrt;
 using namespace winrt::Windows::Storage;
 
-extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
-extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
+//extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
+//extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
 MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数据改变而改变*/<IInspectable>& dorms) : dorms(dorms)
 {
 
 }
-
-void MainManager::TriggerSave(const std::string& filename) {
-	SaveData(dorms, filename);
-}
-
-// 加载：不能直接把指针替换掉（因为会导致前端 UI 绑定的引用失效）
-void MainManager::TriggerLoad(const std::string& filename) {
-	// 拿到队友从文件里读出来的临时新集合
-	auto loadedData = LoadData(filename);
-
-	// 核心安全操作：清空现有的，把读出来的数据一个个灌进你构造函数绑定的血管里
-	dorms.Clear();
-	for (uint32_t i = 0; i < loadedData.Size(); ++i) {
-		m_dorms.Append(loadedData.GetAt(i)); // 这样写，前端 ListView 会瞬间自动蹦出所有宿舍按钮！
-	}
-}
+//
+//void MainManager::TriggerSave(const std::string& filename) {
+//	SaveData(dorms, filename);
+//}
+//
+//// 加载：不能直接把指针替换掉（因为会导致前端 UI 绑定的引用失效）
+//void MainManager::TriggerLoad(const std::string& filename) {
+//	// 拿到队友从文件里读出来的临时新集合
+//	auto loadedData = LoadData(filename);
+//
+//	// 核心安全操作：清空现有的，把读出来的数据一个个灌进你构造函数绑定的血管里
+//	dorms.Clear();
+//	for (uint32_t i = 0; i < loadedData.Size(); ++i) {
+//		dorms.Append(loadedData.GetAt(i)); // 这样写，前端 ListView 会瞬间自动蹦出所有宿舍按钮！
+//	}
+//}
 
 winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> MainManager::getDormItems()
 {

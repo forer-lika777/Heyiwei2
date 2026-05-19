@@ -122,6 +122,8 @@
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Converters.HasPaidToStringConverter.h" />
+    <ClInclude Include="DataSaveService.h" />
     <ClInclude Include="EditDormForm.xaml.h">
       <DependentUpon>EditDormForm.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -135,7 +137,6 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="DormManager.h" />
-    <ClInclude Include="DormPaneItem.h" />
     <ClInclude Include="EditRecordForm.xaml.h">
       <DependentUpon>EditRecordForm.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -168,7 +169,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="RecordManager.h" />
-    <ClInclude Include="stdDataModels.h" />
+    <ClInclude Include="StdModels.h" />
+    <ClInclude Include="StdModelsConverter.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WinRTSerializationHelpers.hpp" />
   </ItemGroup>
@@ -198,6 +200,8 @@
     <Page Include="MainWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Converters.HasPaidToStringConverter.cpp" />
+    <ClCompile Include="DataSaveService.cpp" />
     <ClCompile Include="EditDormForm.xaml.cpp">
       <DependentUpon>EditDormForm.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -211,7 +215,6 @@
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="DormManager.cpp" />
-    <ClCompile Include="DormPaneItem.cpp" />
     <ClCompile Include="EditRecordForm.xaml.cpp">
       <DependentUpon>EditRecordForm.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -245,6 +248,7 @@
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="RecordManager.cpp" />
+    <ClCompile Include="StdModelsConverter.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +264,6 @@
       <DependentUpon>DormManageForm.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
-    <Midl Include="DormPaneItem.idl" />
     <Midl Include="EditRecordForm.idl">
       <DependentUpon>EditRecordForm.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -269,6 +272,7 @@
       <DependentUpon>EditStudentForm.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
+    <Midl Include="HasPaidToStringConverter.idl" />
     <Midl Include="HomePage.idl">
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>

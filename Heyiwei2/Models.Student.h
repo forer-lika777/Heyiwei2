@@ -13,9 +13,19 @@ namespace winrt::Heyiwei2::Models::implementation
         hstring StudentId();
         void StudentId(hstring const& value);
 
+        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler) {
+            return propertyChanged.add(handler);
+        }
+
+        void PropertyChanged(winrt::event_token const& token) noexcept {
+            propertyChanged.remove(token);
+        }
+
     private:
          hstring name;
 		 hstring studentId;
+
+         event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
     };
 }
 

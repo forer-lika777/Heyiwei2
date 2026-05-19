@@ -49,7 +49,7 @@ public:
 private:
     IObservableVector<IInspectable> dorms;
     DormManager dormManager;
-    winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms;
+    //winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms;
 
     //DormManager* getDormManager(const hstring dormId);
     int32_t findDormIndex(const hstring dormId);

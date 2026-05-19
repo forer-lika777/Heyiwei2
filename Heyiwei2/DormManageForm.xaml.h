@@ -15,7 +15,10 @@ namespace winrt::Heyiwei2::implementation
         std::function<void()> onCloseCallback;
         Interfaces::IMainManager* mainManager = nullptr;
         winrt::Windows::Foundation::IAsyncAction openEditDormDialogAsync();
+
         winrt::Windows::Foundation::IAsyncAction openAddRecordDialogAsync();
+        winrt::Windows::Foundation::IAsyncAction openEditRecordDialogAsync(winrt::Heyiwei2::Models::WaterRecord record);
+        winrt::Windows::Foundation::IAsyncAction openDeleteRecordDialogAsync(winrt::Heyiwei2::Models::WaterRecord record);
 
         //void RaisePropertyChanged(winrt::hstring const& propertyName)
         //{
@@ -43,6 +46,8 @@ namespace winrt::Heyiwei2::implementation
         //    propertyChanged.remove(token);
         //}
         void AddRecordButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
+        void EditRecordButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
+        void DeleteRecordButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
     };
 }
 

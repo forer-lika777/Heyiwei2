@@ -18,7 +18,7 @@ Result RecordManager::addWaterRecord(const WaterRecord& record) {
     auto r = querySpecificWaterRecord(record.Year(), record.Month());
     if (r != -1)
     {
-        return winrt::make<implementation::Result>(false, L"添加失败：记录已存在");
+        return winrt::make<implementation::Result>(false, L"添加失败：不可添加具有相同年月份的记录");
     }
     if (record.Usage() > 30000) {
         return winrt::make<implementation::Result>(false, L"你是超人嘛？一个月用 " + winrt::to_hstring(record.Usage()) + L" 吨水？");
