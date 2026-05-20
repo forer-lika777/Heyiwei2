@@ -1,25 +1,21 @@
-#pragma once
+﻿#pragma once
 
 #include "EditStudentForm.g.h"
 
-namespace winrt::Heyiwei2::implementation
-{
-    struct EditStudentForm : EditStudentFormT<EditStudentForm>
-    {
-        EditStudentForm()
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
+namespace winrt::Heyiwei2::implementation {
+	struct EditStudentForm : EditStudentFormT<EditStudentForm> {
+	public:
+		EditStudentForm() {}
 
-        int32_t MyProperty();
-        void MyProperty(int32_t value);
-    };
+		hstring Name();
+		void Name(hstring const& name);
+		hstring StudentId();
+		void StudentId(hstring const& studentId);
+
+		void showInfo(hstring const& info);
+	};
 }
 
-namespace winrt::Heyiwei2::factory_implementation
-{
-    struct EditStudentForm : EditStudentFormT<EditStudentForm, implementation::EditStudentForm>
-    {
-    };
+namespace winrt::Heyiwei2::factory_implementation {
+	struct EditStudentForm : EditStudentFormT<EditStudentForm, implementation::EditStudentForm> {};
 }

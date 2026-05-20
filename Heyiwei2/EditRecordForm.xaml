@@ -14,13 +14,11 @@
         <ComboBox x:Name="YearSelectComboBox"
                   SelectedIndex="0"
                   SelectionChanged="YearSelectComboBox_SelectionChanged"
-                  ItemsSource="{x:Bind Years}">
-        </ComboBox>
+                  ItemsSource="{x:Bind Years}"/>
         <TextBlock Text="选择记录月份："/>
         <ComboBox x:Name="MonthSelectComboBox"
                   SelectedIndex="0"
-                  ItemsSource="{x:Bind Months}">
-        </ComboBox>
+                  ItemsSource="{x:Bind Months}"/>
         <TextBlock Text="输入用水量："/>
         <TextBox x:Name="UsageInput" 
                  TextChanged="UsageInput_TextChanged"

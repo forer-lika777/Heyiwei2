@@ -10,14 +10,12 @@
 
     <StackPanel Spacing="10" Width="300" >
         <TextBlock Text="选择宿舍区域："/>
-        <ComboBox x:Name="RegionSelectComboBox"
-                  SelectedIndex="0">
+        <ComboBox x:Name="RegionSelectComboBox" SelectedIndex="0">
             <x:String>东区</x:String>
             <x:String>西区</x:String>
         </ComboBox>
         <TextBlock Text="选择宿舍楼栋："/>
-        <ComboBox x:Name="BuildingSelectComboBox"
-                  SelectedIndex="0">
+        <ComboBox x:Name="BuildingSelectComboBox" SelectedIndex="0">
             <x:String>1号楼</x:String>
             <x:String>2号楼</x:String>
             <x:String>3号楼</x:String>
@@ -44,8 +42,7 @@
             <x:String>24号楼</x:String>
         </ComboBox>
         <TextBlock Text="选择宿舍楼层："/>
-        <ComboBox x:Name="FloorSelectComboBox"
-                  SelectedIndex="0">
+        <ComboBox x:Name="FloorSelectComboBox" SelectedIndex="0">
             <x:String>1层</x:String>
             <x:String>2层</x:String>
             <x:String>3层</x:String>
@@ -56,13 +53,10 @@
         <TextBlock Text="输入宿舍号："/>
         <TextBox x:Name="DormNumberInput" PlaceholderText="例如：01"/>
         <TextBlock Text="选择起始年份："/>
-        <ComboBox x:Name="StartYearSelectComboBox"
-                  SelectedIndex="0"
-                  ItemsSource="{x:Bind Years}"
-                  SelectionChanged="StartYearSelectComboBox_SelectionChanged"/>
+        <ComboBox x:Name="StartYearSelectComboBox" SelectedIndex="0"
+                  ItemsSource="{x:Bind Years}" SelectionChanged="StartYearSelectComboBox_SelectionChanged"/>
         <TextBlock Text="选择起始月份："/>
-        <ComboBox x:Name="StartMonthSelectComboBox"
-                  SelectedIndex="0"
+        <ComboBox x:Name="StartMonthSelectComboBox" SelectedIndex="0"
                   ItemsSource="{x:Bind Months}"/>
         <TextBlock x:Name="OutputInfoTextBlock"/>
     </StackPanel>

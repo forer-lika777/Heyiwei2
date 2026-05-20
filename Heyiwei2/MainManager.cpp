@@ -10,8 +10,7 @@ using namespace winrt::Windows::Storage;
 
 //extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
 //extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
-MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数据改变而改变*/<IInspectable>& dorms) : dorms(dorms)
-{
+MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数据改变而改变*/<IInspectable>& dorms) : dorms(dorms) {
 
 }
 //
@@ -31,13 +30,11 @@ MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数
 //	}
 //}
 
-winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> MainManager::getDormItems()
-{
+winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> MainManager::getDormItems() {
 	return dorms;
 }
 
-Dorm MainManager::getDorm(const hstring dormId)
-{
+Dorm MainManager::getDorm(const hstring dormId) {
 	int32_t index = findDormIndex(dormId);
 
 	if (index == -1) return nullptr;
@@ -45,12 +42,10 @@ Dorm MainManager::getDorm(const hstring dormId)
 	return dorms.GetAt(index).as<Dorm>();
 }
 
-Result MainManager::addStudent(const hstring dormId, Student const student)
-{
+Result MainManager::addStudent(const hstring dormId, Student const student) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"添加失败：宿舍不存在"
@@ -64,12 +59,10 @@ Result MainManager::addStudent(const hstring dormId, Student const student)
 	return dormManager.addStudent(student);
 }
 
-Result MainManager::removeStudent(const hstring dormId, const hstring studentId)
-{
+Result MainManager::removeStudent(const hstring dormId, const hstring studentId) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"删除失败：宿舍不存在"
@@ -83,12 +76,10 @@ Result MainManager::removeStudent(const hstring dormId, const hstring studentId)
 	return dormManager.removeStudent(studentId);
 }
 
-Result MainManager::updateStudent(const hstring dormId, const hstring studentId, const hstring name)
-{
+Result MainManager::updateStudent(const hstring dormId, const hstring studentId, Student const student) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：宿舍不存在"
@@ -99,18 +90,16 @@ Result MainManager::updateStudent(const hstring dormId, const hstring studentId,
 		dorms.GetAt(index).as<Dorm>()
 	);
 
-	return dormManager.updateStudentName(
+	return dormManager.updateStudent(
 		studentId,
-		name
+		student
 	);
 }
 
-Result MainManager::addDorm(const Dorm dorm)
-{
+Result MainManager::addDorm(const Dorm dorm) {
 	int32_t index = findDormIndex(dorm.DormId());
 
-	if (index != -1)
-	{
+	if (index != -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"添加失败：宿舍已存在"
@@ -134,12 +123,10 @@ Result MainManager::addDorm(const Dorm dorm)
 	);
 }
 
-Result MainManager::removeDorm(const hstring dormId)
-{
+Result MainManager::removeDorm(const hstring dormId) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"删除失败：宿舍不存在"
@@ -154,8 +141,7 @@ Result MainManager::removeDorm(const hstring dormId)
 	);
 }
 
-Result MainManager::updateDorm(const hstring dormId, const Dorm dorm)
-{
+Result MainManager::updateDorm(const hstring dormId, const Dorm dorm) {
 	int32_t index = findDormIndex(dormId);
 
 	int32_t roomNumber = dorm.Info().RoomNumber();
@@ -167,8 +153,7 @@ Result MainManager::updateDorm(const hstring dormId, const Dorm dorm)
 		);
 	}
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：宿舍不存在"
@@ -183,12 +168,10 @@ Result MainManager::updateDorm(const hstring dormId, const Dorm dorm)
 	);
 }
 
-Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info)
-{
+Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：宿舍不存在"
@@ -214,12 +197,10 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info)
 	);
 }
 
-Result MainManager::addStudentToDorm(const hstring dormId, const hstring studentId)
-{
+Result MainManager::addStudentToDorm(const hstring dormId, const hstring studentId) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"添加失败：宿舍不存在"
@@ -237,12 +218,10 @@ Result MainManager::addStudentToDorm(const hstring dormId, const hstring student
 	return dormManager.addStudent(student);
 }
 
-Result MainManager::removeStudentFromDorm(const hstring dormId, const hstring studentId)
-{
+Result MainManager::removeStudentFromDorm(const hstring dormId, const hstring studentId) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"删除失败：宿舍不存在"
@@ -256,12 +235,10 @@ Result MainManager::removeStudentFromDorm(const hstring dormId, const hstring st
 	return dormManager.removeStudent(studentId);
 }
 
-Result MainManager::updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student)
-{
+Result MainManager::updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：宿舍不存在"
@@ -278,12 +255,10 @@ Result MainManager::updateStudentInDorm(const hstring dormId, const hstring stud
 	);
 }
 
-Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord record)
-{
+Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord record) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"添加失败：宿舍不存在"
@@ -297,12 +272,10 @@ Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord recor
 	return dormManager.addWaterRecord(record);
 }
 
-Result MainManager::removeWaterRecord(const hstring dormId, int year, int month)
-{
+Result MainManager::removeWaterRecord(const hstring dormId, int year, int month) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"删除失败：宿舍不存在"
@@ -319,12 +292,10 @@ Result MainManager::removeWaterRecord(const hstring dormId, int year, int month)
 	);
 }
 
-Result MainManager::updateWaterRecord(const hstring dormId, int year, int month, const WaterRecord record)
-{
+Result MainManager::updateWaterRecord(const hstring dormId, int year, int month, const WaterRecord record) {
 	int32_t index = findDormIndex(dormId);
 
-	if (index == -1)
-	{
+	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：宿舍不存在"
@@ -342,14 +313,11 @@ Result MainManager::updateWaterRecord(const hstring dormId, int year, int month,
 	);
 }
 
-int32_t MainManager::findDormIndex(const hstring dormId)
-{
-	for (uint32_t i = 0; i < dorms.Size(); ++i)
-	{
+int32_t MainManager::findDormIndex(const hstring dormId) {
+	for (uint32_t i = 0; i < dorms.Size(); ++i) {
 		auto dorm = dorms.GetAt(i).as<Dorm>();
 
-		if (dorm.DormId() == dormId)
-		{
+		if (dorm.DormId() == dormId) {
 			return static_cast<int32_t>(i);
 		}
 	}

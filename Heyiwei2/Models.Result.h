@@ -9,10 +9,12 @@ namespace winrt::Heyiwei2::Models::implementation
         Result(bool success, winrt::hstring const& message)
             : success(success), message(message) {}
 
-        bool Success();
+        bool Success() const;
         void Success(bool value);
+
         hstring Message();
         void Message(hstring const& value);
+
     private:
         bool success = false;
 		hstring message;

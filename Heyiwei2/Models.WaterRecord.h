@@ -8,15 +8,19 @@ namespace winrt::Heyiwei2::Models::implementation
     public:
         WaterRecord() = default;
 
-        int32_t Year();
+        int32_t Year() const;
         void Year(int32_t value);
-        int32_t Month();
+
+        int32_t Month() const;
         void Month(int32_t value);
-        double Usage();
+
+        double Usage() const;
         void Usage(double value);
-        double Cost();
+
+        double Cost() const;
         void Cost(double value);
-        bool HasPaid();
+
+        bool HasPaid() const;
         void HasPaid(bool value);
 
         winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler) {

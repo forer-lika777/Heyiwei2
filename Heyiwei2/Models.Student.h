@@ -1,36 +1,33 @@
 ﻿#pragma once
 #include "Models.Student.g.h"
 
-namespace winrt::Heyiwei2::Models::implementation
-{
-    struct Student : StudentT<Student>
-    {
-    public:
-        Student() = default;
+namespace winrt::Heyiwei2::Models::implementation {
+	struct Student : StudentT<Student> {
+	public:
+		Student() = default;
 
-        hstring Name();
-        void Name(hstring const& value);
-        hstring StudentId();
-        void StudentId(hstring const& value);
+		hstring Name();
+		void Name(hstring const& value);
 
-        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler) {
-            return propertyChanged.add(handler);
-        }
+		hstring StudentId();
+		void StudentId(hstring const& value);
 
-        void PropertyChanged(winrt::event_token const& token) noexcept {
-            propertyChanged.remove(token);
-        }
+		winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler) {
+			return propertyChanged.add(handler);
+		}
 
-    private:
-         hstring name;
-		 hstring studentId;
+		void PropertyChanged(winrt::event_token const& token) noexcept {
+			propertyChanged.remove(token);
+		}
 
-         event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
-    };
+	private:
+		hstring name;
+		hstring studentId;
+
+		event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
+	};
 }
 
-namespace winrt::Heyiwei2::Models::factory_implementation
-{
-    struct Student : StudentT<Student, implementation::Student>
-    {};
+namespace winrt::Heyiwei2::Models::factory_implementation {
+	struct Student : StudentT<Student, implementation::Student> {};
 }

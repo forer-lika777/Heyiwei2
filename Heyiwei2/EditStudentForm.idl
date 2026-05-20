@@ -1,9 +1,8 @@
-namespace Heyiwei2
+﻿namespace Heyiwei2
 {
     [default_interface]
     runtimeclass EditStudentForm : Microsoft.UI.Xaml.Controls.UserControl
     {
         EditStudentForm();
-        Int32 MyProperty;
     }
 }

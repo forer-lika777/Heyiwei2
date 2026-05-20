@@ -1,24 +1,13 @@
-#pragma once
+﻿#pragma once
 
 #include "HomePage.g.h"
 
-namespace winrt::Heyiwei2::implementation
-{
-    struct HomePage : HomePageT<HomePage>
-    {
-        HomePage()
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
-
-        void MyProperty(int32_t value);
-    };
+namespace winrt::Heyiwei2::implementation {
+	struct HomePage : HomePageT<HomePage> {
+		HomePage() {}
+	};
 }
 
-namespace winrt::Heyiwei2::factory_implementation
-{
-    struct HomePage : HomePageT<HomePage, implementation::HomePage>
-    {
-    };
+namespace winrt::Heyiwei2::factory_implementation {
+	struct HomePage : HomePageT<HomePage, implementation::HomePage> {};
 }

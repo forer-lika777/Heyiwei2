@@ -28,7 +28,7 @@ public:
     // 学生管理
     Result addStudent(const hstring dormId, Student const student) override;
     Result removeStudent(const hstring dormId, const hstring studentId) override;
-    Result updateStudent(const hstring dormId, const hstring studentId, const hstring name) override;
+    Result updateStudent(const hstring dormId, const hstring studentId, Student const student) override;
 
     // 宿舍管理
     Result addDorm(const Dorm dorm) override;

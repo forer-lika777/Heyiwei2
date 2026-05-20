@@ -8,17 +8,12 @@
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace winrt::Heyiwei2::implementation {
+	MainWindow::MainWindow() {
+		ExtendsContentIntoTitleBar(true);
 
-namespace winrt::Heyiwei2::implementation
-{
-    MainWindow::MainWindow()
-    {
-        ExtendsContentIntoTitleBar(true);
+		mainPage = winrt::make<winrt::Heyiwei2::implementation::MainPage>();
 
-        mainPage = winrt::make<winrt::Heyiwei2::implementation::MainPage>();
-
-        this->Content(mainPage);
-    };
+		this->Content(mainPage);
+	};
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="Heyiwei2.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -9,8 +9,6 @@
     mc:Ignorable="d">
 
     <Grid Padding="20, 60, 20, 20">
-        <TextBlock Text="Welcome to Heyiwei2"
-                   FontSize="35"
-                   FontWeight="Bold"/>
+        <TextBlock Text="Welcome to Heyiwei2" FontSize="35" FontWeight="Bold"/>
     </Grid>
 </Page>

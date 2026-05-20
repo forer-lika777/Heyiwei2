@@ -40,6 +40,7 @@ namespace winrt::Heyiwei2::implementation
         winrt::Windows::Foundation::Collections::IObservableVector<int32_t> Months();
         
 		void showInfo(hstring const& info);
+
         void StartYearSelectComboBox_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e);
     };
 }

@@ -16,12 +16,7 @@ namespace winrt::Heyiwei2::implementation
         std::vector<int32_t> monthsPastYear;
         std::vector<int32_t> monthsThisYear;
 
-        //winrt::Heyiwei2::Models::WaterRecord record{ nullptr };
-
-        //int32_t year;
-        //int32_t month;
-        //double usage;
-        double cost;
+        double cost = 0.0;
 
     public:
         EditRecordForm();
@@ -44,8 +39,6 @@ namespace winrt::Heyiwei2::implementation
 
         void LockYearAndMonth();
 
-        //winrt::Windows::Foundation::IInspectable Record();
-        //void Record(winrt::Windows::Foundation::IInspectable const& value);
         void UsageInput_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::TextChangedEventArgs const& e);
         void YearSelectComboBox_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e);
     };

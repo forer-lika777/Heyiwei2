@@ -18,7 +18,7 @@ namespace Interfaces
 
 		virtual Result addStudent(const hstring dormId, Student const student) = 0;
 		virtual Result removeStudent(const hstring dormId, const hstring studentId) = 0;
-		virtual Result updateStudent(const hstring dormId, const hstring studentId, const hstring name) = 0;
+		virtual Result updateStudent(const hstring dormId, const hstring studentId, Student const student) = 0;
 
 		virtual Result addDorm(const Dorm dorm) = 0;
 		virtual Result removeDorm(const hstring dormId) = 0;
