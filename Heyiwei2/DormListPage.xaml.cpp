@@ -16,11 +16,13 @@
 #include "EditDormForm.xaml.h"
 #include "DormManageForm.xaml.h"
 
+
 using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Controls;
 
 namespace winrt::Heyiwei2::implementation {
 	DormListPage::DormListPage() {
+
 		InitializeComponent();
 		mainManager = App::GetMainManager();
 		dormItems = mainManager->getDormItems();

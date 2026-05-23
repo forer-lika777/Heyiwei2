@@ -2,33 +2,48 @@
 #include "MainManager.h"
 #include "Models.Result.h"
 #include "Utils.h"
+#include "DataSaveService.h"
 
 using namespace winrt::Heyiwei2::Models;
 using namespace winrt::Windows::Foundation;
 using namespace winrt;
 using namespace winrt::Windows::Storage;
 
-//extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
-//extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
+extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
+extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
 MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数据改变而改变*/<IInspectable>& dorms) : dorms(dorms) {
 
 }
-//
-//void MainManager::TriggerSave(const std::string& filename) {
-//	SaveData(dorms, filename);
-//}
-//
-//// 加载：不能直接把指针替换掉（因为会导致前端 UI 绑定的引用失效）
-//void MainManager::TriggerLoad(const std::string& filename) {
-//	// 拿到队友从文件里读出来的临时新集合
-//	auto loadedData = LoadData(filename);
-//
-//	// 核心安全操作：清空现有的，把读出来的数据一个个灌进你构造函数绑定的血管里
-//	dorms.Clear();
-//	for (uint32_t i = 0; i < loadedData.Size(); ++i) {
-//		dorms.Append(loadedData.GetAt(i)); // 这样写，前端 ListView 会瞬间自动蹦出所有宿舍按钮！
-//	}
-//}
+
+// 保存功能实现
+void MainManager::SaveCurrentData()
+{
+	// 直接把你持有的 m_dorms 喂给队友的静态方法（或实例方法）
+	// 如果 SaveToFile 是静态函数，直接这样写：
+	DataSaveService::SaveToFile(dorms);
+
+	// 如果 DataSaveService 需要实例化，则写成：
+	// DataSaveService service;
+	// service.SaveToFile(m_dorms);
+}
+
+// 加载功能实现
+void MainManager::LoadStoredData()
+{
+	// 1. 调用队友写的反序列化函数，拿到从 JSON 恢复出来的 WinRT 集合
+	auto loadedDorms = DataSaveService::LoadFromFile();
+
+	// 2. 【核心防错与联动】
+	// 绝对不能直接写 m_dorms = loadedDorms; 因为 m_dorms 是引用，直接赋值会断开与前端 UI 的链接！
+	// 必须清空原有数据，然后把新数据一个个 Append 进去，这样前端的 ListView 才会瞬间自动刷新。
+	dorms.Clear();
+	for (uint32_t i = 0; i < loadedDorms.Size(); ++i)
+	{
+		dorms.Append(loadedDorms.GetAt(i));
+	}
+}
+
+
 
 winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> MainManager::getDormItems() {
 	return dorms;
@@ -41,6 +56,8 @@ Dorm MainManager::getDorm(const hstring dormId) {
 
 	return dorms.GetAt(index).as<Dorm>();
 }
+
+
 
 Result MainManager::addStudent(const hstring dormId, Student const student) {
 	for (auto dorm : dorms) {
@@ -67,7 +84,11 @@ Result MainManager::addStudent(const hstring dormId, Student const student) {
 		dorms.GetAt(index).as<Dorm>()
 	);
 
-	return dormManager.addStudent(student);
+	auto result = dormManager.addStudent(student);
+
+	SaveCurrentData();
+
+	return result;
 }
 
 Result MainManager::removeStudent(const hstring dormId, const hstring studentId) {
@@ -84,7 +105,11 @@ Result MainManager::removeStudent(const hstring dormId, const hstring studentId)
 		dorms.GetAt(index).as<Dorm>()
 	);
 
-	return dormManager.removeStudent(studentId);
+	auto result = dormManager.removeStudent(studentId);
+
+	SaveCurrentData();
+
+	return result;
 }
 
 Result MainManager::updateStudent(const hstring dormId, const hstring studentId, Student const student) {
@@ -111,11 +136,14 @@ Result MainManager::updateStudent(const hstring dormId, const hstring studentId,
 	dormManager.setDorm(
 		dorms.GetAt(index).as<Dorm>()
 	);
-
-	return dormManager.updateStudent(
+	auto result = dormManager.updateStudent(
 		studentId,
 		student
 	);
+
+	SaveCurrentData();
+
+	return result;
 }
 
 Result MainManager::addDorm(const Dorm dorm) {
@@ -138,6 +166,7 @@ Result MainManager::addDorm(const Dorm dorm) {
 	}
 
 	dorms.Append(dorm);
+	SaveCurrentData();
 
 	return winrt::make<implementation::Result>(
 		true,
@@ -156,6 +185,7 @@ Result MainManager::removeDorm(const hstring dormId) {
 	}
 
 	dorms.RemoveAt(index);
+	SaveCurrentData();
 
 	return winrt::make<implementation::Result>(
 		true,
@@ -183,6 +213,7 @@ Result MainManager::updateDorm(const hstring dormId, const Dorm dorm) {
 	}
 
 	dorms.SetAt(index, dorm);
+	SaveCurrentData();
 
 	return winrt::make<implementation::Result>(
 		true,
@@ -212,6 +243,8 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 	auto dorm = dorms.GetAt(index).as<Dorm>();
 
 	dorm.Info(info);
+
+	SaveCurrentData();
 
 	return winrt::make<implementation::Result>(
 		true,
@@ -291,6 +324,8 @@ Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord recor
 		dorms.GetAt(index).as<Dorm>()
 	);
 
+	SaveCurrentData();
+
 	return dormManager.addWaterRecord(record);
 }
 
@@ -307,6 +342,8 @@ Result MainManager::removeWaterRecord(const hstring dormId, int year, int month)
 	dormManager.setDorm(
 		dorms.GetAt(index).as<Dorm>()
 	);
+
+	SaveCurrentData();
 
 	return dormManager.removeWaterRecord(
 		year,
@@ -327,6 +364,8 @@ Result MainManager::updateWaterRecord(const hstring dormId, int year, int month,
 	dormManager.setDorm(
 		dorms.GetAt(index).as<Dorm>()
 	);
+
+	SaveCurrentData();
 
 	return dormManager.updateWaterRecord(
 		year,

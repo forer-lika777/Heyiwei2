@@ -4,6 +4,7 @@
 #include "DormManager.h"
 #include <vector>
 #include <winrt/Windows.Foundation.Collections.h>
+#include "DataSaveService.h"
 
 using winrt::hstring;
 using winrt::Heyiwei2::Models::Result;
@@ -17,13 +18,13 @@ class MainManager : public Interfaces::IMainManager
 {
 public:
     MainManager(IObservableVector<IInspectable>& dorms);
-
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> getDormItems();
-    void saveToJsonFile();
-    void TriggerSave(const std::string& filename);
-    void TriggerLoad(const std::string& filename);
 
     Dorm getDorm(const hstring dormId) override;
+
+    void SaveCurrentData() override;
+    void LoadStoredData() override;
+
 
     // 学生管理
     Result addStudent(const hstring dormId, Student const student) override;
