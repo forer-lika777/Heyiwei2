@@ -192,6 +192,7 @@ namespace winrt::Heyiwei2::implementation {
 				args.Cancel(true);
 				return;
 			}
+
 			record.Cost(f->Cost());
 			record.HasPaid(f->HasPaid());
 
@@ -322,7 +323,7 @@ namespace winrt::Heyiwei2::implementation {
 	}
 
 	void DormManageForm::AddRecordButton_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
-		openAddRecordDialogAsync();
+		//openAddRecordDialogAsync();
 	}
 
 	void DormManageForm::DeleteRecordButton_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {

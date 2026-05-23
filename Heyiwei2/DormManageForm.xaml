@@ -44,7 +44,7 @@
                     </StackPanel>
                     <StackPanel Spacing="20">
                         <TextBlock Text="学生列表"/>
-                        <ScrollView ContentOrientation="Horizontal">
+                        <ScrollView ContentOrientation="Horizontal" VerticalScrollMode="Auto">
                             <ListView Height="200" ItemsSource="{Binding Students, Mode=OneWay}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="models:Student">
@@ -89,8 +89,8 @@
                     </StackPanel>
                     <StackPanel Spacing="20">
                         <TextBlock Text="所有用水信息"/>
-                        <ScrollView ContentOrientation="Horizontal">
-                            <ListView Height="200" ItemsSource="{Binding Records, Mode=OneWay}">
+                        <ScrollView ContentOrientation="Horizontal" VerticalScrollMode="Auto">
+                            <ListView Height="200" ItemsSource="{Binding Records, Mode=OneWay}" SelectionMode="Multiple">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="models:WaterRecord">
                                         <Grid Height="50" MinWidth="650">

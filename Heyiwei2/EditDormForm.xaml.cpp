@@ -17,6 +17,8 @@ namespace winrt::Heyiwei2::implementation {
 		StartMonthSelectComboBox().SelectedIndex(0);
 	}
 	EditDormForm::EditDormForm() {
+		monthSelectionInitialize = false;
+
 		years.ReplaceAll(Utils::generateYears(20));
 
 		monthsThisYear = Utils::generateThisYearMonths();
@@ -54,8 +56,8 @@ namespace winrt::Heyiwei2::implementation {
 	void EditDormForm::StartYear(int32_t const& value) {
 		for (size_t i = 0; i < years.Size(); ++i) {
 			if (years.GetAt(i) == value) {
-				StartYearSelectComboBox().SelectedIndex(i);
 				refreshMonths(value);
+				StartYearSelectComboBox().SelectedIndex(i);
 				return;
 			}
 		}
@@ -81,6 +83,12 @@ namespace winrt::Heyiwei2::implementation {
 		OutputInfoTextBlock().Text(info);
 	}
 	void EditDormForm::StartYearSelectComboBox_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e) {
+		// 页面显示时会触发一次此函数。需要在页面显示时不更新月份列表，以保留页面实例初始化时的数据。
+		// （页面是先初始化再显示的）
+		if (!monthSelectionInitialize) {
+			monthSelectionInitialize = true;
+			return;
+		}
 		refreshMonths(StartYear());
 	}
 }

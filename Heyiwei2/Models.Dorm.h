@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "Models.Dorm.g.h"
-#include <winrt/Windows.UI.Xaml.Data.h>
+#include "Models.WaterRecord.h"
 
 using namespace winrt::Windows::Foundation::Collections;
 //using namespace winrt::Heyiwei2::Models;
@@ -16,8 +16,8 @@ namespace winrt::Heyiwei2::Models::implementation {
 		IObservableVector<IInspectable> Records();
 		void Records(IObservableVector<IInspectable> const& value);
 
-		DormInfo Info();
-		void Info(DormInfo const& value);
+		winrt::Heyiwei2::Models::DormInfo Info();
+		void Info(winrt::Heyiwei2::Models::DormInfo const& value);
 
 		hstring DormId();
 
@@ -35,9 +35,12 @@ namespace winrt::Heyiwei2::Models::implementation {
 
 		hstring dormId;
 		int32_t index = 0;
-		winrt::Heyiwei2::Models::DormInfo info{ nullptr };
+		winrt::Heyiwei2::Models::DormInfo info;
 
 		event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
+
+		//winrt::Heyiwei2::Models::WaterRecord getEarliestRecordDate();
+		void completeMonths(winrt::Heyiwei2::Models::DormInfo const& info);
 	};
 }
 

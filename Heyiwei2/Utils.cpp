@@ -45,7 +45,7 @@ Result Utils::validateStudent(Student const& student) {
 		}
 	}
 
-	return winrt::make<implementation::Result>(false, L"");
+	return winrt::make<implementation::Result>(true, L"");
 }
 
 Result Utils::validateWaterRecord(WaterRecord const& record) {

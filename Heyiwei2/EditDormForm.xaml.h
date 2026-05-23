@@ -7,6 +7,8 @@ namespace winrt::Heyiwei2::implementation
     struct EditDormForm : EditDormFormT<EditDormForm>
     {
     private:
+        bool monthSelectionInitialize;
+
         void refreshMonths(int32_t const& year);
 
         winrt::Windows::Foundation::Collections::IObservableVector<int32_t> years{ winrt::single_threaded_observable_vector<int32_t>() };

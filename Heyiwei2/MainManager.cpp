@@ -43,6 +43,17 @@ Dorm MainManager::getDorm(const hstring dormId) {
 }
 
 Result MainManager::addStudent(const hstring dormId, Student const student) {
+	for (auto dorm : dorms) {
+		for (auto s : dorm.as<Dorm>().Students()) {
+			if (s.as<Student>().StudentId() == student.StudentId()) {
+				return winrt::make<implementation::Result>(
+					false,
+					L"添加失败：已存在相同学号的学生"
+				);
+			}
+		}
+	}
+
 	int32_t index = findDormIndex(dormId);
 
 	if (index == -1) {
@@ -77,6 +88,17 @@ Result MainManager::removeStudent(const hstring dormId, const hstring studentId)
 }
 
 Result MainManager::updateStudent(const hstring dormId, const hstring studentId, Student const student) {
+	for (auto dorm : dorms) {
+		for (auto s : dorm.as<Dorm>().Students()) {
+			if (s.as<Student>().StudentId() == student.StudentId()) {
+				return winrt::make<implementation::Result>(
+					false,
+					L"更新失败：已存在相同学号的学生"
+				);
+			}
+		}
+	}
+
 	int32_t index = findDormIndex(dormId);
 
 	if (index == -1) {
@@ -180,7 +202,7 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 
 	hstring id = Utils::generateDormId(info);
 
-	if (findDormIndex(id) != -1) {
+	if (dormId != Utils::generateDormId(info) && findDormIndex(id) != -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：已存在信息重合的宿舍"
@@ -197,63 +219,63 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 	);
 }
 
-Result MainManager::addStudentToDorm(const hstring dormId, const hstring studentId) {
-	int32_t index = findDormIndex(dormId);
-
-	if (index == -1) {
-		return winrt::make<implementation::Result>(
-			false,
-			L"添加失败：宿舍不存在"
-		);
-	}
-
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
-
-	auto student = winrt::make<implementation::Student>();
-
-	student.StudentId(studentId);
-
-	return dormManager.addStudent(student);
-}
-
-Result MainManager::removeStudentFromDorm(const hstring dormId, const hstring studentId) {
-	int32_t index = findDormIndex(dormId);
-
-	if (index == -1) {
-		return winrt::make<implementation::Result>(
-			false,
-			L"删除失败：宿舍不存在"
-		);
-	}
-
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
-
-	return dormManager.removeStudent(studentId);
-}
-
-Result MainManager::updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) {
-	int32_t index = findDormIndex(dormId);
-
-	if (index == -1) {
-		return winrt::make<implementation::Result>(
-			false,
-			L"修改失败：宿舍不存在"
-		);
-	}
-
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
-
-	return dormManager.updateStudentName(
-		studentId,
-		student.Name()
-	);
-}
+//Result MainManager::addStudentToDorm(const hstring dormId, const hstring studentId) {
+//	int32_t index = findDormIndex(dormId);
+//
+//	if (index == -1) {
+//		return winrt::make<implementation::Result>(
+//			false,
+//			L"添加失败：宿舍不存在"
+//		);
+//	}
+//
+//	dormManager.setDorm(
+//		dorms.GetAt(index).as<Dorm>()
+//	);
+//
+//	auto student = winrt::make<implementation::Student>();
+//
+//	student.StudentId(studentId);
+//
+//	return dormManager.addStudent(student);
+//}
+//
+//Result MainManager::removeStudentFromDorm(const hstring dormId, const hstring studentId) {
+//	int32_t index = findDormIndex(dormId);
+//
+//	if (index == -1) {
+//		return winrt::make<implementation::Result>(
+//			false,
+//			L"删除失败：宿舍不存在"
+//		);
+//	}
+//
+//	dormManager.setDorm(
+//		dorms.GetAt(index).as<Dorm>()
+//	);
+//
+//	return dormManager.removeStudent(studentId);
+//}
+//
+//Result MainManager::updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) {
+//	int32_t index = findDormIndex(dormId);
+//
+//	if (index == -1) {
+//		return winrt::make<implementation::Result>(
+//			false,
+//			L"修改失败：宿舍不存在"
+//		);
+//	}
+//
+//	dormManager.setDorm(
+//		dorms.GetAt(index).as<Dorm>()
+//	);
+//
+//	return dormManager.updateStudentName(
+//		studentId,
+//		student.Name()
+//	);
+//}
 
 Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord record) {
 	int32_t index = findDormIndex(dormId);

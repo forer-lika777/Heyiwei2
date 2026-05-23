@@ -37,9 +37,9 @@ public:
     Result updateDormInfo(const hstring dormId, const DormInfo info) override;
 
     // 学生分配
-    Result addStudentToDorm(const hstring dormId, const hstring studentId) override;
-    Result removeStudentFromDorm(const hstring dormId, const hstring studentId) override;
-    Result updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) override;
+    //Result addStudentToDorm(const hstring dormId, const hstring studentId) override;
+    //Result removeStudentFromDorm(const hstring dormId, const hstring studentId) override;
+    //Result updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) override;
 
     // 水费记录
     Result addWaterRecord(const hstring dormId, const WaterRecord record) override;
