@@ -43,9 +43,14 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Spacing="20">
-                        <TextBlock Text="学生列表"/>
+                        <StackPanel Orientation="Horizontal" Spacing="80">
+                            <TextBlock Text="学生列表"/>
+                            <Button x:Name="StudentBatchDeleteButton" Content="批量删除"
+                                    Click="StudentBatchDeleteButton_Click"/>
+                        </StackPanel>
                         <ScrollView ContentOrientation="Horizontal" VerticalScrollMode="Auto">
-                            <ListView Height="200" ItemsSource="{Binding Students, Mode=OneWay}">
+                            <ListView x:Name="StudentListView" Height="200" ItemsSource="{Binding Students, Mode=OneWay}" 
+                                      SelectionMode="Multiple" SelectionChanged="StudentListView_SelectionChanged">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="models:Student">
                                         <Grid Height="50" MinWidth="650">

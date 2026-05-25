@@ -301,7 +301,7 @@ namespace winrt::Heyiwei2::implementation {
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openDeleteStudentDialogAsync(winrt::Heyiwei2::Models::Student student) {
 		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"确定要删除此记录吗？"));
+		dialog.Title(winrt::box_value(L"确定要删除此学生吗？"));
 		dialog.Content(winrt::box_value(L"此操作不可逆"));
 		dialog.PrimaryButtonText(L"确认");
 		dialog.CloseButtonText(L"取消");
@@ -322,8 +322,35 @@ namespace winrt::Heyiwei2::implementation {
 		auto result = co_await dialog.ShowAsync();
 	}
 
+	winrt::Windows::Foundation::IAsyncAction DormManageForm::openBatchDeleteStudentDialogAsync() {
+		ContentDialog dialog;
+		dialog.Title(winrt::box_value(L"确定要删除这些学生吗？"));
+		dialog.Content(winrt::box_value(L"此操作不可逆"));
+		dialog.PrimaryButtonText(L"确认");
+		dialog.CloseButtonText(L"取消");
+		dialog.DefaultButton(ContentDialogButton::Primary);
+
+		dialog.XamlRoot(this->XamlRoot());
+
+		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+
+			for (auto s : StudentListView().SelectedItems()) {
+				auto student = s.as<Student>();
+				auto result = mainManager->removeStudent(dorm.DormId(), student.StudentId());
+
+				if (!result.Success()) {
+					args.Cancel(true);
+					dialog.Content(winrt::box_value(result.Message()));
+					return;
+				}
+			}
+		});
+
+		auto result = co_await dialog.ShowAsync();
+	}
+
 	void DormManageForm::AddRecordButton_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
-		//openAddRecordDialogAsync();
+		openAddRecordDialogAsync();
 	}
 
 	void DormManageForm::DeleteRecordButton_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
@@ -356,5 +383,18 @@ namespace winrt::Heyiwei2::implementation {
 		auto dataContext = button.DataContext();
 
 		if (dataContext) openDeleteStudentDialogAsync(dataContext.as<Student>());
+	}
+
+	void DormManageForm::StudentListView_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e) {
+		if (StudentListView().SelectedItems().Size() > 1) {
+			StudentBatchDeleteButton().Visibility(winrt::Microsoft::UI::Xaml::Visibility::Visible);
+		}
+		else {
+			StudentBatchDeleteButton().Visibility(winrt::Microsoft::UI::Xaml::Visibility::Collapsed);
+		}
+	}
+
+	void DormManageForm::StudentBatchDeleteButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
+
 	}
 }

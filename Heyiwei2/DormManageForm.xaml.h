@@ -25,6 +25,7 @@ namespace winrt::Heyiwei2::implementation
         winrt::Windows::Foundation::IAsyncAction openAddStudentDialogAsync();
         winrt::Windows::Foundation::IAsyncAction openEditStudentDialogAsync(winrt::Heyiwei2::Models::Student student);
         winrt::Windows::Foundation::IAsyncAction openDeleteStudentDialogAsync(winrt::Heyiwei2::Models::Student student);
+        winrt::Windows::Foundation::IAsyncAction openBatchDeleteStudentDialogAsync();
 
     public:
         DormManageForm();
@@ -44,6 +45,9 @@ namespace winrt::Heyiwei2::implementation
         void AddStudentButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void EditStudentButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void DeleteStudentButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
+        void StudentBatchDeleteButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
+
+        void StudentListView_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e);
     };
 }
 
