@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "App.xaml.h"
 #include "MainWindow.xaml.h"
+#include "MainManager.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -39,7 +40,7 @@ namespace winrt::Heyiwei2::implementation
     {
         dorms = winrt::single_threaded_observable_vector<IInspectable>();
         mainManager = new MainManager(dorms);
-
+        mainManager->LoadStoredData();
         window = make<MainWindow>();
         window.Activate();
     }

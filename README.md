@@ -1,7 +1,13 @@
 Heyiwei2
 ===
 
-什么是Heyiwei2？Heyiwei2是一个使用winui c++的学生水费管理系统，是Heyiwei的超级重构升级版。
+什么是Heyiwei2？
+---
+
+Heyiwei2是一个使用winui c++的学生水费管理系统，是Heyiwei的超级重构升级版。
+
+为什么要开发Heyiwei2？
+---
 
 我们用炫酷的winui界面替代了那古老的黑色命令行窗口，旨在对标第一次答辩第一个上台的组那糟糕的UI设计。
 

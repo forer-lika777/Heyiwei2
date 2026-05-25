@@ -5,22 +5,35 @@
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>
 #include <cereal/types/string.hpp>
+#include <winrt/Windows.Storage.h> // 确保引入了该头文件
+#include <filesystem>              // 用于方便地拼接路径
 
 void DataSaveService::SaveToFile(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> dorms) {
-    // 转换成 std::vector
     auto stdDorms = StdModelsConverter::ToStdDorms(dorms);
 
-    // 序列化到 JSON 文件
-    std::ofstream file("dorms_data.json");
-    cereal::JSONOutputArchive archive(file);
-    archive(cereal::make_nvp("dorms", stdDorms));
+    // 【核心修复】：获取 WinUI 3 应用法定的本地存储绝对路径
+    auto localFolderPath = winrt::Windows::Storage::ApplicationData::Current().LocalFolder().Path();
+    std::filesystem::path fullPath(localFolderPath.c_str());
+    fullPath /= "dorms_data.json"; // 拼接成绝对路径
+
+    // 使用绝对路径进行标准流操作 (注意 Windows 下路径转换成 wstring 或 string)
+    std::ofstream file(fullPath.wstring());
+    if (file.is_open()) {
+        cereal::JSONOutputArchive archive(file);
+        archive(cereal::make_nvp("dorms", stdDorms));
+    }
 }
 
 winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> DataSaveService::LoadFromFile()
 {
     std::vector<Heyiwei2::StdModels::Dorm> stdDorms;
 
-    std::ifstream file("dorms_data.json");
+    // 【核心修复】：读取时也必须从同一个绝对路径读取
+    auto localFolderPath = winrt::Windows::Storage::ApplicationData::Current().LocalFolder().Path();
+    std::filesystem::path fullPath(localFolderPath.c_str());
+    fullPath /= "dorms_data.json";
+
+    std::ifstream file(fullPath.wstring());
     if (file.is_open())
     {
         try
@@ -30,11 +43,9 @@ winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Found
         }
         catch (...)
         {
-            // 文件损坏或不存在，返回空列表
             stdDorms.clear();
         }
     }
 
-    // 转换回 WinRT 类型
     return StdModelsConverter::ToWinrtDorms(stdDorms);
 }
