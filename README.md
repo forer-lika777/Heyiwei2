@@ -230,7 +230,7 @@ StudentId hstring 学号
 
 3.3 UI 数据绑定机制
 
-本项目采用 IObservableVector + SetAt 的实用主义绑定方案。
+本项目采用 INotifyPropertyChanged 绑定方案。
 
 ```
 MainManager 持有 IObservableVector<Dorm>
@@ -246,16 +246,6 @@ ListView 绑定到该集合
 ListView 自动刷新 UI
 ```
 
-为什么不使用 INotifyPropertyChanged？
-
-在 C++/WinRT 中实现 INotifyPropertyChanged 存在以下问题：
-
-· 需要在 UI 线程触发属性变更事件，线程调度复杂
-· 每个属性都要手写 getter/setter 和通知代码
-· 与 XAML Page 的多重继承存在冲突
-
-相比之下，IObservableVector::SetAt 方案更简洁可靠，在课设场景下完全满足需求。
-
 ---
 
 四、详细实现
@@ -265,6 +255,7 @@ ListView 自动刷新 UI
 主界面采用 NavigationView 布局，包含：
 
 · 导航菜单（宿舍列表、学生管理等）
+
 · 内容区域（Frame 控件实现页面导航）
 
 4.2 宿舍列表页（DormListPage）
@@ -272,7 +263,9 @@ ListView 自动刷新 UI
 功能：
 
 · 显示所有宿舍信息
+
 · 提供添加、编辑、删除操作入口
+
 · 点击宿舍查看详细信息
 
 数据绑定：
@@ -288,8 +281,11 @@ dormItems = mainManager->getDormItems();
 功能：
 
 · 显示宿舍详细信息
+
 · 管理学生列表
+
 · 管理用水记录
+
 · 通过 ContentDialog 弹出编辑窗口
 
 关键实现：
@@ -310,8 +306,11 @@ winrt::IAsyncAction DormManageForm::openEditDormDialogAsync()
 采用广州市居民阶梯水价标准：
 
 阶梯 用水量 单价
+
 第一阶梯 ≤26吨/月 2.93元/吨
+
 第二阶梯 27-34吨/月 4.40元/吨
+
 第三阶梯 34吨/月 7.87元/吨
 
 ```cpp
@@ -366,8 +365,6 @@ StdModels → StdModelsConverter → WinRT Models
 
 尝试：最初尝试在 Model 类上实现 INotifyPropertyChanged，遇到线程调度问题——属性变更事件必须在 UI 线程触发，而在后台线程修改数据时无法正确调度。
 
-最终方案：采用 IObservableVector::SetAt 替换整个对象来触发集合级通知。这种方式简单可靠，避免了线程问题。
-
 5.2 多页面数据同步
 
 问题：DormListPage 和 DormManageForm 同时引用 Dorm 对象，一处修改需要多处更新。
@@ -385,7 +382,7 @@ StdModels → StdModelsConverter → WinRT Models
 解决：
 
 · 增大 Windows 虚拟内存（页面文件）
-· 关闭不必要的后台程序（如 osu!）
+· 关闭不必要的后台程序
 · 确保使用 x64 编译配置
 
 5.4 日期补全逻辑
@@ -407,11 +404,17 @@ StdModels → StdModelsConverter → WinRT Models
 6.2 功能测试
 
 测试项 预期结果 实际结果
+
 添加宿舍 宿舍列表中显示新宿舍 ✓ 通过
+
 编辑宿舍信息 信息更新且列表刷新 ✓ 通过
+
 删除宿舍 列表中移除该宿舍 ✓ 通过
+
 添加学生 学生列表更新 ✓ 通过
+
 添加用水记录 记录显示且水费自动计算 ✓ 通过
+
 数据保存 关闭程序后重新打开数据仍在 ✓ 通过
 
 6.3 运行截图
@@ -433,16 +436,23 @@ StdModels → StdModelsConverter → WinRT Models
 通过本次课程设计，深入理解了：
 
 · C++/WinRT 的运行时特性与线程模型
+
 · WinUI 3 的数据绑定机制
+
 · 现代 C++ 的协程、智能指针等特性
+
 · 软件架构分层设计的重要性
+
 · 问题排查与调试技巧
 
 7.3 未来改进
 
 · 引入 MVVM 框架进一步解耦 UI 与业务逻辑
+
 · 增加数据统计图表功能
+
 · 支持数据导出为 Excel
+
 · 部署到局域网服务器，支持多用户访问
 
 ---
