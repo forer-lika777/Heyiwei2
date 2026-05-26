@@ -10,7 +10,7 @@ namespace winrt::Heyiwei2::implementation
     {
     private:
         winrt::Windows::Foundation::IAsyncAction openCreateDormDialogAsync();
-        winrt::Windows::Foundation::IAsyncAction openDeleteDormDialogAsync(winrt::Heyiwei2::Models::Dorm const& dorm);
+        winrt::Windows::Foundation::IAsyncAction openDeleteDormDialogAsync(winrt::Heyiwei2::Models::Dorm const dorm);
 
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> dormItems{ nullptr }; // 存储宿舍信息的成员变量
 		Interfaces::IMainManager* mainManager = nullptr; // 指向 MainManager 的指针

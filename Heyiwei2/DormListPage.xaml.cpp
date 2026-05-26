@@ -113,7 +113,7 @@ namespace winrt::Heyiwei2::implementation {
 		auto result = co_await dialog.ShowAsync();
 	}
 
-	winrt::Windows::Foundation::IAsyncAction DormListPage::openDeleteDormDialogAsync(winrt::Heyiwei2::Models::Dorm const& dorm) {
+	winrt::Windows::Foundation::IAsyncAction DormListPage::openDeleteDormDialogAsync(winrt::Heyiwei2::Models::Dorm const dorm) {
 		ContentDialog dialog;
 		dialog.Title(winrt::box_value(L"确定要删除此宿舍吗？"));
 		dialog.Content(winrt::box_value(L"此操作不可逆"));
@@ -131,7 +131,7 @@ namespace winrt::Heyiwei2::implementation {
 				dialog.Content(winrt::box_value(result.Message()));
 				return;
 			}
-			});
+		});
 
 		auto result = co_await dialog.ShowAsync();
 	}
