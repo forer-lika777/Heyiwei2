@@ -21,6 +21,7 @@ namespace winrt::Heyiwei2::implementation
         winrt::Windows::Foundation::IAsyncAction openAddRecordDialogAsync();
         winrt::Windows::Foundation::IAsyncAction openEditRecordDialogAsync(winrt::Heyiwei2::Models::WaterRecord record);
         winrt::Windows::Foundation::IAsyncAction openDeleteRecordDialogAsync(winrt::Heyiwei2::Models::WaterRecord record);
+        winrt::Windows::Foundation::IAsyncAction openBatchDeleteRecordDialogAsync();
 
         winrt::Windows::Foundation::IAsyncAction openAddStudentDialogAsync();
         winrt::Windows::Foundation::IAsyncAction openEditStudentDialogAsync(winrt::Heyiwei2::Models::Student student);
@@ -48,6 +49,8 @@ namespace winrt::Heyiwei2::implementation
         void StudentBatchDeleteButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
 
         void StudentListView_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e);
+        void RecordBatchDeleteButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
+        void RecordListView_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e);
     };
 }
 

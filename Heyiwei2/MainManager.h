@@ -2,9 +2,6 @@
 #pragma once
 #include "IMainManager.h"
 #include "DormManager.h"
-#include <vector>
-#include <winrt/Windows.Foundation.Collections.h>
-#include "DataSaveService.h"
 
 using winrt::hstring;
 using winrt::Heyiwei2::Models::Result;

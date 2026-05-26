@@ -230,6 +230,37 @@ namespace winrt::Heyiwei2::implementation {
 		auto result = co_await dialog.ShowAsync();
 	}
 
+	winrt::Windows::Foundation::IAsyncAction DormManageForm::openBatchDeleteRecordDialogAsync() {
+		ContentDialog dialog;
+		dialog.Title(winrt::box_value(L"确定要删除这些记录吗？"));
+		dialog.Content(winrt::box_value(L"此操作不可逆"));
+		dialog.PrimaryButtonText(L"确认");
+		dialog.CloseButtonText(L"取消");
+		dialog.DefaultButton(ContentDialogButton::Primary);
+
+		dialog.XamlRoot(this->XamlRoot());
+
+		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+
+			std::vector<WaterRecord> records;
+			for (auto r : RecordListView().SelectedItems()) {
+				auto record = r.as<WaterRecord>();
+				records.push_back(record);
+			}
+
+			for (auto& record : records) {
+				auto result = mainManager->removeWaterRecord(dorm.DormId(), record.Year(), record.Month());
+				if (!result.Success()) {
+					args.Cancel(true);
+					dialog.Content(winrt::box_value(result.Message()));
+					return;
+				}
+			}
+		});
+
+		auto result = co_await dialog.ShowAsync();
+	}
+
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openAddStudentDialogAsync() {
 		auto form = winrt::make_self<winrt::Heyiwei2::implementation::EditStudentForm>();
 
@@ -334,10 +365,15 @@ namespace winrt::Heyiwei2::implementation {
 
 		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
 
+			// 先收集选择的学生学号，因为遍历的同时删除元素会引发异常
+			std::vector<hstring> selectedIds;
 			for (auto s : StudentListView().SelectedItems()) {
 				auto student = s.as<Student>();
-				auto result = mainManager->removeStudent(dorm.DormId(), student.StudentId());
+				selectedIds.push_back(student.StudentId());
+			}
 
+			for (auto& id : selectedIds) {
+				auto result = mainManager->removeStudent(dorm.DormId(), id);
 				if (!result.Success()) {
 					args.Cancel(true);
 					dialog.Content(winrt::box_value(result.Message()));
@@ -394,7 +430,22 @@ namespace winrt::Heyiwei2::implementation {
 		}
 	}
 
-	void DormManageForm::StudentBatchDeleteButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
-
+	void DormManageForm::RecordListView_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e) {
+		if (RecordListView().SelectedItems().Size() > 1) {
+			RecordBatchDeleteButton().Visibility(winrt::Microsoft::UI::Xaml::Visibility::Visible);
+		}
+		else {
+			RecordBatchDeleteButton().Visibility(winrt::Microsoft::UI::Xaml::Visibility::Collapsed);
+		}
 	}
+
+	void DormManageForm::StudentBatchDeleteButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
+		openBatchDeleteStudentDialogAsync();
+	}
+
+	void DormManageForm::RecordBatchDeleteButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
+		openBatchDeleteRecordDialogAsync();
+	}
+
+	
 }

@@ -1,0 +1,9 @@
+﻿namespace Heyiwei2
+{
+    [default_interface]
+    runtimeclass SettingsPage : Microsoft.UI.Xaml.Controls.Page
+    {
+        SettingsPage();
+        Boolean DarkModeIsOn;
+    }
+}

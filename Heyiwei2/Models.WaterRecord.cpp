@@ -43,6 +43,7 @@ namespace winrt::Heyiwei2::Models::implementation {
 	void WaterRecord::Cost(double value) {
 		if (cost != value) {
 			cost = value;
+			HasPaid((cost <= 0.0) ? true : false);
 			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Cost"));
 		}
 	}

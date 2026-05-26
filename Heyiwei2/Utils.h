@@ -5,6 +5,8 @@ class Utils {
 public:
 	//计算总水费
 	static double calculateTotalWaterFee(double const& usage);
+
+	static winrt::Heyiwei2::Models::Result valideDormInfo(winrt::Heyiwei2::Models::DormInfo const& dormInfo);
 	//检验学生ID是否合法
 	static winrt::Heyiwei2::Models::Result validateStudent(winrt::Heyiwei2::Models::Student const& record);
 	//检测水费记录是否合法

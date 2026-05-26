@@ -24,4 +24,12 @@ namespace winrt::Heyiwei2::Models::implementation {
 			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"StudentId"));
 		}
 	}
+
+	hstring Student::Password() {
+		return password;
+	}
+
+	void Student::Password(hstring const& value) {
+		password = value;
+	}
 }

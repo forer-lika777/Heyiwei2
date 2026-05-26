@@ -19,7 +19,7 @@
             <Rectangle Fill="{ThemeResource SolidBackgroundFillColorTertiaryBrush}" RadiusX="10" RadiusY="10"/>
             <!--Rectangle： 矩形图案，不能包含控件-->
             <ScrollView>
-                <StackPanel Padding="22, 22, 22, 80" Spacing="20">
+                <StackPanel Padding="22, 22, 22, 100" Spacing="20">
                     <!--排列方式-->
                     <TextBlock Text="查看宿舍信息" FontSize="25"/>
                     <StackPanel Orientation="Horizontal" Spacing="50">
@@ -43,10 +43,10 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Spacing="20">
-                        <StackPanel Orientation="Horizontal" Spacing="80">
-                            <TextBlock Text="学生列表"/>
-                            <Button x:Name="StudentBatchDeleteButton" Content="批量删除"
-                                    Click="StudentBatchDeleteButton_Click"/>
+                        <StackPanel Orientation="Horizontal" Spacing="50" Height="45">
+                            <TextBlock Text="学生列表" VerticalAlignment="Center"/>
+                            <Button x:Name="StudentBatchDeleteButton" Content="批量删除" Visibility="Collapsed"
+                                    VerticalAlignment="Center" Click="StudentBatchDeleteButton_Click"/>
                         </StackPanel>
                         <ScrollView ContentOrientation="Horizontal" VerticalScrollMode="Auto">
                             <ListView x:Name="StudentListView" Height="200" ItemsSource="{Binding Students, Mode=OneWay}" 
@@ -90,12 +90,16 @@
                                 </ListView.ItemTemplate>
                             </ListView>
                         </ScrollView>
-                        
                     </StackPanel>
                     <StackPanel Spacing="20">
-                        <TextBlock Text="所有用水信息"/>
+                        <StackPanel Orientation="Horizontal" Spacing="50" Height="30">
+                            <TextBlock Text="所有用水信息" VerticalAlignment="Center" />
+                            <Button x:Name="RecordBatchDeleteButton" Content="批量删除" Visibility="Collapsed"
+                                    VerticalAlignment="Center" Click="RecordBatchDeleteButton_Click"/>
+                        </StackPanel>
                         <ScrollView ContentOrientation="Horizontal" VerticalScrollMode="Auto">
-                            <ListView Height="200" ItemsSource="{Binding Records, Mode=OneWay}" SelectionMode="Multiple">
+                            <ListView x:Name="RecordListView" Height="200" ItemsSource="{Binding Records, Mode=OneWay}" 
+                                      SelectionMode="Multiple" SelectionChanged="RecordListView_SelectionChanged">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="models:WaterRecord">
                                         <Grid Height="50" MinWidth="650">

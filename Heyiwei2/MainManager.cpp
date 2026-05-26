@@ -9,8 +9,8 @@ using namespace winrt::Windows::Foundation;
 using namespace winrt;
 using namespace winrt::Windows::Storage;
 
-extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
-extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
+//extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
+//extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
 MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数据改变而改变*/<IInspectable>& dorms) : dorms(dorms) {
 
 }
@@ -43,8 +43,6 @@ void MainManager::LoadStoredData()
 	}
 }
 
-
-
 winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> MainManager::getDormItems() {
 	return dorms;
 }
@@ -56,8 +54,6 @@ Dorm MainManager::getDorm(const hstring dormId) {
 
 	return dorms.GetAt(index).as<Dorm>();
 }
-
-
 
 Result MainManager::addStudent(const hstring dormId, Student const student) {
 	for (auto dorm : dorms) {
@@ -80,11 +76,14 @@ Result MainManager::addStudent(const hstring dormId, Student const student) {
 		);
 	}
 
+	auto result = Utils::validateStudent(student);
+	if (!result.Success()) return result;
+
 	dormManager.setDorm(
 		dorms.GetAt(index).as<Dorm>()
 	);
 
-	auto result = dormManager.addStudent(student);
+	result = dormManager.addStudent(student);
 
 	SaveCurrentData();
 
@@ -133,10 +132,14 @@ Result MainManager::updateStudent(const hstring dormId, const hstring studentId,
 		);
 	}
 
+	auto result = Utils::validateStudent(student);
+	if (!result.Success()) return result;
+
 	dormManager.setDorm(
 		dorms.GetAt(index).as<Dorm>()
 	);
-	auto result = dormManager.updateStudent(
+
+	result = dormManager.updateStudent(
 		studentId,
 		student
 	);
@@ -156,14 +159,8 @@ Result MainManager::addDorm(const Dorm dorm) {
 		);
 	}
 
-	int32_t roomNumber = dorm.Info().RoomNumber();
-
-	if (roomNumber >= 100 || roomNumber <= 0) {
-		return winrt::make<implementation::Result>(
-			false,
-			L"添加失败：房间号格式有误"
-		);
-	}
+	auto result = Utils::valideDormInfo(dorm.Info());
+	if (!result.Success()) return result;
 
 	dorms.Append(dorm);
 	SaveCurrentData();
@@ -196,21 +193,15 @@ Result MainManager::removeDorm(const hstring dormId) {
 Result MainManager::updateDorm(const hstring dormId, const Dorm dorm) {
 	int32_t index = findDormIndex(dormId);
 
-	int32_t roomNumber = dorm.Info().RoomNumber();
-
-	if (roomNumber >= 100 || roomNumber <= 0) {
-		return winrt::make<implementation::Result>(
-			false,
-			L"添加失败：房间号格式有误"
-		);
-	}
-
 	if (index == -1) {
 		return winrt::make<implementation::Result>(
 			false,
 			L"修改失败：宿舍不存在"
 		);
 	}
+
+	auto result = Utils::valideDormInfo(dorm.Info());
+	if (!result.Success()) return result;
 
 	dorms.SetAt(index, dorm);
 	SaveCurrentData();
@@ -239,6 +230,9 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 			L"修改失败：已存在信息重合的宿舍"
 		);
 	}
+
+	auto result = Utils::valideDormInfo(info);
+	if (!result.Success()) return result;
 
 	auto dorm = dorms.GetAt(index).as<Dorm>();
 
@@ -320,6 +314,9 @@ Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord recor
 		);
 	}
 
+	auto result = Utils::validateWaterRecord(record);
+	if (!result.Success()) return result;
+
 	dormManager.setDorm(
 		dorms.GetAt(index).as<Dorm>()
 	);
@@ -360,6 +357,9 @@ Result MainManager::updateWaterRecord(const hstring dormId, int year, int month,
 			L"修改失败：宿舍不存在"
 		);
 	}
+
+	auto result = Utils::validateWaterRecord(record);
+	if (!result.Success()) return result;
 
 	dormManager.setDorm(
 		dorms.GetAt(index).as<Dorm>()

@@ -15,5 +15,5 @@ namespace winrt::Heyiwei2::implementation {
 		mainPage = winrt::make<winrt::Heyiwei2::implementation::MainPage>();
 
 		this->Content(mainPage);
-	};
+	}
 }

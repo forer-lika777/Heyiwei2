@@ -2,12 +2,15 @@
 
 #include "MainPage.g.h"
 #include "MainManager.h"
+#include "MainWindow.xaml.h"
 
 namespace winrt::Heyiwei2::implementation {
 	struct MainPage : MainPageT<MainPage> {
 	private:
 		void openHomePage();
 		void openDormListPage();
+		void openSettingsPage();
+
 	public:
 		MainPage();
 

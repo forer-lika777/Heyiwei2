@@ -51,10 +51,6 @@ namespace winrt::Heyiwei2::implementation {
 		}
 	}
 
-	void DormListPage::addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
-		openCreateDormDialogAsync();
-	}
-
 	winrt::Windows::Foundation::IAsyncAction DormListPage::openCreateDormDialogAsync() {
 		auto form = winrt::make_self<winrt::Heyiwei2::implementation::EditDormForm>();
 
@@ -115,5 +111,39 @@ namespace winrt::Heyiwei2::implementation {
 
 		// 等待用户选择
 		auto result = co_await dialog.ShowAsync();
+	}
+
+	winrt::Windows::Foundation::IAsyncAction DormListPage::openDeleteDormDialogAsync(winrt::Heyiwei2::Models::Dorm const& dorm) {
+		ContentDialog dialog;
+		dialog.Title(winrt::box_value(L"确定要删除此宿舍吗？"));
+		dialog.Content(winrt::box_value(L"此操作不可逆"));
+		dialog.PrimaryButtonText(L"确认");
+		dialog.CloseButtonText(L"取消");
+		dialog.DefaultButton(ContentDialogButton::Primary);
+
+		dialog.XamlRoot(this->XamlRoot());
+
+		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+			auto result = mainManager->removeDorm(dorm.DormId());
+
+			if (!result.Success()) {
+				args.Cancel(true);
+				dialog.Content(winrt::box_value(result.Message()));
+				return;
+			}
+			});
+
+		auto result = co_await dialog.ShowAsync();
+	}
+
+	void DormListPage::addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
+		openCreateDormDialogAsync();
+	}
+
+	void DormListPage::DeleteDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
+		auto button = sender.as<winrt::Microsoft::UI::Xaml::Controls::Button>();
+		auto dataContext = button.DataContext();
+
+		if (dataContext) openDeleteDormDialogAsync(dataContext.as<Dorm>());
 	}
 }

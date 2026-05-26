@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "MainWindow.g.h"
 
@@ -8,6 +8,8 @@ namespace winrt::Heyiwei2::implementation
     {
     public:
         MainWindow();
+        //static MainWindow GetMainManager();
+
     private:
         winrt::Heyiwei2::MainPage mainPage{ nullptr };
     };

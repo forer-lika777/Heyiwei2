@@ -22,6 +22,19 @@ double Utils::calculateTotalWaterFee(double const& usage) {
 	}
 }
 
+Result Utils::valideDormInfo(winrt::Heyiwei2::Models::DormInfo const& dormInfo) {
+	int32_t roomNumber = dormInfo.RoomNumber();
+
+	if (roomNumber >= 100 || roomNumber <= 0) {
+		return winrt::make<implementation::Result>(
+			false,
+			L"房间号格式有误"
+		);
+	}
+
+	return winrt::make<implementation::Result>(true, L"");
+}
+
 Result Utils::validateStudent(Student const& student) {
 	winrt::hstring hId = const_cast<Student&>(student).StudentId();
 	std::wstring studentId(hId.c_str());
@@ -52,7 +65,7 @@ Result Utils::validateWaterRecord(WaterRecord const& record) {
 	// record 是 const 引用，直接使用 const_cast 获取可变引用以调用非 const 成员，避免拷贝（拷贝构造被删除）
 	auto& r = const_cast<WaterRecord&>(record);
 
-	if (r.Year() < 2026) {
+	if (r.Year() > 10000) {
 		return winrt::make<implementation::Result>(false, L"年份超出范围");
 	}
 	else if (r.Month() < 1 || r.Month() > 12) {
