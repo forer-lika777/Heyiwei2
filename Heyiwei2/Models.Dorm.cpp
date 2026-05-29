@@ -14,6 +14,7 @@ namespace winrt::Heyiwei2::Models::implementation {
 
 	void Dorm::Students(IObservableVector<IInspectable> const& value) {
 		students = value;
+		RefreshStudentsCount();
 	}
 
 	IObservableVector<IInspectable> Dorm::Records() {
@@ -23,6 +24,7 @@ namespace winrt::Heyiwei2::Models::implementation {
 	void Dorm::Records(IObservableVector<IInspectable> const& value) {
 		records = value;
 		RefreshStatus();
+		RefreshRecordsCount();
 	}
 
 	winrt::Heyiwei2::Models::DormInfo Dorm::Info() {
