@@ -26,6 +26,16 @@ namespace winrt::Heyiwei2::implementation {
 		MonthSelectComboBox().SelectedIndex(0);
 	}
 
+	void EditRecordForm::refreshCost() {
+		try {
+			cost = Utils::calculateTotalWaterFee(std::stod(Usage().c_str()));
+			CostDisplay(winrt::to_hstring(cost));
+		}
+		catch (...) {
+			CostDisplay(L"-");
+		}
+	}
+
 	void EditRecordForm::showInfo(hstring const& info) {
 		OutputInfoTextBlock().Text(info);
 	}
@@ -71,6 +81,7 @@ namespace winrt::Heyiwei2::implementation {
 
 	void EditRecordForm::Usage(hstring const& value) {
 		UsageInput().Text(value);
+		refreshCost();
 	}
 
 	double EditRecordForm::Cost() {
@@ -99,14 +110,7 @@ namespace winrt::Heyiwei2::implementation {
 	}
 
 	void EditRecordForm::UsageInput_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::TextChangedEventArgs const& e) {
-		try {
-			cost = Utils::calculateTotalWaterFee(std::stod(Usage().c_str()));
-			CostDisplay(winrt::to_hstring(cost));
-			//CostTextBlock().Text();
-		}
-		catch (...) {
-			CostDisplay(L"-");
-		}
+		refreshCost();
 	}
 
 	void EditRecordForm::YearSelectComboBox_SelectionChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const& e) {

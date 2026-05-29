@@ -9,6 +9,7 @@ namespace winrt::Heyiwei2::implementation
     {
     private:
         void refreshMonths(int32_t const& year);
+        void refreshCost();
 
         winrt::Windows::Foundation::Collections::IObservableVector<int32_t> years{ winrt::single_threaded_observable_vector<int32_t>() };
         winrt::Windows::Foundation::Collections::IObservableVector<int32_t> months{ winrt::single_threaded_observable_vector<int32_t>() };

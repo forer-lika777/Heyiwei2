@@ -37,7 +37,7 @@
     <Midl Include="Models.idl">
       <Filter>Models</Filter>
     </Midl>
-    <Midl Include="HasPaidToStringConverter.idl">
+    <Midl Include="Converters.idl">
       <Filter>Converters</Filter>
     </Midl>
   </ItemGroup>
@@ -78,6 +78,12 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Converters.HasPaidToStringConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="Converters.StatusToColorConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="Converters.StatusToStringConverter.cpp">
       <Filter>Converters</Filter>
     </ClCompile>
   </ItemGroup>
@@ -127,6 +133,12 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Converters.HasPaidToStringConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="Converters.StatusToColorConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="Converters.StatusToStringConverter.h">
       <Filter>Converters</Filter>
     </ClInclude>
   </ItemGroup>

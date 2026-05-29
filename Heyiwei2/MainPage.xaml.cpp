@@ -15,19 +15,6 @@ namespace winrt::Heyiwei2::implementation {
 		InitializeComponent();
 	}
 
-	void MainPage::openHomePage() {
-		mainFrame().Navigate(xaml_typename<HomePage>());
-	}
-
-	void MainPage::openDormListPage() {
-		auto page_impl = winrt::make_self<winrt::Heyiwei2::implementation::DormListPage>();
-		mainFrame().Navigate(xaml_typename<winrt::Heyiwei2::DormListPage>(), *page_impl);  // 传参导航
-	}
-
-	void MainPage::openSettingsPage() {
-		mainFrame().Navigate(xaml_typename<SettingsPage>());
-	}
-
 	void MainPage::Page_Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
 		openHomePage();
 		navigationView().SelectedItem(navigationView().MenuItems().GetAt(0));
@@ -48,7 +35,19 @@ namespace winrt::Heyiwei2::implementation {
 			else if (tag == L"dormlist") {
 				openDormListPage();
 			}
-
 		}
+	}
+
+	void MainPage::openHomePage() {
+		mainFrame().Navigate(xaml_typename<HomePage>());
+	}
+
+	void MainPage::openDormListPage() {
+		auto page_impl = winrt::make_self<winrt::Heyiwei2::implementation::DormListPage>();
+		mainFrame().Navigate(xaml_typename<winrt::Heyiwei2::DormListPage>(), *page_impl);  // 传参导航
+	}
+
+	void MainPage::openSettingsPage() {
+		mainFrame().Navigate(xaml_typename<SettingsPage>());
 	}
 }

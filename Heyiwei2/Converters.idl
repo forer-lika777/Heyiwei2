@@ -1,0 +1,21 @@
+﻿
+namespace Heyiwei2.Converters
+{
+	[default_interface]
+	runtimeclass HasPaidToStringConverter : Microsoft.UI.Xaml.Data.IValueConverter
+	{
+		HasPaidToStringConverter();
+	}
+
+	[default_interface]
+	runtimeclass StatusToStringConverter : Microsoft.UI.Xaml.Data.IValueConverter
+	{
+		StatusToStringConverter();
+	}
+
+	[default_interface]
+	runtimeclass StatusToColorConverter : Microsoft.UI.Xaml.Data.IValueConverter
+	{
+		StatusToColorConverter();
+	}
+}

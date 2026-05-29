@@ -52,15 +52,23 @@ std::vector<Heyiwei2::StdModels::Dorm> StdModelsConverter::ToStdDorms(winrt::Win
 	return stdDorms;
 }
 
+/// <summary>
+/// 输入 C++ 标准库类型，转换为 winrt 类型
+/// </summary>
+/// <param name="stdDorms">标准类型</param>
+/// <returns>winrt类型</returns>
 winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> StdModelsConverter::ToWinrtDorms(std::vector<Heyiwei2::StdModels::Dorm> stdDorms)
 {
+    // 生成一个空的winrt类型列表
     auto winrtDorms = winrt::single_threaded_observable_vector<winrt::Windows::Foundation::IInspectable>();
 
+    // 遍历标准类型列表
     for (auto const& stdDorm : stdDorms)
     {
+        // 创建一个新的 winrt 类型 dorm 对象
         auto winrtDorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>();
 
-        // convert dorm info
+        // 手动转换宿舍信息
         auto winrtDormInfo = winrt::make<winrt::Heyiwei2::Models::implementation::DormInfo>();
         winrtDormInfo.StartDateYear(stdDorm.info.startYear);
         winrtDormInfo.StartDateMonth(stdDorm.info.startMonth);
@@ -71,7 +79,7 @@ winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Found
 
         winrtDorm.Info(winrtDormInfo);
 
-        // convert students
+        // 手动转换学生信息
         auto winrtStudents = winrt::single_threaded_observable_vector<winrt::Windows::Foundation::IInspectable>();
         for (auto const& stdStudent : stdDorm.students)
         {
@@ -83,7 +91,7 @@ winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Found
         }
         winrtDorm.Students(winrtStudents);
 
-        // convert records
+        // 手动转换水费记录信息
         auto winrtRecords = winrt::single_threaded_observable_vector<winrt::Windows::Foundation::IInspectable>();
         for (auto const& stdRecord : stdDorm.records)
         {
@@ -98,8 +106,10 @@ winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Found
         }
         winrtDorm.Records(winrtRecords);
 
+        // 添加至 winrt 类型列表
         winrtDorms.Append(winrtDorm);
     }
 
+    // 返回 winrt 类型列表对象
     return winrtDorms;
 }

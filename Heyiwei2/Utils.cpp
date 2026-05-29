@@ -4,6 +4,11 @@
 
 using namespace winrt::Heyiwei2::Models;
 
+/// <summary>
+/// 阶梯计算水费
+/// </summary>
+/// <param name="usage">用水量</param>
+/// <returns>水费</returns>
 double Utils::calculateTotalWaterFee(double const& usage) {
 	constexpr double tier1Limit = 26.0;
 	constexpr double tier2Limit = 34.0;
@@ -65,7 +70,7 @@ Result Utils::validateWaterRecord(WaterRecord const& record) {
 	// record 是 const 引用，直接使用 const_cast 获取可变引用以调用非 const 成员，避免拷贝（拷贝构造被删除）
 	auto& r = const_cast<WaterRecord&>(record);
 
-	if (r.Year() > 10000) {
+	if (r.Year() > Utils::getCurrentYear()) {
 		return winrt::make<implementation::Result>(false, L"年份超出范围");
 	}
 	else if (r.Month() < 1 || r.Month() > 12) {

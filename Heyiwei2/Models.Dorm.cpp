@@ -7,6 +7,7 @@ using namespace winrt::Windows::Foundation::Collections;
 using namespace winrt::Windows::Foundation;
 
 namespace winrt::Heyiwei2::Models::implementation {
+
 	IObservableVector<IInspectable> Dorm::Students() {
 		return students;
 	}
@@ -21,6 +22,7 @@ namespace winrt::Heyiwei2::Models::implementation {
 
 	void Dorm::Records(IObservableVector<IInspectable> const& value) {
 		records = value;
+		RefreshStatus();
 	}
 
 	winrt::Heyiwei2::Models::DormInfo Dorm::Info() {
@@ -29,23 +31,84 @@ namespace winrt::Heyiwei2::Models::implementation {
 
 	void Dorm::Info(winrt::Heyiwei2::Models::DormInfo const& value) {
 		if (info != value) {
-
 			completeMonths(value);
 
 			info = value;
-			
 			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Info"));
+			RefreshRecordsCount();
 		}
 
 		hstring id = Utils::generateDormId(info);
 		if (dormId != id) {
-			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"DormId"));
 			dormId = id;
+			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"DormId"));
 		}
+	}
+
+	bool Dorm::Status() const {
+		return status;
+	}
+
+	double Dorm::Arrears() const {
+		return arrears;
+	}
+
+	double Dorm::Surplus() const {
+		return surplus;
+	}
+
+	int32_t Dorm::StudentsCount() const {
+		return studentsCount;
+	}
+
+	int32_t Dorm::RecordsCount() const {
+		return recordsCount;
 	}
 
 	hstring Dorm::DormId() {
 		return dormId;
+	}
+
+	void Dorm::RefreshStatus() {
+		arrears = 0.0;
+		for (auto r : records) {
+			auto record = r.as<winrt::Heyiwei2::Models::WaterRecord>();
+			if (!record.HasPaid()) {
+				auto cost = record.Cost();
+				if (surplus > 0.0) {
+					if (surplus >= cost) {
+						surplus -= cost;
+						record.HasPaid(true);
+					}
+					else {
+						arrears += cost - surplus;
+						surplus = 0.0;
+					}
+				}
+				else {
+					arrears += cost;
+				}
+			}
+		}
+		if (arrears > 0.0) status = false;
+		else status = true;
+		propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Status"));
+		propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Surplus"));
+		propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Arrears"));
+	}
+
+	void Dorm::RefreshStudentsCount() {
+		if (studentsCount != students.Size()) {
+			studentsCount = students.Size();
+			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"StudentsCount"));
+		}
+	}
+
+	void Dorm::RefreshRecordsCount() {
+		if (recordsCount != records.Size()) {
+			recordsCount = records.Size();
+			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"RecordsCount"));
+		}
 	}
 
 	void Dorm::completeMonths(winrt::Heyiwei2::Models::DormInfo const& value) {
@@ -77,13 +140,4 @@ namespace winrt::Heyiwei2::Models::implementation {
 			}
 		}
 	}
-
-	//winrt::Heyiwei2::Models::WaterRecord Dorm::getEarliestRecordDate() {
-	//	//int32_t year, month;
-
-	//	//winrt::Heyiwei2::Models::WaterRecord record;
-	//	//for (auto r : records) {
-	//	//	
-	//	//}
-	//}
 }

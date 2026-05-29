@@ -194,7 +194,8 @@ namespace winrt::Heyiwei2::implementation {
 			}
 
 			record.Cost(f->Cost());
-			record.HasPaid(f->HasPaid());
+			if (record.Cost() > 0.0) record.HasPaid(f->HasPaid());
+			else record.HasPaid(true);
 
 			auto result = mainManager->updateWaterRecord(dorm.DormId(), record.Year(), record.Month(), r);
 

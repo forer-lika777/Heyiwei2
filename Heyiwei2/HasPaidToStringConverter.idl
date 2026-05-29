@@ -1,9 +1,0 @@
-﻿
-namespace Heyiwei2.Converters
-{
-	[default_interface]
-	runtimeclass HasPaidToStringConverter : Microsoft.UI.Xaml.Data.IValueConverter
-	{
-		HasPaidToStringConverter();
-	}
-}

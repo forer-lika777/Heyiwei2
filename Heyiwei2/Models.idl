@@ -43,10 +43,23 @@ namespace Heyiwei2.Models
 	runtimeclass Dorm : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		Dorm();
+		
 		Windows.Foundation.Collections.IObservableVector<Object> Students;
 		Windows.Foundation.Collections.IObservableVector<Object> Records;
+
 		String DormId{ get; };
 		DormInfo Info;
+
+		Boolean Status{ get; };
+		Double Arrears{ get; };
+		Double Surplus{ get; };
+
+		Int32 StudentsCount{ get; };
+		Int32 RecordsCount{ get; };
+
+		void RefreshStatus();
+		void RefreshStudentsCount();
+		void RefreshRecordsCount();
 	};
 
 	[default_interface]

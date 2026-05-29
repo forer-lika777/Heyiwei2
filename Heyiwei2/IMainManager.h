@@ -28,10 +28,6 @@ namespace Interfaces
 		virtual Result updateDorm(const hstring dormId, const Dorm dorm) = 0;
 		virtual Result updateDormInfo(const hstring dormId, const DormInfo info) = 0;
 
-		//virtual Result addStudentToDorm(const hstring dormId, const hstring studentId) = 0;
-		//virtual Result removeStudentFromDorm(const hstring dormId, const hstring studentId) = 0;
-		//virtual Result updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) = 0;
-
 		virtual Result addWaterRecord(const hstring dormId, const WaterRecord record) = 0;
 		virtual Result removeWaterRecord(const hstring dormId, int year, int month) = 0;
 		virtual Result updateWaterRecord(const hstring dormId, int year, int month, const WaterRecord record) = 0;

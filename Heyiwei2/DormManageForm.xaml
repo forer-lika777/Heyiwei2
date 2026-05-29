@@ -15,7 +15,7 @@
 
     <Grid DataContext="{Binding}">
         <Rectangle Fill="{ThemeResource SmokeFillColorDefaultBrush}"/>
-        <Grid Margin="100, 80, 100, 80">
+        <Grid Margin="50">
             <Rectangle Fill="{ThemeResource SolidBackgroundFillColorTertiaryBrush}" RadiusX="10" RadiusY="10"/>
             <!--Rectangle： 矩形图案，不能包含控件-->
             <ScrollView>

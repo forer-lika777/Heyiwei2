@@ -5,77 +5,104 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Heyiwei2"
     xmlns:models="using:Heyiwei2.Models"
+    xmlns:converters="using:Heyiwei2.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     DataContext="local:DormListPage"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <converters:StatusToStringConverter x:Key="StatusToStringConverter"/>
+        <converters:StatusToColorConverter x:Key="StatusToColorConverter"/>
+    </Page.Resources>
 
     <Grid Padding="0">
-        <Grid Padding="20, 70, 20, 20">
+        <Grid Padding="20, 40, 20, 20">
             <!--排列方式：默认vertical(垂直堆叠)、horizonal(水平堆叠)-->
-            <TextBlock Padding="20"
-                   FontFamily="Segoe UI Semibold" 
-                   Text="以下展示所有宿舍用水记录"/>
+            <TextBlock Padding="20" FontFamily="Segoe UI Semibold" Text="以下展示所有宿舍用水记录"/>
             <!--FontFamily: 设定字体 Padding: 内边距(元素内容与元素边界的距离) TextBlock: 展示静态字符串或者动态数组绑定的内容-->
-            <ScrollView Margin="0, 60, 0, 90" VerticalScrollMode="Enabled">
-                <!--给画布提供滚动条以预览超出画布的部分-->
-                <ListView x:Name="dormListView"
-                      ItemsSource="{x:Bind DormItems}">
-                    <!--ListView: 垂直排列内容，实时渲染屏幕出现的内容 ItemsSource：提供数据来源-->
-                    <ListView.ItemTemplate>
-                        <!--ItemTemplate：设定每行的外观、作为一个地址引向渲染DataTemplate-->
-                        <DataTemplate x:DataType="models:Dorm">
-                            <!--定义由数据向ui转变时的外观如字体、布局-->
-                            <Grid Height="120">
-                                <StackPanel Padding="10">
-                                    <TextBlock Text="{Binding Info.ToString}" 
-                                            VerticalAlignment="Center"/>
-                                    <!--VerticalAlignment：规定数据在垂直空间上的位置 StackPanel:使包含内容自动排列-->
-                                    <TextBlock Text="{Binding DormId}"
-                                            />
-                                </StackPanel>
-                                <!--<Button x:Name="openDormButton"
-                                    Click="openDormButton_Click"
-                                    HorizontalAlignment="Right"
-                                    CornerRadius="8"
-                                    VerticalAlignment="Top"
-                                    Margin="20, 20 , 20 , 20">
-                                    --><!--HorizontalAlignment：规定数据在水平空间上的位置 Margin: 定义按键大小 CornerRadius：定义圆弧度 Click: 设定点击功能--><!--
-                                    <TextBlock Text="打开详细信息" 
-                                           TextWrapping="Wrap" 
-                                           TextAlignment="Center"/>
-                                    --><!--TextWrapping：文字在空间内的折叠情况--><!--
-                                </Button>-->
-                                <StackPanel Spacing="10" Margin="15" HorizontalAlignment="Right" Width="200">
-                                    <Button x:Name="openDormButton" HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Top" Click="openDormButton_Click">
-                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                            <SymbolIcon Symbol="OpenPane"/>
-                                            <TextBlock Text="打开详细信息"/>
+            <ScrollView Margin="0, 0, 0, 80" ContentOrientation="Horizontal">
+                <Grid MinWidth="1000">
+                    <Grid Margin="15, 60, 0, 20" Height="50" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="312"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="宿舍" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Text="人数" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="2" Text="水费记录" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="3" Text="加入时间" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="4" Text="状态" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="5" Text="剩余" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="6" Text="欠费" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="10" Text="操作" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <ScrollView Margin="0, 85, 0, 0" VerticalScrollMode="Enabled">
+                        <!--给画布提供滚动条以预览超出画布的部分-->
+                        <ListView x:Name="dormListView" ItemsSource="{x:Bind DormItems}">
+                            <!--ListView: 垂直排列内容，实时渲染屏幕出现的内容 ItemsSource：提供数据来源-->
+                            <ListView.ItemTemplate>
+                                <!--ItemTemplate：设定每行的外观、作为一个地址引向渲染DataTemplate-->
+                                <DataTemplate x:DataType="models:Dorm">
+                                    <!--定义由数据向ui转变时的外观如字体、布局-->
+                                    <Grid Height="100" Padding="0, 10, 0, 10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="300"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Info.ToString}" HorizontalAlignment="Left"/>
+                                        <!--VerticalAlignment：规定数据在垂直空间上的位置 StackPanel:使包含内容自动排列-->
+                                        <TextBlock Grid.Column="1" Text="{Binding StudentsCount}" HorizontalAlignment="Left"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding RecordsCount}" HorizontalAlignment="Left"/>
+                                        <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Left">
+                                            <TextBlock Text="{Binding Info.StartDateYear}"/>
+                                            <TextBlock Text="年"/>
+                                            <TextBlock Text="{Binding Info.StartDateMonth}"/>
+                                            <TextBlock Text="月"/>
                                         </StackPanel>
-                                    </Button>
-                                    <Button x:Name="DeleteDormButton" HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Top" Click="DeleteDormButton_Click">
-                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                            <SymbolIcon Symbol="Delete"/>
-                                            <TextBlock Text="删除宿舍"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                        <TextBlock Grid.Column="4" HorizontalAlignment="Left" Text="{Binding Status, Converter={StaticResource StatusToStringConverter}}" Foreground="{Binding Status, Converter={StaticResource StatusToColorConverter}}"/>
+                                        <TextBlock Grid.Column="5" Text="{Binding Surplus}" HorizontalAlignment="Left"/>
+                                        <TextBlock Grid.Column="6" Text="{Binding Arrears}" HorizontalAlignment="Left"/>
+                                        <Grid Grid.Column="10" HorizontalAlignment="Stretch">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="10"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="0" x:Name="openDormButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="openDormButton_Click">
+                                                <StackPanel Spacing="6">
+                                                    <SymbolIcon Symbol="OpenPane"/>
+                                                    <TextBlock Text="打开详细信息"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button Grid.Column="2" x:Name="DeleteDormButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="DeleteDormButton_Click">
+                                                <StackPanel Spacing="6">
+                                                    <SymbolIcon Symbol="Delete"/>
+                                                    <TextBlock Text="删除宿舍"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollView>
+                </Grid>
             </ScrollView>
-            <Button x:Name="addDormButton"
-                Content="添加宿舍"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Click="addDormButton_Click"
-                Margin="20"/>
+            <Button x:Name="addDormButton" Content="添加宿舍" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="addDormButton_Click" Margin="20"/>
         </Grid>
-        <Grid x:Name="DormManageView"
-              Visibility="Collapsed">
+        <Grid x:Name="DormManageView" Visibility="Collapsed">
         </Grid>
     </Grid>
 </Page>

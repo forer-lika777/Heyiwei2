@@ -3,7 +3,6 @@
 #include "StdModelsConverter.h"
 #include <fstream>
 #include <cereal/archives/json.hpp>
-#include <cereal/types/vector.hpp>
 #include <cereal/types/string.hpp>
 #include <winrt/Windows.Storage.h> // 确保引入了该头文件
 #include <filesystem>              // 用于方便地拼接路径
@@ -11,7 +10,7 @@
 void DataSaveService::SaveToFile(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> dorms) {
     auto stdDorms = StdModelsConverter::ToStdDorms(dorms);
 
-    // 【核心修复】：获取 WinUI 3 应用法定的本地存储绝对路径
+    // 获取 WinUI 3 应用法定的本地存储绝对路径
     auto localFolderPath = winrt::Windows::Storage::ApplicationData::Current().LocalFolder().Path();
     std::filesystem::path fullPath(localFolderPath.c_str());
     fullPath /= "dorms_data.json"; // 拼接成绝对路径

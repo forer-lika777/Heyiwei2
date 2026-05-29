@@ -19,7 +19,18 @@ namespace winrt::Heyiwei2::Models::implementation {
 		winrt::Heyiwei2::Models::DormInfo Info();
 		void Info(winrt::Heyiwei2::Models::DormInfo const& value);
 
+		bool Status() const;
+		double Arrears() const;
+		double Surplus() const;
+
+		int32_t StudentsCount() const;
+		int32_t RecordsCount() const;
+
 		hstring DormId();
+
+		void RefreshStatus();
+		void RefreshStudentsCount();
+		void RefreshRecordsCount();
 
 		winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler) {
 			return propertyChanged.add(handler);
@@ -36,6 +47,13 @@ namespace winrt::Heyiwei2::Models::implementation {
 		hstring dormId;
 		int32_t index = 0;
 		winrt::Heyiwei2::Models::DormInfo info;
+
+		bool status = true;
+		double arrears = 0.0;
+		double surplus = 0.0;
+
+		int32_t studentsCount = 0;
+		int32_t recordsCount = 0;
 
 		event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
 

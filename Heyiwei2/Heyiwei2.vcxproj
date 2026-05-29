@@ -87,7 +87,16 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <PackageCertificateThumbprint>5C3AEE0742678EF10E3DE108D751315283EBF469</PackageCertificateThumbprint>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>False</GenerateTestArtifacts>
+    <AppxBundle>Never</AppxBundle>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -123,6 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Converters.HasPaidToStringConverter.h" />
+    <ClInclude Include="Converters.StatusToColorConverter.h" />
+    <ClInclude Include="Converters.StatusToStringConverter.h" />
     <ClInclude Include="DataSaveService.h" />
     <ClInclude Include="EditDormForm.xaml.h">
       <DependentUpon>EditDormForm.xaml</DependentUpon>
@@ -208,6 +219,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Converters.HasPaidToStringConverter.cpp" />
+    <ClCompile Include="Converters.StatusToColorConverter.cpp" />
+    <ClCompile Include="Converters.StatusToStringConverter.cpp" />
     <ClCompile Include="DataSaveService.cpp" />
     <ClCompile Include="EditDormForm.xaml.cpp">
       <DependentUpon>EditDormForm.xaml</DependentUpon>
@@ -283,7 +296,7 @@
       <DependentUpon>EditStudentForm.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
-    <Midl Include="HasPaidToStringConverter.idl" />
+    <Midl Include="Converters.idl" />
     <Midl Include="HomePage.idl">
       <DependentUpon>HomePage.xaml</DependentUpon>
       <SubType>Code</SubType>

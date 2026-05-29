@@ -36,7 +36,7 @@ namespace winrt::Heyiwei2::Models::implementation
 		int32_t month = 0;
 		double usage = 0.0;
         double cost = 0.0;
-		bool hasPaid = false;
+		bool hasPaid = true;
 
         event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
     };

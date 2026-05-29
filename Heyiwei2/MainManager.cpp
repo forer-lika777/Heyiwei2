@@ -1,16 +1,16 @@
 ﻿#include "pch.h"
 #include "MainManager.h"
-#include "Models.Result.h"
-#include "Utils.h"
 #include "DataSaveService.h"
+#include "Utils.h"
+
+#include "Models.Result.h"
+#include "Models.Dorm.h"
 
 using namespace winrt::Heyiwei2::Models;
 using namespace winrt::Windows::Foundation;
 using namespace winrt;
 using namespace winrt::Windows::Storage;
 
-//extern void SaveData(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms, const std::string& filename);
-//extern winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> LoadData(const std::string& filename);
 MainManager::MainManager(IObservableVector /*：可观测动态数组，ui随数据改变而改变*/<IInspectable>& dorms) : dorms(dorms) {
 
 }
@@ -27,7 +27,9 @@ void MainManager::SaveCurrentData()
 	// service.SaveToFile(m_dorms);
 }
 
-// 加载功能实现
+/// <summary>
+/// 触发保存数据
+/// </summary>
 void MainManager::LoadStoredData()
 {
 	// 1. 调用队友写的反序列化函数，拿到从 JSON 恢复出来的 WinRT 集合
@@ -43,10 +45,19 @@ void MainManager::LoadStoredData()
 	}
 }
 
+/// <summary>
+/// 获取持有的 dorms 列表对象
+/// </summary>
+/// <returns>宿舍列表对象</returns>
 winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> MainManager::getDormItems() {
 	return dorms;
 }
 
+/// <summary>
+/// 依据宿舍id获取宿舍对象
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <returns>目标宿舍对象</returns>
 Dorm MainManager::getDorm(const hstring dormId) {
 	int32_t index = findDormIndex(dormId);
 
@@ -55,6 +66,12 @@ Dorm MainManager::getDorm(const hstring dormId) {
 	return dorms.GetAt(index).as<Dorm>();
 }
 
+/// <summary>
+/// 添加学生至目标宿舍
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="student">学生对象</param>
+/// <returns>操作结果</returns>
 Result MainManager::addStudent(const hstring dormId, Student const student) {
 	for (auto dorm : dorms) {
 		for (auto s : dorm.as<Dorm>().Students()) {
@@ -79,17 +96,24 @@ Result MainManager::addStudent(const hstring dormId, Student const student) {
 	auto result = Utils::validateStudent(student);
 	if (!result.Success()) return result;
 
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
+	auto dorm = dorms.GetAt(index).as<Dorm>();
+	dormManager.setDorm(dorm);
 
 	result = dormManager.addStudent(student);
 
+	dorm.RefreshStudentsCount();
+	dorm.RefreshStatus();
 	SaveCurrentData();
 
 	return result;
 }
 
+/// <summary>
+/// 移除学生
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="studentId">要移除的学生id</param>
+/// <returns>操作结果</returns>
 Result MainManager::removeStudent(const hstring dormId, const hstring studentId) {
 	int32_t index = findDormIndex(dormId);
 
@@ -100,17 +124,25 @@ Result MainManager::removeStudent(const hstring dormId, const hstring studentId)
 		);
 	}
 
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
+	auto dorm = dorms.GetAt(index).as<Dorm>();
+	dormManager.setDorm(dorm);
 
 	auto result = dormManager.removeStudent(studentId);
 
+	dorm.RefreshStudentsCount();
+	dorm.RefreshStatus();
 	SaveCurrentData();
 
 	return result;
 }
 
+/// <summary>
+/// 更新学生
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="studentId">学生id</param>
+/// <param name="student">要更新的学生</param>
+/// <returns>操作结果</returns>
 Result MainManager::updateStudent(const hstring dormId, const hstring studentId, Student const student) {
 	for (auto dorm : dorms) {
 		for (auto s : dorm.as<Dorm>().Students()) {
@@ -135,20 +167,25 @@ Result MainManager::updateStudent(const hstring dormId, const hstring studentId,
 	auto result = Utils::validateStudent(student);
 	if (!result.Success()) return result;
 
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
+	auto dorm = dorms.GetAt(index).as<Dorm>();
+
+	dormManager.setDorm(dorm);
 
 	result = dormManager.updateStudent(
 		studentId,
 		student
 	);
-
+	
 	SaveCurrentData();
 
 	return result;
 }
 
+/// <summary>
+/// 添加宿舍
+/// </summary>
+/// <param name="dorm">要添加的宿舍</param>
+/// <returns>操作结果</returns>
 Result MainManager::addDorm(const Dorm dorm) {
 	int32_t index = findDormIndex(dorm.DormId());
 
@@ -171,6 +208,11 @@ Result MainManager::addDorm(const Dorm dorm) {
 	);
 }
 
+/// <summary>
+/// 移除宿舍
+/// </summary>
+/// <param name="dormId">要移除的宿舍id</param>
+/// <returns>操作结果</returns>
 Result MainManager::removeDorm(const hstring dormId) {
 	int32_t index = findDormIndex(dormId);
 
@@ -190,6 +232,12 @@ Result MainManager::removeDorm(const hstring dormId) {
 	);
 }
 
+/// <summary>
+/// 更新宿舍（将替换所有学生和水费记录）
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="dorm">要替换的宿舍对象</param>
+/// <returns>操作结果</returns>
 Result MainManager::updateDorm(const hstring dormId, const Dorm dorm) {
 	int32_t index = findDormIndex(dormId);
 
@@ -212,6 +260,12 @@ Result MainManager::updateDorm(const hstring dormId, const Dorm dorm) {
 	);
 }
 
+/// <summary>
+/// 更新宿舍信息
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="info">要更新的宿舍信息</param>
+/// <returns>操作结果</returns>
 Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 	int32_t index = findDormIndex(dormId);
 
@@ -238,6 +292,7 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 
 	dorm.Info(info);
 
+	//dorm.RefreshStatus();
 	SaveCurrentData();
 
 	return winrt::make<implementation::Result>(
@@ -304,6 +359,12 @@ Result MainManager::updateDormInfo(const hstring dormId, const DormInfo info) {
 //	);
 //}
 
+/// <summary>
+/// 添加用水记录
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="record">要添加的水费记录</param>
+/// <returns>操作结果</returns>
 Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord record) {
 	int32_t index = findDormIndex(dormId);
 
@@ -317,15 +378,27 @@ Result MainManager::addWaterRecord(const hstring dormId, const WaterRecord recor
 	auto result = Utils::validateWaterRecord(record);
 	if (!result.Success()) return result;
 
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
+	auto dorm = dorms.GetAt(index).as<Dorm>();
+	dormManager.setDorm(dorm);
 
+	result = dormManager.addWaterRecord(record);
+
+	if (!result.Success()) return result;
+
+	dorm.RefreshStatus();
+	dorm.RefreshRecordsCount();
 	SaveCurrentData();
 
-	return dormManager.addWaterRecord(record);
+	return result;
 }
 
+/// <summary>
+/// 移除用水记录
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="year">年份</param>
+/// <param name="month">月份</param>
+/// <returns>操作结果</returns>
 Result MainManager::removeWaterRecord(const hstring dormId, int year, int month) {
 	int32_t index = findDormIndex(dormId);
 
@@ -336,18 +409,31 @@ Result MainManager::removeWaterRecord(const hstring dormId, int year, int month)
 		);
 	}
 
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
+	auto dorm = dorms.GetAt(index).as<Dorm>();
+	dormManager.setDorm(dorm);
 
-	SaveCurrentData();
-
-	return dormManager.removeWaterRecord(
+	auto result = dormManager.removeWaterRecord(
 		year,
 		month
 	);
+
+	if (!result.Success()) return result;
+
+	dorm.RefreshStatus();
+	dorm.RefreshRecordsCount();
+	SaveCurrentData();
+
+	return result;
 }
 
+/// <summary>
+/// 更新水费记录
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <param name="year">年份</param>
+/// <param name="month">月份</param>
+/// <param name="record">要替换的水费信息</param>
+/// <returns>操作结果</returns>
 Result MainManager::updateWaterRecord(const hstring dormId, int year, int month, const WaterRecord record) {
 	int32_t index = findDormIndex(dormId);
 
@@ -361,19 +447,28 @@ Result MainManager::updateWaterRecord(const hstring dormId, int year, int month,
 	auto result = Utils::validateWaterRecord(record);
 	if (!result.Success()) return result;
 
-	dormManager.setDorm(
-		dorms.GetAt(index).as<Dorm>()
-	);
+	auto dorm = dorms.GetAt(index).as<Dorm>();
+	dormManager.setDorm(dorm);
 
-	SaveCurrentData();
-
-	return dormManager.updateWaterRecord(
+	result = dormManager.updateWaterRecord(
 		year,
 		month,
 		record.Usage()
 	);
+
+	if (!result.Success()) return result;
+
+	dorm.RefreshStatus();
+	SaveCurrentData();
+
+	return result;
 }
 
+/// <summary>
+/// 查找宿舍索引
+/// </summary>
+/// <param name="dormId">宿舍id</param>
+/// <returns>索引值</returns>
 int32_t MainManager::findDormIndex(const hstring dormId) {
 	for (uint32_t i = 0; i < dorms.Size(); ++i) {
 		auto dorm = dorms.GetAt(i).as<Dorm>();
@@ -385,5 +480,3 @@ int32_t MainManager::findDormIndex(const hstring dormId) {
 
 	return -1;
 }
-
-
