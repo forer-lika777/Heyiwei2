@@ -3,7 +3,7 @@
 #include "MainWindow.xaml.h"
 #include "MainManager.h"
 //#include <winrt/Windows.Foundation.Collections.h>
-#include <winrt/Windows.Storage.h>
+//#include <winrt/Windows.Storage.h>
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -40,14 +40,14 @@ namespace winrt::Heyiwei2::implementation {
 		mainManager->LoadStoredData();
 		window = make<MainWindow>();
 
-		auto settings = winrt::Windows::Storage::ApplicationData::Current().LocalSettings();
-		auto themeValue = settings.Values().Lookup(L"AppTheme");
+		//auto settings = winrt::Windows::Storage::ApplicationData::Current().LocalSettings();
+		//auto themeValue = settings.Values().Lookup(L"AppTheme");
 
-		if (themeValue) {
-			auto themeInt = winrt::unbox_value<int32_t>(themeValue);
-			auto theme = static_cast<winrt::Microsoft::UI::Xaml::ElementTheme>(themeInt);
-			window.Content().as<winrt::Microsoft::UI::Xaml::FrameworkElement>().RequestedTheme(theme);
-		}
+		//if (themeValue) {
+		//	auto themeInt = winrt::unbox_value<int32_t>(themeValue);
+		//	auto theme = static_cast<winrt::Microsoft::UI::Xaml::ElementTheme>(themeInt);
+		//	window.Content().as<winrt::Microsoft::UI::Xaml::FrameworkElement>().RequestedTheme(theme);
+		//}
 
 		window.Activate();
 	}

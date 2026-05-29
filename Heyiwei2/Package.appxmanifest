@@ -11,7 +11,7 @@
   <Identity
     Name="9b769bdf-3fa3-4e91-bd0a-121c73bfdfba"
     Publisher="CN=Zhang"
-    Version="1.0.0.0" />
+    Version="1.0.3.0" />
 
   <mp:PhoneIdentity PhoneProductId="9b769bdf-3fa3-4e91-bd0a-121c73bfdfba" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
