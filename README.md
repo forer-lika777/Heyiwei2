@@ -62,4 +62,18 @@ omg我终于搞好那个煞笔INotifyPropertyChanged了，还是看csdn博客看
 
 还是那句话，玩腻了 WinUI/C++，你一定要去玩 C++/WinUI。
 
-居然刷新了一个
+居然刷新了一个 Xaml 的 Converters，过去看看。
+
+我去，IDL，居然还是个 WinUI 内置的配置，错怪他了。
+
+这里有本书，来看一下。WinUI的配置指南，这是啥意思？
+
+算了，来帮我测一测我未来的 Converters 吧。
+
+我去我去，开始编译了！真的假的？...不是，这啥意思？这么快就测出来了？来看一下。
+
+"StatusToStringConverter": 不是 "winrt::Heyiwei2::Converters::implementation" 的成员
+
+这啥意思？你魔了？看来这是个假 Converters，我们需要打假。
+
+听见我说要打假，他又开始作法了，姑且再信他一回。来看一下这次是什么。
