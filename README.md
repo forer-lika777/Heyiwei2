@@ -72,8 +72,23 @@ omg我终于搞好那个煞笔INotifyPropertyChanged了，还是看csdn博客看
 
 我去我去，开始编译了！真的假的？...不是，这啥意思？这么快就测出来了？来看一下。
 
-"StatusToStringConverter": 不是 "winrt::Heyiwei2::Converters::implementation" 的成员
+“StatusToStringConverter”: 未声明的标识符
+“StatusToStringConverter": 不是 "winrt::Heyiwei2::Converters::implementation" 的成员
 
 这啥意思？你魔了？看来这是个假 Converters，我们需要打假。
 
 听见我说要打假，他又开始作法了，姑且再信他一回。来看一下这次是什么。
+
+达到内存堆限制，未能创建 PCH 的虚拟内存。
+
+你啥意思？你真魔了呀。那这波我要召唤打假上号了。
+
+直接制裁！
+
+居然还想逃逸，门都没有。
+
+直接制裁，野生 WinUI！
+
+直接拿下。拿下！
+
+我说过，如果你玩腻了 UWP，那你要试试玩 WinUI。
