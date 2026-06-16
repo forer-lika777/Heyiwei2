@@ -4,12 +4,7 @@
 #include "DormManager.h"
 
 using winrt::hstring;
-using winrt::Heyiwei2::Models::Result;
-using winrt::Heyiwei2::Models::Dorm;
-using winrt::Heyiwei2::Models::Student;
-using winrt::Heyiwei2::Models::WaterRecord;
-using winrt::Windows::Foundation::Collections::IObservableVector;
-using winrt::Windows::Foundation::IInspectable;
+using namespace winrt::Heyiwei2::Models;
 
 class MainManager : public Interfaces::IMainManager
 {
@@ -17,38 +12,36 @@ public:
     MainManager(IObservableVector<IInspectable>& dorms);
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> getDormItems();
 
-    Dorm getDorm(const hstring dormId) override;
+    Dorm getDorm(hstring const& dormId) override;
 
     void SaveCurrentData() override;
     void LoadStoredData() override;
 
-
     // 学生管理
-    Result addStudent(const hstring dormId, Student const student) override;
-    Result removeStudent(const hstring dormId, const hstring studentId) override;
-    Result updateStudent(const hstring dormId, const hstring studentId, Student const student) override;
+    Result addStudent(hstring const& dormId, Student const& student) override;
+    Result removeStudent(hstring const& dormId, hstring const& studentId) override;
+    Result updateStudent(hstring const& dormId, hstring const& studentId, Student const& student) override;
 
     // 宿舍管理
-    Result addDorm(const Dorm dorm) override;
-    Result removeDorm(const hstring dormId) override;
-    Result updateDorm(const hstring dormId, const Dorm dorm) override;
-    Result updateDormInfo(const hstring dormId, const DormInfo info) override;
+    Result addDorm(Dorm const& dorm) override;
+    Result removeDorm(hstring const& dormId) override;
+    Result updateDorm(hstring const& dormId, Dorm const& dorm) override;
+    Result updateDormInfo(hstring const& dormId, DormInfo const& info) override;
 
     // 学生分配
-    //Result addStudentToDorm(const hstring dormId, const hstring studentId) override;
-    //Result removeStudentFromDorm(const hstring dormId, const hstring studentId) override;
-    //Result updateStudentInDorm(const hstring dormId, const hstring studentId, const Student student) override;
+    //Result addStudentToDorm(hstring const& dormId, hstring const& studentId) override;
+    //Result removeStudentFromDorm(hstring const& dormId, hstring const& studentId) override;
+    //Result updateStudentInDorm(hstring const& dormId, hstring const& studentId, const Student student) override;
 
     // 水费记录
-    Result addWaterRecord(const hstring dormId, const WaterRecord record) override;
-    Result removeWaterRecord(const hstring dormId, int year, int month) override;
-    Result updateWaterRecord(const hstring dormId, int year, int month, const WaterRecord record) override;
+    Result addWaterRecord(hstring const& dormId, WaterRecord const& record) override;
+    Result removeWaterRecord(hstring const& dormId, int year, int month) override;
+    Result updateWaterRecord(hstring const& dormId, int year, int month, WaterRecord const& record) override;
 
 private:
     IObservableVector<IInspectable> dorms;
     DormManager dormManager;
-    //winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& dorms;
 
-    //DormManager* getDormManager(const hstring dormId);
-    int32_t findDormIndex(const hstring dormId);
+    //DormManager* getDormManager(hstring const& dormId);
+    int32_t findDormIndex(hstring const& dormId);
 };

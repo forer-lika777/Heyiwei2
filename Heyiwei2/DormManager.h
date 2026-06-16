@@ -1,18 +1,12 @@
 ﻿#pragma once
 #include "IDormManager.h"
-#include "Models.Student.h"
-#include "Models.WaterRecord.h"
 #include "RecordManager.h"
-#include <vector>
-
-using namespace winrt::Heyiwei2::Models;
-using namespace winrt::Windows::Foundation::Collections;
 
 class DormManager : public Interfaces::IDormManager
 {
 private:
     Dorm dorm{ nullptr };
-	RecordManager recordManager{ nullptr };
+    RecordManager recordManager;
 
 public:
     DormManager();

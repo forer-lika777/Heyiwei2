@@ -7,14 +7,7 @@
 
 class StdModelsConverter {
 public:
-	static std::vector<Heyiwei2::StdModels::Dorm> ToStdDorms(
-		winrt::Windows::Foundation::Collections::IObservableVector<
-		winrt::Windows::Foundation::IInspectable> winrtDorms);
-
-	static winrt::Windows::Foundation::Collections::IObservableVector<
-		winrt::Windows::Foundation::IInspectable> ToWinrtDorms(
-			std::vector<Heyiwei2::StdModels::Dorm> stdDorms);
-private:
-
+	static std::vector<Heyiwei2::StdModels::Dorm> ToStdDorms(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> winrtDorms);
+	static winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> ToWinrtDorms(std::vector<Heyiwei2::StdModels::Dorm> stdDorms);
 };
 

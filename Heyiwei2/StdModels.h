@@ -76,6 +76,4 @@ namespace Heyiwei2::StdModels {
             );
         }
     };
-
-
 }

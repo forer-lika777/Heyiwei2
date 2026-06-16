@@ -3,9 +3,6 @@
 #include "Models.Dorm.g.cpp"
 #include "Utils.h"
 
-using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Windows::Foundation;
-
 namespace winrt::Heyiwei2::Models::implementation {
 
 	IObservableVector<IInspectable> Dorm::Students() {

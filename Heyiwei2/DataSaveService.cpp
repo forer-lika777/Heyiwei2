@@ -4,7 +4,7 @@
 #include <fstream>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/string.hpp>
-#include <shlobj.h>       // 必须包含此头文件，用于 SHGetKnownFolderPath 
+#include <shlobj.h>       // 包含此头文件，用于 SHGetKnownFolderPath 
 #include <filesystem>
 #pragma comment(lib, "shell32.lib")
 

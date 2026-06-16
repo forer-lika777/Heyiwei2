@@ -2,8 +2,8 @@
 #include "Models.Dorm.g.h"
 #include "Models.WaterRecord.h"
 
-using namespace winrt::Windows::Foundation::Collections;
-//using namespace winrt::Heyiwei2::Models;
+using winrt::Windows::Foundation::Collections::IObservableVector;
+using winrt::Windows::Foundation::IInspectable;
 
 namespace winrt::Heyiwei2::Models::implementation {
 	struct Dorm : DormT<Dorm> {
@@ -57,7 +57,6 @@ namespace winrt::Heyiwei2::Models::implementation {
 
 		event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged{};
 
-		//winrt::Heyiwei2::Models::WaterRecord getEarliestRecordDate();
 		void completeMonths(winrt::Heyiwei2::Models::DormInfo const& info);
 	};
 }

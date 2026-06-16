@@ -1,6 +1,11 @@
 ﻿#include "pch.h"
 #include "StdModelsConverter.h"
 
+/// <summary>
+/// 输入 winrt 类型，转换为 C++ 标准库类型。
+/// </summary>
+/// <param name="winrtDorms">winrt 类型</param>
+/// <returns>C++ 标准类型</returns>
 std::vector<Heyiwei2::StdModels::Dorm> StdModelsConverter::ToStdDorms(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> winrtDorms)
 {
 	std::vector<Heyiwei2::StdModels::Dorm> stdDorms;
@@ -31,7 +36,7 @@ std::vector<Heyiwei2::StdModels::Dorm> StdModelsConverter::ToStdDorms(winrt::Win
 			stdStudents.push_back(stdStudent);
 		}
 
-		//convert records
+		// convert records
 		auto& stdRecords = stdDorm.records;
 		for (auto const& winrtRecordObject : winrtDorm.Records()) {
 			auto winrtRecord = winrtRecordObject.as<winrt::Heyiwei2::Models::WaterRecord>();
@@ -53,10 +58,10 @@ std::vector<Heyiwei2::StdModels::Dorm> StdModelsConverter::ToStdDorms(winrt::Win
 }
 
 /// <summary>
-/// 输入 C++ 标准库类型，转换为 winrt 类型
+/// 输入 C++ 标准库类型，转换为 winrt 类型。
 /// </summary>
-/// <param name="stdDorms">标准类型</param>
-/// <returns>winrt类型</returns>
+/// <param name="stdDorms">C++ 标准类型</param>
+/// <returns>winrt 类型</returns>
 winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> StdModelsConverter::ToWinrtDorms(std::vector<Heyiwei2::StdModels::Dorm> stdDorms)
 {
     // 生成一个空的winrt类型列表

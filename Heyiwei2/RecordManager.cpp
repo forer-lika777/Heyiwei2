@@ -6,15 +6,17 @@
 #include "Utils.h"
 
 using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Windows::Foundation;
 using namespace winrt::Heyiwei2::Models;
 
 
 //初始化RecordManager，传入水费记录
-RecordManager::RecordManager(IObservableVector<IInspectable> records)
-	: waterRecords(records) {}
+//RecordManager::RecordManager(IObservableVector<IInspectable> records) : waterRecords(records) {
+//
+//}
 
 //添加水费记录，检查是否已存在相同年月的记录
-Result RecordManager::addWaterRecord(const WaterRecord& record) {
+Result RecordManager::addWaterRecord(WaterRecord const& record) {
 	auto r = querySpecificWaterRecord(record.Year(), record.Month());
 	if (r != -1) {
 		return winrt::make<implementation::Result>(false, L"添加失败：不可添加具有相同年月份的记录");
@@ -55,3 +57,8 @@ int32_t RecordManager::querySpecificWaterRecord(int year, int month) {
 	}
 	return -1;
 }
+
+void RecordManager::setRecords(IObservableVector<IInspectable> records) {
+	waterRecords = records;
+}
+

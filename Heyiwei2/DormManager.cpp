@@ -3,7 +3,6 @@
 #include "DormManager.h"
 #include "Utils.h"
 
-using namespace winrt::Windows::Foundation::Collections;
 using namespace winrt::Heyiwei2::Models;
 
 DormManager::DormManager() {
@@ -15,7 +14,7 @@ DormManager::DormManager() {
 /// </summary>
 /// <param name="dorm"></param>
 void DormManager::setDorm(const Dorm dorm) {
-	recordManager = RecordManager(dorm.Records());
+	recordManager.setRecords(dorm.Records());
 	this->dorm = dorm;
 }
 

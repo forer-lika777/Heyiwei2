@@ -8,9 +8,6 @@
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace winrt::Heyiwei2::implementation {
 	/// <summary>
 	/// Initializes the singleton application object.  This is the first line of authored code
@@ -39,15 +36,6 @@ namespace winrt::Heyiwei2::implementation {
 		mainManager = new MainManager(dorms);
 		mainManager->LoadStoredData();
 		window = make<MainWindow>();
-
-		//auto settings = winrt::Windows::Storage::ApplicationData::Current().LocalSettings();
-		//auto themeValue = settings.Values().Lookup(L"AppTheme");
-
-		//if (themeValue) {
-		//	auto themeInt = winrt::unbox_value<int32_t>(themeValue);
-		//	auto theme = static_cast<winrt::Microsoft::UI::Xaml::ElementTheme>(themeInt);
-		//	window.Content().as<winrt::Microsoft::UI::Xaml::FrameworkElement>().RequestedTheme(theme);
-		//}
 
 		window.Activate();
 	}
