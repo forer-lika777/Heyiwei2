@@ -10,6 +10,7 @@ namespace winrt::Heyiwei2::implementation {
 		void openHomePage();
 		void openDormListPage();
 		void openSettingsPage();
+		void openShowacasePage();
 
 	public:
 		MainPage();

@@ -4,6 +4,9 @@
 #include <winrt/Windows.Foundation.Collections.h>
 #include "IMainManager.h"
 
+#include "Converters.StatusToColorConverter.h"
+#include "Converters.StatusToStringConverter.h"
+
 namespace winrt::Heyiwei2::implementation
 {
     struct DormListPage : DormListPageT<DormListPage>

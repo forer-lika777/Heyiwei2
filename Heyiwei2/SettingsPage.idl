@@ -4,6 +4,6 @@
     runtimeclass SettingsPage : Microsoft.UI.Xaml.Controls.Page
     {
         SettingsPage();
-        Boolean DarkModeIsOn;
+        Int32 DarkModeStatus;
     }
 }

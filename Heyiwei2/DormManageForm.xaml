@@ -11,6 +11,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:HasPaidToStringConverter x:Key="HasPaidToStringConverter"/>
+        <converters:StatusToColorConverter x:Key="StatusToColorConverter"/>
     </UserControl.Resources>
 
     <Grid DataContext="{Binding}">
@@ -132,7 +133,8 @@
                                             </StackPanel>
                                             <TextBlock Grid.Column="3"
                                                        VerticalAlignment="Center" HorizontalAlignment="Left" Padding="10"
-                                                       Text="{x:Bind HasPaid, Mode=OneWay, Converter={StaticResource HasPaidToStringConverter}}"/>
+                                                       Text="{x:Bind HasPaid, Mode=OneWay, Converter={StaticResource HasPaidToStringConverter}}"
+                                                       Foreground="{Binding HasPaid, Converter={StaticResource StatusToColorConverter}}"/>
                                             <Button x:Name="EditRecordButton" Grid.Column="4"
                                                     VerticalAlignment="Center" Click="EditRecordButton_Click">
                                                 <StackPanel Orientation="Horizontal" Spacing="6">

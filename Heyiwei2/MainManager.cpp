@@ -385,6 +385,8 @@ Result MainManager::addWaterRecord(hstring const& dormId, WaterRecord const& rec
 
 	if (!result.Success()) return result;
 
+	Utils::sortWaterRecords(dorm.Records());
+
 	dorm.RefreshStatus();
 	dorm.RefreshRecordsCount();
 	SaveCurrentData();

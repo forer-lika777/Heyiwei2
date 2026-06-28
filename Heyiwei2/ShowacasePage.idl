@@ -1,0 +1,8 @@
+﻿namespace Heyiwei2
+{
+    [default_interface]
+    runtimeclass ShowacasePage : Microsoft.UI.Xaml.Controls.Page
+    {
+        ShowacasePage();
+    }
+}

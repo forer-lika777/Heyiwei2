@@ -1,6 +1,19 @@
 ﻿#pragma once
 #include <algorithm>
 
+#include "Models.Dorm.h"
+#include "Models.Result.h"
+#include "Models.Student.h"
+#include "Models.WaterRecord.h"
+
+using winrt::Windows::Foundation::Collections::IObservableVector;
+using winrt::Windows::Foundation::IInspectable;
+using winrt::Heyiwei2::Models::Dorm;
+using winrt::Heyiwei2::Models::DormInfo;
+using winrt::Heyiwei2::Models::Result;
+using winrt::Heyiwei2::Models::Student;
+using winrt::Heyiwei2::Models::WaterRecord;
+
 class Utils {
 public:
 	//计算总水费
@@ -12,7 +25,7 @@ public:
 	//检测水费记录是否合法
 	static winrt::Heyiwei2::Models::Result validateWaterRecord(winrt::Heyiwei2::Models::WaterRecord const& record);
 	//排序水费记录
-	static void sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable>& records);
+	static void sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> records);
 
 	static int32_t getCurrentYear();
 

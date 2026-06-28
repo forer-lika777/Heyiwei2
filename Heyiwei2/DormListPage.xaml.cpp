@@ -16,6 +16,7 @@
 #include "EditDormForm.xaml.h"
 #include "DormManageForm.xaml.h"
 
+#include "UiHelpers.h"
 
 using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Controls;
@@ -54,27 +55,11 @@ namespace winrt::Heyiwei2::implementation {
 	winrt::Windows::Foundation::IAsyncAction DormListPage::openCreateDormDialogAsync() {
 		auto form = winrt::make_self<winrt::Heyiwei2::implementation::EditDormForm>();
 
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"添加宿舍"));
-		dialog.Content(form.as<winrt::Heyiwei2::EditDormForm>()); // 将 UserControl 设为内容
-
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-
-		dialog.XamlRoot(this->XamlRoot());
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"添加宿舍", form.as<winrt::Heyiwei2::EditDormForm>(), [this, form](auto const&, auto const& args) {
 			auto f = form.get();
 
 			if (f->DormNumber() == L"") {
 				f->showInfo(L"请输入宿舍号");
-				args.Cancel(true);
-				return;
-			}
-
-			if (mainManager == nullptr) {
-				f->showInfo(L"发生程序内部错误：内部管理器指向了空指针");
 				args.Cancel(true);
 				return;
 			}
@@ -108,32 +93,17 @@ namespace winrt::Heyiwei2::implementation {
 				return;
 			}
 			});
-
-		// 等待用户选择
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormListPage::openDeleteDormDialogAsync(winrt::Heyiwei2::Models::Dorm const dorm) {
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"确定要删除此宿舍吗？"));
-		dialog.Content(winrt::box_value(L"此操作不可逆"));
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"确定要删除此宿舍吗？", winrt::box_value(L"此操作不可逆"), [this, dorm](auto const&, auto const& args) {
 			auto result = mainManager->removeDorm(dorm.DormId());
 
 			if (!result.Success()) {
 				args.Cancel(true);
-				dialog.Content(winrt::box_value(result.Message()));
 				return;
 			}
-		});
-
-		auto result = co_await dialog.ShowAsync();
+			});
 	}
 
 	void DormListPage::addDormButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {

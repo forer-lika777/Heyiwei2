@@ -11,14 +11,18 @@
 
     <NavigationView x:Name="navigationView"
                     IsSettingsVisible="True"
+                    PaneDisplayMode="LeftCompact"
                     ItemInvoked="NavigationView_Invoked">
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Home"
+            <NavigationViewItem Content="开始"
                                 Icon="Home"
                                 Tag="home" />
-            <NavigationViewItem Content="DormList"
+            <NavigationViewItem Content="宿舍列表"
                                 Icon="List"
                                 Tag="dormlist" />
+            <NavigationViewItem Content="关于 WinUI"
+                                Icon="Find"
+                                Tag="showacase" />
         </NavigationView.MenuItems>
         <NavigationView.Content>
             <Frame x:Name="mainFrame" />

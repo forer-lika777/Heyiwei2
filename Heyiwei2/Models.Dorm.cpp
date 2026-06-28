@@ -74,6 +74,10 @@ namespace winrt::Heyiwei2::Models::implementation {
 			auto record = r.as<winrt::Heyiwei2::Models::WaterRecord>();
 			if (!record.HasPaid()) {
 				auto cost = record.Cost();
+				if (cost == 0.0) {
+					record.HasPaid(true);
+					continue;
+				}
 				if (surplus > 0.0) {
 					if (surplus >= cost) {
 						surplus -= cost;

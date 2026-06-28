@@ -1,4 +1,9 @@
 ﻿#pragma once
+#include "Models.Result.h"
+#include "Models.WaterRecord.h"
+
+using winrt::Heyiwei2::Models::Result;
+using winrt::Heyiwei2::Models::WaterRecord;
 
 class RecordManager
 {

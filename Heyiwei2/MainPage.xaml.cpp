@@ -35,6 +35,9 @@ namespace winrt::Heyiwei2::implementation {
 			else if (tag == L"dormlist") {
 				openDormListPage();
 			}
+			else if (tag == L"showacase") {
+				openShowacasePage();
+			}
 		}
 	}
 
@@ -43,11 +46,14 @@ namespace winrt::Heyiwei2::implementation {
 	}
 
 	void MainPage::openDormListPage() {
-		auto page_impl = winrt::make_self<winrt::Heyiwei2::implementation::DormListPage>();
-		mainFrame().Navigate(xaml_typename<winrt::Heyiwei2::DormListPage>(), *page_impl);  // 传参导航
+		mainFrame().Navigate(xaml_typename<winrt::Heyiwei2::DormListPage>());  // 传参导航
 	}
 
 	void MainPage::openSettingsPage() {
 		mainFrame().Navigate(xaml_typename<SettingsPage>());
+	}
+
+	void MainPage::openShowacasePage() {
+		mainFrame().Navigate(xaml_typename<winrt::Heyiwei2::ShowacasePage>());
 	}
 }

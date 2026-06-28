@@ -1,8 +1,17 @@
 ﻿#pragma once
 #include "Models.Dorm.h"
+#include "Models.Result.h"
+#include "Models.Student.h"
+#include "Models.WaterRecord.h"
 
 using winrt::Windows::Foundation::Collections::IObservableVector;
 using winrt::Windows::Foundation::IInspectable;
+using winrt::Heyiwei2::Models::Dorm;
+using winrt::Heyiwei2::Models::DormInfo;
+using winrt::Heyiwei2::Models::Result;
+using winrt::Heyiwei2::Models::Student;
+using winrt::Heyiwei2::Models::WaterRecord;
+using winrt::hstring;
 
 namespace Interfaces {
 	class IMainManager {

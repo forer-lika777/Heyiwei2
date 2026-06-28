@@ -7,14 +7,18 @@ namespace winrt::Heyiwei2::implementation
     struct SettingsPage : SettingsPageT<SettingsPage>
     {
     private:
-        bool darkModeIsOn = false;
+        int32_t darkModeStatus;
+        //bool darkModeIsOn = false;
         bool initialized = false;
+
+        void SaveThemeSetting(int32_t theme);
+        int32_t LoadThemeSetting();
 
     public:
         SettingsPage();
-
-        void DarkModeIsOn(bool const& value);
-        bool DarkModeIsOn();
+        
+        void DarkModeStatus(int32_t const& value);
+        int32_t DarkModeStatus() const;
 
         //void DarkModeToggle_Toggled(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
     };

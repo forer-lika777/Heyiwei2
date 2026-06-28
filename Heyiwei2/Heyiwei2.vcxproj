@@ -14,11 +14,11 @@
   <Import Project="..\packages\Microsoft.WindowsAppSDK.Base.2.0.3\build\native\Microsoft.WindowsAppSDK.Base.props" Condition="Exists('..\packages\Microsoft.WindowsAppSDK.Base.2.0.3\build\native\Microsoft.WindowsAppSDK.Base.props')" />
   <Import Project="..\packages\Microsoft.Windows.SDK.BuildTools.MSIX.1.7.251221100\build\Microsoft.Windows.SDK.BuildTools.MSIX.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.BuildTools.MSIX.1.7.251221100\build\Microsoft.Windows.SDK.BuildTools.MSIX.props')" />
   <Import Project="..\packages\Microsoft.Windows.AI.MachineLearning.2.0.300\build\native\Microsoft.Windows.AI.MachineLearning.props" Condition="Exists('..\packages\Microsoft.Windows.AI.MachineLearning.2.0.300\build\native\Microsoft.Windows.AI.MachineLearning.props')" />
-    <PropertyGroup>
-	    <WindowsPackageType>None</WindowsPackageType>
-	    <SelfContained>true</SelfContained>
-	    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-    </PropertyGroup>
+  <PropertyGroup>
+    <WindowsPackageType>None</WindowsPackageType>
+    <SelfContained>true</SelfContained>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
@@ -136,6 +136,8 @@
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationInfo.h" />
+    <ClInclude Include="AnimationService.h" />
     <ClInclude Include="Converters.HasPaidToStringConverter.h" />
     <ClInclude Include="Converters.StatusToColorConverter.h" />
     <ClInclude Include="Converters.StatusToStringConverter.h" />
@@ -189,8 +191,13 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="ShowacasePage.xaml.h">
+      <DependentUpon>ShowacasePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="StdModels.h" />
     <ClInclude Include="StdModelsConverter.h" />
+    <ClInclude Include="UiHelpers.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WinRTSerializationHelpers.hpp" />
   </ItemGroup>
@@ -221,8 +228,12 @@
     <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ShowacasePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationService.cpp" />
     <ClCompile Include="Converters.HasPaidToStringConverter.cpp" />
     <ClCompile Include="Converters.StatusToColorConverter.cpp" />
     <ClCompile Include="Converters.StatusToStringConverter.cpp" />
@@ -277,6 +288,10 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="ShowacasePage.xaml.cpp">
+      <DependentUpon>ShowacasePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="StdModelsConverter.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
@@ -319,6 +334,10 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
+    <Midl Include="ShowacasePage.idl">
+      <DependentUpon>ShowacasePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">
@@ -326,6 +345,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\header.png" />
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
     <Image Include="Assets\SplashScreen.scale-200.png" />
     <Image Include="Assets\Square150x150Logo.scale-200.png" />
@@ -333,6 +353,7 @@
     <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Image Include="Assets\StoreLogo.png" />
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Image Include="Assets\winui-hero.png" />
   </ItemGroup>
   <!--
     Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging

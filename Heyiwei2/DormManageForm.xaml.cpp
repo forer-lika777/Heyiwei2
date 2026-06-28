@@ -8,11 +8,13 @@
 #include "Models.DormInfo.h"
 #include "Models.WaterRecord.h"
 
-#include "DormListPage.xaml.h"
+//#include "DormListPage.xaml.h"
 
 #include "EditDormForm.xaml.h"
 #include "EditRecordForm.xaml.h"
 #include "EditStudentForm.xaml.h"
+
+#include "UiHelpers.h"
 
 using namespace winrt::Microsoft::UI::Xaml::Controls;
 using winrt::Windows::Foundation::Collections::IObservableVector;
@@ -61,24 +63,9 @@ namespace winrt::Heyiwei2::implementation {
 		f->StartYear(info.StartDateYear());
 		f->StartMonth(info.StartDateMonth());
 
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"编辑宿舍"));
-		dialog.Content(form.as<winrt::Heyiwei2::EditDormForm>()); // 将 UserControl 设为内容
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"编辑宿舍", form.as<winrt::Heyiwei2::EditDormForm>(), [this, form, f](auto const&, auto const& args) {
 			if (f->DormNumber() == L"") {
 				f->showInfo(L"请输入宿舍号");
-				args.Cancel(true);
-				return;
-			}
-
-			if (mainManager == nullptr) {
-				f->showInfo(L"发生程序内部错误：内部管理器指向了空指针");
 				args.Cancel(true);
 				return;
 			}
@@ -109,9 +96,6 @@ namespace winrt::Heyiwei2::implementation {
 
 			this->Dorm();
 			});
-
-		// 等待用户选择
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openAddRecordDialogAsync() {
@@ -119,16 +103,7 @@ namespace winrt::Heyiwei2::implementation {
 
 		auto f = form.get();
 
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"添加用水记录"));
-		dialog.Content(form.as<winrt::Heyiwei2::EditRecordForm>()); // 将 UserControl 设为内容
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"添加用水记录", form.as<winrt::Heyiwei2::EditRecordForm>(), [this, form, f](auto const&, auto const& args) {
 			auto record = winrt::make<winrt::Heyiwei2::Models::implementation::WaterRecord>();
 
 			record.Year(f->Year());
@@ -154,8 +129,6 @@ namespace winrt::Heyiwei2::implementation {
 				return;
 			}
 			});
-
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openEditRecordDialogAsync(winrt::Heyiwei2::Models::WaterRecord record) {
@@ -169,16 +142,7 @@ namespace winrt::Heyiwei2::implementation {
 		f->HasPaid(record.HasPaid());
 		f->LockYearAndMonth();
 
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"编辑用水记录"));
-		dialog.Content(form.as<winrt::Heyiwei2::EditRecordForm>()); // 将 UserControl 设为内容
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"编辑用水记录", form.as<winrt::Heyiwei2::EditRecordForm>(), [this, form, f, record](auto const&, auto const& args) {
 			auto r = winrt::make<winrt::Heyiwei2::Models::implementation::WaterRecord>();
 
 			r.Year(f->Year());
@@ -205,44 +169,21 @@ namespace winrt::Heyiwei2::implementation {
 				return;
 			}
 			});
-
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openDeleteRecordDialogAsync(winrt::Heyiwei2::Models::WaterRecord record) {
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"确定要删除此记录吗？"));
-		dialog.Content(winrt::box_value(L"此操作不可逆"));
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"确定要删除此记录吗？", winrt::box_value(L"此操作不可逆"), [this, record](auto const&, auto const& args) {
 			auto result = mainManager->removeWaterRecord(dorm.DormId(), record.Year(), record.Month());
 
 			if (!result.Success()) {
 				args.Cancel(true);
-				dialog.Content(winrt::box_value(result.Message()));
 				return;
 			}
 			});
-
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openBatchDeleteRecordDialogAsync() {
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"确定要删除这些记录吗？"));
-		dialog.Content(winrt::box_value(L"此操作不可逆"));
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"确定要删除这些记录吗？", winrt::box_value(L"此操作不可逆"), [this](auto const&, auto const& args) {
 			std::vector<WaterRecord> records;
 			for (auto r : RecordListView().SelectedItems()) {
 				auto record = r.as<WaterRecord>();
@@ -253,30 +194,18 @@ namespace winrt::Heyiwei2::implementation {
 				auto result = mainManager->removeWaterRecord(dorm.DormId(), record.Year(), record.Month());
 				if (!result.Success()) {
 					args.Cancel(true);
-					dialog.Content(winrt::box_value(result.Message()));
+					//dialog.Content(winrt::box_value(result.Message()));
 					return;
 				}
 			}
-		});
-
-		auto result = co_await dialog.ShowAsync();
+			});
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openAddStudentDialogAsync() {
 		auto form = winrt::make_self<winrt::Heyiwei2::implementation::EditStudentForm>();
-
 		auto f = form.get();
 
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"添加学生"));
-		dialog.Content(form.as<winrt::Heyiwei2::EditStudentForm>()); // 将 UserControl 设为内容
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"添加学生", form.as<winrt::Heyiwei2::EditStudentForm>(), [this, form, f](auto const&, auto const& args) {
 			auto student = winrt::make<winrt::Heyiwei2::Models::implementation::Student>();
 
 			student.Name(f->Name());
@@ -290,30 +219,16 @@ namespace winrt::Heyiwei2::implementation {
 				return;
 			}
 			});
-
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openEditStudentDialogAsync(winrt::Heyiwei2::Models::Student student) {
 		auto form = winrt::make_self<winrt::Heyiwei2::implementation::EditStudentForm>();
-
 		auto f = form.get();
 
 		f->Name(student.Name());
 		f->StudentId(student.StudentId());
 
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"编辑学生"));
-		dialog.Content(form.as<winrt::Heyiwei2::EditStudentForm>()); // 将 UserControl 设为内容
-
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"编辑学生", form.as<winrt::Heyiwei2::EditStudentForm>(), [this, form, f, student](auto const&, auto const& args) {
 			auto s = winrt::make<winrt::Heyiwei2::Models::implementation::Student>();
 
 			s.Name(f->Name());
@@ -327,46 +242,21 @@ namespace winrt::Heyiwei2::implementation {
 				return;
 			}
 			});
-
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openDeleteStudentDialogAsync(winrt::Heyiwei2::Models::Student student) {
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"确定要删除此学生吗？"));
-		dialog.Content(winrt::box_value(L"此操作不可逆"));
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"确定要删除此学生吗？", winrt::box_value(L"此操作不可逆"), [this, student](auto const&, auto const& args) {
 			auto result = mainManager->removeStudent(dorm.DormId(), student.StudentId());
 
 			if (!result.Success()) {
 				args.Cancel(true);
-				dialog.Content(winrt::box_value(result.Message()));
 				return;
 			}
 			});
-
-		auto result = co_await dialog.ShowAsync();
 	}
 
 	winrt::Windows::Foundation::IAsyncAction DormManageForm::openBatchDeleteStudentDialogAsync() {
-		ContentDialog dialog;
-		dialog.Title(winrt::box_value(L"确定要删除这些学生吗？"));
-		dialog.Content(winrt::box_value(L"此操作不可逆"));
-		dialog.PrimaryButtonText(L"确认");
-		dialog.CloseButtonText(L"取消");
-		dialog.DefaultButton(ContentDialogButton::Primary);
-
-		dialog.XamlRoot(this->XamlRoot());
-
-		dialog.PrimaryButtonClick([&](ContentDialog const&, ContentDialogButtonClickEventArgs const& args) {
-
-			// 先收集选择的学生学号，因为遍历的同时删除元素会引发异常
+		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"确定要删除这些学生吗？", winrt::box_value(L"此操作不可逆"), [this](auto const&, auto const& args) {
 			std::vector<hstring> selectedIds;
 			for (auto s : StudentListView().SelectedItems()) {
 				auto student = s.as<Student>();
@@ -377,13 +267,10 @@ namespace winrt::Heyiwei2::implementation {
 				auto result = mainManager->removeStudent(dorm.DormId(), id);
 				if (!result.Success()) {
 					args.Cancel(true);
-					dialog.Content(winrt::box_value(result.Message()));
 					return;
 				}
 			}
-		});
-
-		auto result = co_await dialog.ShowAsync();
+			});
 	}
 
 	void DormManageForm::AddRecordButton_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
@@ -448,5 +335,5 @@ namespace winrt::Heyiwei2::implementation {
 		openBatchDeleteRecordDialogAsync();
 	}
 
-	
+
 }

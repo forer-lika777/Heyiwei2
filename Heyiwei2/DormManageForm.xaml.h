@@ -6,6 +6,9 @@
 #include "IMainManager.h"
 #include <functional>
 
+#include "Converters.HasPaidToStringConverter.h"
+#include "Converters.StatusToColorConverter.h"
+
 namespace winrt::Heyiwei2::implementation
 {
     struct DormManageForm : DormManageFormT<DormManageForm>

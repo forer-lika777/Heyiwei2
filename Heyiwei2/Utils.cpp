@@ -87,7 +87,7 @@ Result Utils::validateWaterRecord(WaterRecord const& record) {
 	}
 }
 
-void Utils::sortWaterRecords(IObservableVector<winrt::Windows::Foundation::IInspectable>& records) {
+void Utils::sortWaterRecords(winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> records) {
 	uint32_t n = records.Size();
 	std::vector<WaterRecord> vec;
 	vec.reserve(n);
@@ -99,9 +99,9 @@ void Utils::sortWaterRecords(IObservableVector<winrt::Windows::Foundation::IInsp
 	std::sort(vec.begin(), vec.end(),
 		[](const WaterRecord& a, const WaterRecord& b) {
 			if (a.Year() != b.Year()) {
-				return a.Year() < b.Year();
+				return a.Year() > b.Year();
 			}
-			return a.Month() < b.Month();
+			return a.Month() > b.Month();
 		});
 
 	records.Clear();

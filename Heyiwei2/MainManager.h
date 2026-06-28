@@ -3,6 +3,10 @@
 #include "IMainManager.h"
 #include "DormManager.h"
 
+#include "Models.Dorm.h"
+#include "Models.Result.h"
+#include "Models.Student.h"
+
 using winrt::hstring;
 using namespace winrt::Heyiwei2::Models;
 
