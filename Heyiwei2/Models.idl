@@ -40,7 +40,7 @@ namespace Heyiwei2.Models
 
 	[bindable]
 	[default_interface]
-	runtimeclass Dorm : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	runtimeclass Dorm : BindableBase
 	{
 		Dorm();
 		
@@ -69,5 +69,11 @@ namespace Heyiwei2.Models
 		Result(Boolean success, String message);
 		Boolean Success;
 		String Message;
+	}
+	
+	[default_interface]
+	unsealed runtimeclass BindableBase : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+
 	}
 }

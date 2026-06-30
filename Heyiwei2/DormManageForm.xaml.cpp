@@ -227,6 +227,7 @@ namespace winrt::Heyiwei2::implementation {
 
 		f->Name(student.Name());
 		f->StudentId(student.StudentId());
+		f->LockStudentId();
 
 		co_await UiHelpers::ShowStandardDialogAsync(this->XamlRoot(), L"编辑学生", form.as<winrt::Heyiwei2::EditStudentForm>(), [this, form, f, student](auto const&, auto const& args) {
 			auto s = winrt::make<winrt::Heyiwei2::Models::implementation::Student>();

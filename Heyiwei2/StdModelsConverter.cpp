@@ -71,7 +71,7 @@ winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Found
     for (auto const& stdDorm : stdDorms)
     {
         // 创建一个新的 winrt 类型 dorm 对象
-        auto winrtDorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>();
+        auto winrtDorm = winrt::make<winrt::Heyiwei2::Models::implementation::Dorm>().as<winrt::Heyiwei2::Models::Dorm>();
 
         // 手动转换宿舍信息
         auto winrtDormInfo = winrt::make<winrt::Heyiwei2::Models::implementation::DormInfo>();

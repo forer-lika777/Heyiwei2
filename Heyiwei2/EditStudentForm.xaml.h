@@ -12,6 +12,8 @@ namespace winrt::Heyiwei2::implementation {
 		hstring StudentId();
 		void StudentId(hstring const& studentId);
 
+		void LockStudentId();
+
 		void showInfo(hstring const& info);
 	};
 }

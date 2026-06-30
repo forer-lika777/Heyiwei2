@@ -31,6 +31,7 @@
     <Page Include="SettingsPage.xaml">
       <Filter>Pages</Filter>
     </Page>
+    <Page Include="ShowacasePage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />
@@ -86,6 +87,9 @@
     <ClCompile Include="Converters.StatusToStringConverter.cpp">
       <Filter>Converters</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationService.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -119,7 +123,6 @@
     <ClInclude Include="Models.Result.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="WinRTSerializationHelpers.hpp" />
     <ClInclude Include="StdModels.h">
       <Filter>Models</Filter>
     </ClInclude>
@@ -140,6 +143,18 @@
     </ClInclude>
     <ClInclude Include="Converters.StatusToStringConverter.h">
       <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationService.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationInfo.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="UiHelpers.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Models.BindableBase.h">
+      <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +177,12 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\header.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\winui-hero.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
@@ -192,10 +213,10 @@
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
+    <None Include="$(_WindowsMLLocalNativePath)\onnxruntime.dll" />
+    <None Include="$(_WindowsMLLocalNativePath)\DirectML.dll" />
+    <None Include="$(_WindowsMLLocalNativePath)\Microsoft.Windows.AI.MachineLearning.dll" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />

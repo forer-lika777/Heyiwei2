@@ -32,7 +32,7 @@ void MainManager::SaveCurrentData()
 /// </summary>
 void MainManager::LoadStoredData()
 {
-	// 1. 调用队友写的反序列化函数，拿到从 JSON 恢复出来的 WinRT 集合
+	// 1. 调用反序列化函数，拿到从 JSON 恢复出来的 WinRT 集合
 	auto loadedDorms = DataSaveService::LoadFromFile();
 
 	// 2. 【核心防错与联动】
@@ -144,16 +144,16 @@ Result MainManager::removeStudent(hstring const& dormId, hstring const& studentI
 /// <param name="student">要更新的学生</param>
 /// <returns>操作结果</returns>
 Result MainManager::updateStudent(hstring const& dormId, hstring const& studentId, Student const& student) {
-	for (auto dorm : dorms) {
-		for (auto s : dorm.as<Dorm>().Students()) {
-			if (s.as<Student>().StudentId() == student.StudentId()) {
-				return winrt::make<implementation::Result>(
-					false,
-					L"更新失败：已存在相同学号的学生"
-				);
-			}
-		}
-	}
+	//for (auto dorm : dorms) {
+	//	for (auto s : dorm.as<Dorm>().Students()) {
+	//		if (s.as<Student>().StudentId() == student.StudentId()) {
+	//			return winrt::make<implementation::Result>(
+	//				false,
+	//				L"更新失败：已存在相同学号的学生"
+	//			);
+	//		}
+	//	}
+	//}
 
 	int32_t index = findDormIndex(dormId);
 

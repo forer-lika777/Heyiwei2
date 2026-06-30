@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="AnimationInfo.h" />
     <ClInclude Include="AnimationService.h" />
+    <ClInclude Include="Models.BindableBase.h" />
     <ClInclude Include="Converters.HasPaidToStringConverter.h" />
     <ClInclude Include="Converters.StatusToColorConverter.h" />
     <ClInclude Include="Converters.StatusToStringConverter.h" />
@@ -199,7 +200,6 @@
     <ClInclude Include="StdModelsConverter.h" />
     <ClInclude Include="UiHelpers.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="WinRTSerializationHelpers.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />

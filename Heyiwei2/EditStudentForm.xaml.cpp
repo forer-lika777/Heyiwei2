@@ -23,6 +23,10 @@ namespace winrt::Heyiwei2::implementation {
 		StudentIdEntryTextBox().Text(studentId);
 	}
 
+	void EditStudentForm::LockStudentId() {
+		StudentIdEntryTextBox().IsEnabled(false);
+	}
+
 	void EditStudentForm::showInfo(hstring const& info) {
 		OutputInfoTextBlock().Text(info);
 	}

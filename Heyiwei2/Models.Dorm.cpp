@@ -9,7 +9,7 @@ namespace winrt::Heyiwei2::Models::implementation {
 		return students;
 	}
 
-	void Dorm::Students(IObservableVector<IInspectable> const& value) {
+	void Dorm::Students(IObservableVector<winrt::Windows::Foundation::IInspectable> const& value) {
 		students = value;
 		RefreshStudentsCount();
 	}
@@ -18,7 +18,7 @@ namespace winrt::Heyiwei2::Models::implementation {
 		return records;
 	}
 
-	void Dorm::Records(IObservableVector<IInspectable> const& value) {
+	void Dorm::Records(IObservableVector<winrt::Windows::Foundation::IInspectable> const& value) {
 		records = value;
 		RefreshStatus();
 		RefreshRecordsCount();
@@ -29,19 +29,14 @@ namespace winrt::Heyiwei2::Models::implementation {
 	}
 
 	void Dorm::Info(winrt::Heyiwei2::Models::DormInfo const& value) {
-		if (info != value) {
+		if (SetProperty(info, value, L"Info")) {
 			completeMonths(value);
-
-			info = value;
-			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Info"));
 			RefreshRecordsCount();
 		}
 
-		hstring id = Utils::generateDormId(info);
-		if (dormId != id) {
-			dormId = id;
-			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"DormId"));
-		}
+		dormId = Utils::generateDormId(info);
+		RaisePropertyChanged(L"DormId");
+		//SetProperty(dormId, id, L"DormId");
 	}
 
 	bool Dorm::Status() const {
@@ -56,11 +51,11 @@ namespace winrt::Heyiwei2::Models::implementation {
 		return surplus;
 	}
 
-	int32_t Dorm::StudentsCount() const {
+	uint32_t Dorm::StudentsCount() const {
 		return studentsCount;
 	}
 
-	int32_t Dorm::RecordsCount() const {
+	uint32_t Dorm::RecordsCount() const {
 		return recordsCount;
 	}
 
@@ -95,23 +90,17 @@ namespace winrt::Heyiwei2::Models::implementation {
 		}
 		if (arrears > 0.0) status = false;
 		else status = true;
-		propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Status"));
-		propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Surplus"));
-		propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Arrears"));
+		RaisePropertyChanged(L"Status");
+		RaisePropertyChanged(L"Surplus");
+		RaisePropertyChanged(L"Arrears");
 	}
 
 	void Dorm::RefreshStudentsCount() {
-		if (studentsCount != students.Size()) {
-			studentsCount = students.Size();
-			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"StudentsCount"));
-		}
+		SetProperty(studentsCount, students.Size(), L"StudentsCount");
 	}
 
 	void Dorm::RefreshRecordsCount() {
-		if (recordsCount != records.Size()) {
-			recordsCount = records.Size();
-			propertyChanged(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"RecordsCount"));
-		}
+		SetProperty(recordsCount, records.Size(), L"RecordsCount");
 	}
 
 	void Dorm::completeMonths(winrt::Heyiwei2::Models::DormInfo const& value) {
